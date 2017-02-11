@@ -7,7 +7,7 @@
   
   "background": {
     "scripts": ["background.js", "thirdParty/jquery-3.1.1.min.js", 
-    "thirdParty/jquery-ui.js"],
+    "thirdParty/jquery-ui.js", "thirdParty/webgazer.js"],
     "persistent": false
   },
   "browser_action": {

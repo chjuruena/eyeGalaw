@@ -1,9 +1,13 @@
 // var app = chrome.runtime.getBackgroundPage();
 
 function hello() {
-  chrome.tabs.executeScript({
-    file: 'insert.js'
-  }); 
+   chrome.tabs.executeScript({file: "thirdParty/webgazer.js"}, function(){
+            chrome.tabs.executeScript({file: 'insert.js'});
+        });
+
+  // chrome.tabs.executeScript({
+    // file: 'insert.js'
+  // }); 
 }
 
 // document.addEventListener('DOMContentLoaded', function () { // working
