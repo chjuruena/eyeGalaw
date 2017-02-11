@@ -6,14 +6,26 @@
   "version": "1.0",
   
   "background": {
-    "scripts": ["background.js", "thirdParty/jquery-3.1.1.min.js", 
-    "thirdParty/jquery-ui.js", "thirdParty/webgazer.js"],
+    "scripts": ["background.js",  "src/thirdParty/jquery-3.1.1.min.js", 
+    "src/thirdParty/jquery-ui.js", "src/thirdParty/webgazer.js"],
     "persistent": false
   },
   "browser_action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html"
   },
+  // "web_accessible_resources": [
+  //   "src/thirdParty/jquery-3.1.1.min.js", 
+  //   "src/thirdParty/jquery-ui.js", "src/thirdParty/webgazer.js"
+  // ],
+   "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "css": ["controls.css"],
+      "js": ["src/thirdParty/jquery-3.1.1.min.js", "src/thirdParty/jquery-ui.js"]
+    }
+  ],
+    
 
   "permissions": [
     "tabs", "http://*/*", "https://*/*"
