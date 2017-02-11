@@ -70,19 +70,72 @@ body{
     height: 100%;
     width: 100%;
 }
-#main_frame{
+.main_frame{
     top: 0%;
     left: 0%;
      height: 100%;
     width: 100%;
     position:fixed;
-    background-color:pink;   
+  z-index: 1000 !important;
+
+
+    /*background-color:pink;   */
 }
-#myDivId{
+/*#myDivId{
     position:fixed;
     top:50%;
 left:50%;
 width:100%;   
 height:100%;
 background-color:red;
+}
+*/
+
+/*box arrows*/
+#arrow_up{
+  top: 0;
+  left: 0;
+right: 0;
+border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  
+  border-bottom: 50px solid black;
+}
+
+#arrow_down{
+  bottom: 0;
+  left: 0;
+right: 0;
+border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  
+  border-top: 50px solid black;
+}
+#arrow_left{
+    top: 0;
+  left: 0;
+  bottom: 0;
+  border-right: 50px solid black;
+  border-top: 50px solid transparent; 
+  border-bottom: 50px solid transparent;
+}
+#arrow_right{
+    top: 0;
+  bottom: 0;
+  right: 0;
+  border-left: 50px solid black;
+  border-top: 50px solid transparent;
+  border-bottom: 50px solid transparent;
+
+}
+
+
+.arrows{
+width:0;   
+height:0;
+margin: auto;
+
+position:fixed;
+background-color:red;
+    
 }
