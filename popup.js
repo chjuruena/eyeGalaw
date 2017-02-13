@@ -1,5 +1,16 @@
 // var app = chrome.runtime.getBackgroundPage();
 var running;
+var scroll_speed=300;
+
+var obj= {};
+
+obj[scroll_speed] = 300;
+ // chrome.storage.sync.set({'value': theValue}
+
+// chrome.storage.local.set(obj, function () {
+//         console.log('Saved', obj);
+//     });
+
 
 function hello() {
    // chrome.tabs.executeScript({file: "src/thirdParty/webgazer.js"}, function(){
@@ -37,7 +48,8 @@ chrome.tabs.getSelected(null, function(tab) {
 window.onload=function(){
 	document.getElementById('clickme').addEventListener('click', hello);
 	
-	document.getElementById('flat-slider').addEventListener('mouseup', changeOpacity);
+document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
+	document.getElementById('flat-slider2').addEventListener('mouseup', changeSpeed);
 		
 }
 function myFunction() {
@@ -49,11 +61,24 @@ function myFunction() {
 
 $(function() {
 
-	$('#flat-slider').slider({
+	$('#flat-slider1').slider({
+		slide: function( event, ui ) {
+                $( "#slider-value-opacity" ).html( ui.value );
+            }
+	});
+	$('#flat-slider2').slider({
+		slide: function( event, ui ) {
+                $( "#slider-value-scroll" ).html( ui.value );
+            }
+	});
+	$('.flat-slider').slider({
 	  orientation: 'horizontal',
 	  range:       false,
-	  values:      [50]
+	  values:      [50]	 
+     // disabled: true
+ 
 	});
+
 });
 
 document.addEventListener('yourCustomEvent', function (e)
