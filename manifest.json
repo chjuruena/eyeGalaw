@@ -30,6 +30,7 @@
     
 
   "permissions": [
+  "activeTab",
     "tabs", "http://*/*", "https://*/*"
     // "tabs", "http://*/*", "https://*/*"
     // "https://ajax.googleapis.com/"
