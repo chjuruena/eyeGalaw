@@ -7,10 +7,14 @@ var obj= {};
 obj[scroll_speed] = 300;
  // chrome.storage.sync.set({'value': theValue}
 
-// chrome.storage.local.set(obj, function () {
-//         console.log('Saved', obj);
-//     });
+chrome.storage.sync.set(obj, function () {
+        console.log('Saved', obj);
+    });
 
+chrome.storage.sync.get(null, function(items) {
+    var allKeys = Object.keys(items);
+    console.log(allKeys);
+});
 
 function hello() {
    // chrome.tabs.executeScript({file: "src/thirdParty/webgazer.js"}, function(){
@@ -20,6 +24,9 @@ function hello() {
 
 
 	running = true;
+	$('.flat-slider').slider({
+		disabled: false
+	});
 	chrome.tabs.executeScript(null, {
 	file: 'insert.js'
 
@@ -36,12 +43,12 @@ function changeOpacity(){
 }
 
 // message passing
-chrome.tabs.getSelected(null, function(tab) {
-  // Send a request to the content script.
-  chrome.tabs.sendMessage(tab.id, {action: "getDOM"}, function(response) {
-    console.log(response.dom);
-  });
-});
+// chrome.tabs.getSelected(null, function(tab) {
+//   // Send a request to the content script.
+//   chrome.tabs.sendMessage(tab.id, {action: "getDOM"}, function(response) {
+//     console.log(response.dom);
+//   });
+// });
 
 
 
@@ -74,8 +81,8 @@ $(function() {
 	$('.flat-slider').slider({
 	  orientation: 'horizontal',
 	  range:       false,
-	  values:      [50]	 
-     // disabled: true
+	  values:      [50],
+      disabled: true
  
 	});
 

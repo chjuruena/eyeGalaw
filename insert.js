@@ -222,17 +222,25 @@ document.body.appendChild(arrow_right );
 
 
 var scrolled=0;
-var scroll_speed=300;
+var scroll_speed;
 
 // var storage = chrome.storage.local;
 
-// chrome.storage.local.get('scroll_speed', function (items) {
-//     // assignTextToTextareas(items.scroll_speed);
-//     scroll_speed = items.scroll_speed;
-//     // storage.remove('scroll_speed');
-//     chrome.storage.local.clear();
+chrome.storage.sync.get(null, function(items) {
+    var allKeys = Object.keys(items);
+    console.log(allKeys);
+});
 
-// });
+chrome.storage.sync.get(null, function (items) {
+    // assignTextToTextareas(items.scroll_speed);
+    var allKeys = Object.keys(items);    
+    scroll_speed = allKeys[0];
+    // storage.remove('scroll_speed');
+    console.log(items[0])
+    console.log(allKeys[0])
+    // chrome.storage.sync.clear();
+
+});
 
 $(document).ready(function(){
 	alert('scroll_speed'+scroll_speed);
