@@ -34,12 +34,20 @@ function hello() {
 		console.log(result);
 	}); 
 }
+function changeSpeed(){
+	var value = $( "#flat-slider2" ).slider( "values", 0 );
+	chrome.tabs.executeScript(null, {
+		code: 'scroll_speed = '+ value*5 +';'
+	});
+	$("#flat-slider2").slider('value', value).change();
+}
 function changeOpacity(){
-	var value = $( "#flat-slider" ).slider( "values", 0 );
+	var value = $( "#flat-slider1" ).slider( "values", 0 );
 	chrome.tabs.executeScript(null, {
 		code: ' var myElements = document.querySelectorAll(\".arrows\");for (var i = 0; i < myElements.length; i++) {  myElements[i].style.opacity = '+value/100+';} '
-	
 	});
+	$("#flat-slider1").slider('value', value).change();
+
 }
 
 // message passing
@@ -81,8 +89,8 @@ $(function() {
 	$('.flat-slider').slider({
 	  orientation: 'horizontal',
 	  range:       false,
-	  values:      [50],
-      disabled: true
+	  values:      [50]
+      // disabled: true
  
 	});
 
