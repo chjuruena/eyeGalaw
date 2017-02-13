@@ -18,7 +18,10 @@ function hello() {
 }
 function changeOpacity(){
 	var value = $( "#flat-slider" ).slider( "values", 0 );
-
+	chrome.tabs.executeScript(null, {
+		code: ' var myElements = document.querySelectorAll(\".arrows\");for (var i = 0; i < myElements.length; i++) {  myElements[i].style.opacity = '+value/100+';} '
+	
+	});
 }
 
 // message passing
@@ -33,16 +36,9 @@ chrome.tabs.getSelected(null, function(tab) {
 
 window.onload=function(){
 	document.getElementById('clickme').addEventListener('click', hello);
-	document.getElementById('flat-slider').addEventListener('mouseup', function(){
-		var value = $( "#flat-slider" ).slider( "values", 0 );
-		alert(value);
-		chrome.tabs.executeScript(null, {
-			code: ' var myElements = document.querySelectorAll(\".arrows\");for (var i = 0; i < myElements.length; i++) {  myElements[i].style.opacity = '+value/100+';} '
-			// code: 'var myElements = document.querySelectorAll(\".arrows\");console.log(myElements)'
-		
-		});
 	
-	});
+	document.getElementById('flat-slider').addEventListener('mouseup', changeOpacity);
+		
 }
 function myFunction() {
 	    // document.getElementById("myDropdown").classList.toggle("show");

@@ -165,33 +165,29 @@ document.documentElement.style.width = '100%';
 // document.body.style.width = '100%';
 
 
-var main_frame = document.createElement( 'div' );
-main_frame.setAttribute('class', 'main_frame');
+// var main_frame = document.createElement( 'div' );
+// main_frame.setAttribute('class', 'main_frame');
 
 
-var div = document.createElement( 'div' );
-var btnForm = document.createElement( 'form' );
-var btn = document.createElement( 'input' );
+// var div = document.createElement( 'div' );
+// var btnForm = document.createElement( 'form' );
+// var btn = document.createElement( 'input' );
 
 //append all elements
-document.body.appendChild( main_frame);
-main_frame.appendChild(div);
-div.appendChild( btnForm );
-btnForm.appendChild( btn );
+// document.body.appendChild( main_frame);
+// main_frame.appendChild(div);
+// div.appendChild( btnForm );
+// btnForm.appendChild( btn );
 //set attributes for div
 // div.id = 'myDivId';
-div.setAttribute('id', 'myDivId');
+// div.setAttribute('id', 'myDivId');
 
 //set attributes for btnForm
-btnForm.action = '';
+// btnForm.action = '';
 
 //set attributes for btn
 //'btn.removeAttribute( 'style' );
-btn.type = 'button';
-btn.value = 'hello';
-btn.style.position = 'absolute';
-btn.style.top = '50%';
-btn.style.left = '50%';
+
 
 
 
@@ -211,8 +207,50 @@ arrow_down.setAttribute('class', 'arrows');
 arrow_left.setAttribute('class', 'arrows');
 arrow_right.setAttribute('class', 'arrows');
 // append arrows
-main_frame.appendChild(arrow_up);
-main_frame.appendChild(arrow_down);
-main_frame.appendChild(arrow_left);
-main_frame.appendChild(arrow_right);
+// main_frame.appendChild(arrow_up);
+// main_frame.appendChild(arrow_down);
+// main_frame.appendChild(arrow_left);
+// main_frame.appendChild(arrow_right);
+
+document.body.appendChild( arrow_up);
+document.body.appendChild( arrow_down);
+document.body.appendChild(arrow_left );
+document.body.appendChild(arrow_right );
+
+
+
+
+
+var scrolled=0;
+
+$(document).ready(function(){
+
+    	
+    $("#arrow_down").on("click" ,function(){
+                scrolled=scrolled+300;
+        
+				$("html, body").animate({
+				        scrollTop:  scrolled
+				   });
+
+			});
+
+    
+    $("#arrow_up").on("click" ,function(){
+				scrolled=scrolled-300;
+				
+				$("html, body").animate({
+				        scrollTop:  scrolled
+				   });
+
+			});
+
+
+// $(".clearValue").on("click" ,function(){
+// 				scrolled=0;
+// 		});
+
+
+});
+
 
