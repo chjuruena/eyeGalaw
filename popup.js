@@ -1,15 +1,10 @@
 // var app = chrome.runtime.getBackgroundPage();
 var running;
-
+var lastSpeedValue = 0;
 
 // obj["`"] = 300;
  // chrome.storage.sync.set({'value': theValue}
 
-function setObjectdata(obj){
-	chrome.storage.local.set(obj, function () {
-        console.log('Saved', obj);
-    });
-}
 
 // function getObjectdata(key){
 // 	var data;
@@ -23,34 +18,22 @@ function setObjectdata(obj){
 //     	return data;
 
 // }
+function setObjectdata(obj){
+	chrome.storage.local.set(obj, function () {
+        console.log('Saved', obj);
+    });
+}
 function getObjectdata(callback) {
-	// var data;
-
 	chrome.storage.local.get(null, callback);
-
-    	// return(items[key])
-    		// (data);
-    	// if(callback)  callback;
-
-    // });
 }
 
 function loadDeafultValues(){
-	// var scroll_speed=300;
-
 	var obj= {
 		"scroll_speed" : 300
 	};
 	setObjectdata(obj);
-	// chrome.storage.local.set(obj, function () {
-	//         console.log('Saved', obj);
-	//     });
-
-	chrome.storage.local.get(null, function(items) {
-	    var allKeys = Object.keys(items);
-	    console.log("allKeys" + allKeys);
-	    // chrome.storage.local.clear();
-	});
+	lastSpeedValue = 300;
+	
 
 }
 
@@ -69,7 +52,6 @@ function hello() {
 // uncomment later
 
 
-	running = true;
 	$('.flat-slider').slider({
 		disabled: false
 	});
@@ -80,28 +62,26 @@ function hello() {
 		console.log(result);
 	}); 
 }
+
 function changeSpeed(){
 	var value = $( "#flat-slider2" ).slider( "values", 0 );
 	
-    	// scroll_speed = items.scroll_speed;
-	
-	
-	// var obj= {
-	// 	"scroll_speed" : 300
-	// };
+
+	// if (ui.value > last) $("#amount").val("this is increasing");
+ //        if (ui.value < last) $("#amount").val("this is decreasing");
+ //        last = ui.value;
+
 
 	var scroll_speed;
-	
-
-
-
 	getObjectdata( function(data){
-	 	scroll_speed = data["scroll_speed"];
-		console.log(scroll_speed);
 
+	 	scroll_speed = data["scroll_speed"];
 		console.log("scroll_speed" +scroll_speed);
 
-		var new_scroll_speed = scroll_speed + value*5;
+		if ( value > lastSpeedValue ) new_scroll_speed = scroll_speed + value*5;
+		else new_scroll_speed = scroll_speed  - value*5;
+		lastSpeedValue = value;
+		// var 
 		console.log("new scroll_speed");
 		console.log(new_scroll_speed);
 		
@@ -119,6 +99,7 @@ function changeSpeed(){
 		$("#flat-slider2").slider('value', value).change();
 	});
 
+	lastSpeedValue = value;
 	
 }
 function changeOpacity(){
@@ -149,6 +130,7 @@ function myFunction() {
 
 
 $(function() {
+	var last = 0;
 
 	$('#flat-slider1').slider({
 		slide: function( event, ui ) {
@@ -167,6 +149,12 @@ $(function() {
       // disabled: true
  
 	});
+
+	// slide: function(event, ui) {
+ //        if (ui.value > last) $("#amount").val("this is increasing");
+ //        if (ui.value < last) $("#amount").val("this is decreasing");
+ //        last = ui.value;
+ //    }
 
 });
 
