@@ -226,18 +226,19 @@ var scroll_speed;
 
 // var storage = chrome.storage.local;
 
-chrome.storage.sync.get(null, function(items) {
+chrome.storage.local.get(null, function(items) {
     var allKeys = Object.keys(items);
+    console.log(items);
     console.log(allKeys);
 });
 
-chrome.storage.sync.get(null, function (items) {
+chrome.storage.local.get(null, function (items) {
     // assignTextToTextareas(items.scroll_speed);
-    var allKeys = Object.keys(items);    
-    scroll_speed = allKeys[0];
+    // var allKeys = Object.keys(items);    
+    scroll_speed = items.scroll_speed;
     // storage.remove('scroll_speed');
-    console.log(items[0])
-    console.log(allKeys[0])
+    // console.log(items[0])
+    console.log(items.scroll_speed)
     // chrome.storage.sync.clear();
 
 });

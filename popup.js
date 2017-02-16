@@ -1,21 +1,67 @@
 // var app = chrome.runtime.getBackgroundPage();
 var running;
-var scroll_speed=300;
 
-var obj= {};
 
-obj[scroll_speed] = 300;
+// obj["`"] = 300;
  // chrome.storage.sync.set({'value': theValue}
 
-chrome.storage.sync.set(obj, function () {
+function setObjectdata(obj){
+	chrome.storage.local.set(obj, function () {
         console.log('Saved', obj);
     });
+}
 
-chrome.storage.sync.get(null, function(items) {
-    var allKeys = Object.keys(items);
-    console.log(allKeys);
-});
+// function getObjectdata(key){
+// 	var data;
+// 	chrome.storage.local.get(null, function (items) {
+//     	data = items[key];
 
+//     	// return(items[key])
+
+//     });
+//     	console.log(data);
+//     	return data;
+
+// }
+function getObjectdata(callback) {
+	// var data;
+
+	chrome.storage.local.get(null, callback);
+
+    	// return(items[key])
+    		// (data);
+    	// if(callback)  callback;
+
+    // });
+}
+
+function loadDeafultValues(){
+	// var scroll_speed=300;
+
+	var obj= {
+		"scroll_speed" : 300
+	};
+	setObjectdata(obj);
+	// chrome.storage.local.set(obj, function () {
+	//         console.log('Saved', obj);
+	//     });
+
+	chrome.storage.local.get(null, function(items) {
+	    var allKeys = Object.keys(items);
+	    console.log("allKeys" + allKeys);
+	    // chrome.storage.local.clear();
+	});
+
+}
+
+window.onload=function(){
+	loadDeafultValues();
+	document.getElementById('clickme').addEventListener('click', hello);
+	
+	document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
+	document.getElementById('flat-slider2').addEventListener('mouseup', changeSpeed);
+		
+}
 function hello() {
    // chrome.tabs.executeScript({file: "src/thirdParty/webgazer.js"}, function(){
    //          chrome.tabs.executeScript({file: 'insert.js'});
@@ -36,10 +82,44 @@ function hello() {
 }
 function changeSpeed(){
 	var value = $( "#flat-slider2" ).slider( "values", 0 );
-	chrome.tabs.executeScript(null, {
-		code: 'scroll_speed = '+ value*5 +';'
+	
+    	// scroll_speed = items.scroll_speed;
+	
+	
+	// var obj= {
+	// 	"scroll_speed" : 300
+	// };
+
+	var scroll_speed;
+	
+
+
+
+	getObjectdata( function(data){
+	 	scroll_speed = data["scroll_speed"];
+		console.log(scroll_speed);
+
+		console.log("scroll_speed" +scroll_speed);
+
+		var new_scroll_speed = scroll_speed + value*5;
+		console.log("new scroll_speed");
+		console.log(new_scroll_speed);
+		
+		chrome.tabs.executeScript(null, {
+			code: 'scroll_speed = ' + new_scroll_speed +';'
+		});
+		var obj= {
+			"scroll_speed" : new_scroll_speed 
+		};
+		setObjectdata(obj);
+		getObjectdata("scroll_speed", function(res){
+			console.log(res);	
+		});
+
+		$("#flat-slider2").slider('value', value).change();
 	});
-	$("#flat-slider2").slider('value', value).change();
+
+	
 }
 function changeOpacity(){
 	var value = $( "#flat-slider1" ).slider( "values", 0 );
@@ -60,18 +140,12 @@ function changeOpacity(){
 
 
 
-window.onload=function(){
-	document.getElementById('clickme').addEventListener('click', hello);
-	
-document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
-	document.getElementById('flat-slider2').addEventListener('mouseup', changeSpeed);
-		
-}
+
 function myFunction() {
 	    // document.getElementById("myDropdown").classList.toggle("show");
 	var myDropdown = document.getElementById("myDropdown");
 	myDropdown.classList.toggle("show");
-	}
+}
 
 
 $(function() {
