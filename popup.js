@@ -1,6 +1,6 @@
 // var app = chrome.runtime.getBackgroundPage();
 var running;
-var lastSpeedValue = 0;
+var lastSpeedSliderValue = 0;
 
 // obj["`"] = 300;
  // chrome.storage.sync.set({'value': theValue}
@@ -32,7 +32,7 @@ function loadDeafultValues(){
 		"scroll_speed" : 300
 	};
 	setObjectdata(obj);
-	lastSpeedValue = 300;
+	lastSpeedSliderValue = 300;
 	
 
 }
@@ -71,35 +71,46 @@ function changeSpeed(){
  //        if (ui.value < last) $("#amount").val("this is decreasing");
  //        last = ui.value;
 
+ 	
 
 	var scroll_speed;
+	var scroll_speed_slider_val;
 	getObjectdata( function(data){
+		 	scroll_speed_slider_val = data["scroll_speed_slider"];
 
-	 	scroll_speed = data["scroll_speed"];
-		console.log("scroll_speed" +scroll_speed);
 
-		if ( value > lastSpeedValue ) new_scroll_speed = scroll_speed + value*5;
-		else new_scroll_speed = scroll_speed  - value*5;
-		lastSpeedValue = value;
-		// var 
-		console.log("new scroll_speed");
-		console.log(new_scroll_speed);
-		
-		chrome.tabs.executeScript(null, {
-			code: 'scroll_speed = ' + new_scroll_speed +';'
+		getObjectdata( function(data2){
+
+		 	scroll_speed = data2["scroll_speed"];
+			console.log("scroll_speed" +scroll_speed);
+
+			if ( value > scroll_speed_slider_val ) new_scroll_speed = scroll_speed + value*5;
+			else new_scroll_speed = scroll_speed  - value*5;
+			// var 
+			console.log("new scroll_speed");
+			console.log(new_scroll_speed);
+			
+			chrome.tabs.executeScript(null, {
+				code: 'scroll_speed = ' + new_scroll_speed +';'
+			});
+			var obj= {
+				"scroll_speed" : new_scroll_speed 
+			};
+			setObjectdata(obj);
+			getObjectdata("scroll_speed", function(res){
+				console.log(res);	
+			});
+
+			$("#flat-slider2").slider('value', value).change();
 		});
-		var obj= {
-			"scroll_speed" : new_scroll_speed 
-		};
-		setObjectdata(obj);
-		getObjectdata("scroll_speed", function(res){
-			console.log(res);	
-		});
-
-		$("#flat-slider2").slider('value', value).change();
 	});
 
-	lastSpeedValue = value;
+
+
+	var obj= {
+		"scroll_speed_slider" : value
+	};
+	setObjectdata(obj);
 	
 }
 function changeOpacity(){
