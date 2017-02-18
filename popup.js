@@ -1,6 +1,5 @@
 // var app = chrome.runtime.getBackgroundPage();
 var running;
-var lastSpeedSliderValue = 0;
 
 // obj["`"] = 300;
  // chrome.storage.sync.set({'value': theValue}
@@ -29,29 +28,47 @@ function getObjectdata(callback) {
 
 function loadDeafultValues(){
 	var obj= {
-		"scroll_speed" : 300
+		"scroll_speed" : 300,
+		"opacity" : 50
 	};
 	setObjectdata(obj);
-	lastSpeedSliderValue = 300;
 	
 
 }
 
+function loadSliders(){
+	getObjectdata( function(data){
+		var scroll_speed_slider = data["scroll_speed_slider"];
+		var opacity_slider = data["opacity"];
+
+		$(function() {
+			$("#flat-slider2").slider('value',scroll_speed_slider);
+			$("#flat-slider1").slider('value',opacity_slider);
+		});
+		
+
+		// add opcaity
+
+	});
+}
+// document.addEventListener('DOMContentLoaded', function() {
 window.onload=function(){
-	loadDeafultValues();
+	//set value of sliders
+	loadSliders();
 	document.getElementById('clickme').addEventListener('click', hello);
-	
 	document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
 	document.getElementById('flat-slider2').addEventListener('mouseup', changeSpeed);
 		
 }
 function hello() {
+
    // chrome.tabs.executeScript({file: "src/thirdParty/webgazer.js"}, function(){
    //          chrome.tabs.executeScript({file: 'insert.js'});
    //      });
 // uncomment later
 
-
+	loadDeafultValues();
+	
 	$('.flat-slider').slider({
 		disabled: false
 	});
@@ -65,14 +82,6 @@ function hello() {
 
 function changeSpeed(){
 	var value = $( "#flat-slider2" ).slider( "values", 0 );
-	
-
-	// if (ui.value > last) $("#amount").val("this is increasing");
- //        if (ui.value < last) $("#amount").val("this is decreasing");
- //        last = ui.value;
-
- 	
-
 	var scroll_speed;
 	var scroll_speed_slider_val;
 	getObjectdata( function(data){
@@ -85,7 +94,7 @@ function changeSpeed(){
 			console.log("scroll_speed" +scroll_speed);
 
 			if ( value > scroll_speed_slider_val ) new_scroll_speed = scroll_speed + value*5;
-			else new_scroll_speed = scroll_speed  - value*5;
+			else new_scroll_speed = scroll_speed  - (value)*5;
 			// var 
 			console.log("new scroll_speed");
 			console.log(new_scroll_speed);
@@ -104,9 +113,6 @@ function changeSpeed(){
 			$("#flat-slider2").slider('value', value).change();
 		});
 	});
-
-
-
 	var obj= {
 		"scroll_speed_slider" : value
 	};
@@ -118,7 +124,11 @@ function changeOpacity(){
 	chrome.tabs.executeScript(null, {
 		code: ' var myElements = document.querySelectorAll(\".arrows\");for (var i = 0; i < myElements.length; i++) {  myElements[i].style.opacity = '+value/100+';} '
 	});
-	$("#flat-slider1").slider('value', value).change();
+	// $("#flat-slider1").slider('value', value).change();
+	var obj= {
+		"opacity" : value
+	};
+	setObjectdata(obj);
 
 }
 
@@ -155,8 +165,8 @@ $(function() {
 	});
 	$('.flat-slider').slider({
 	  orientation: 'horizontal',
-	  range:       false,
-	  values:      [50]
+	  range:       false
+	  // values:      [50]
       // disabled: true
  
 	});
