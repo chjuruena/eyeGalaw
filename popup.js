@@ -1,7 +1,16 @@
 // var app = chrome.runtime.getBackgroundPage();
 var running;
 
-// obj["`"] = 300;
+// var obj= {
+// 	'start_button' : 'START'
+// };
+// setObjectdata(obj);
+getObjectdata( function(data){
+	console.log(data);
+});
+
+
+// obj['`'] = 300;
  // chrome.storage.sync.set({'value': theValue}
 
 
@@ -28,8 +37,9 @@ function getObjectdata(callback) {
 
 function loadDeafultValues(){
 	var obj= {
-		"scroll_speed" : 300,
-		"opacity" : 50
+		'scroll_speed' : 300,
+		'opacity' : 50
+		
 	};
 	setObjectdata(obj);
 	
@@ -38,12 +48,12 @@ function loadDeafultValues(){
 
 function loadSliders(){
 	getObjectdata( function(data){
-		var scroll_speed_slider = data["scroll_speed_slider"];
-		var opacity_slider = data["opacity"];
+		var scroll_speed_slider = data['scroll_speed_slider'];
+		var opacity_slider = data['opacity'];
 
 		$(function() {
-			$("#flat-slider2").slider('value',scroll_speed_slider);
-			$("#flat-slider1").slider('value',opacity_slider);
+			$('#flat-slider2').slider('value',scroll_speed_slider);
+			$('#flat-slider1').slider('value',opacity_slider);
 		});
 		
 
@@ -51,82 +61,151 @@ function loadSliders(){
 
 	});
 }
+function loadButtonVal(){
+	getObjectdata( function(data){
+		var start_val=data["start_button"];
+		console.log(start_val);
+		document.getElementById('clickme').text = start_val;
+		// if(start_val =='START')document.getElementById('clickme').text = 'START';
+		// else document.getElementById('clickme').text = 'STOP';
+
+	});
+		
+	
+}
 // document.addEventListener('DOMContentLoaded', function() {
 window.onload=function(){
 	//set value of sliders
 	loadSliders();
+	loadButtonVal();
 	document.getElementById('clickme').addEventListener('click', hello);
-	document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
-	document.getElementById('flat-slider2').addEventListener('mouseup', changeSpeed);
-		
+
+	// document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
+	// document.getElementById('flat-slider2').addEventListener('mouseup', changeSpeed);	
 }
+window.addEventListener('beforeunload', function(e) {
+	chrome.storage.local.clear(function() {
+	    var error = chrome.runtime.lastError;
+	    if (error) {
+	        console.error(error);
+	    }
+	});
+}, false);
+
+
 function hello() {
 
-   // chrome.tabs.executeScript({file: "src/thirdParty/webgazer.js"}, function(){
+   // chrome.tabs.executeScript({file: 'src/thirdParty/webgazer.js'}, function(){
    //          chrome.tabs.executeScript({file: 'insert.js'});
    //      });
 // uncomment later
+	getObjectdata( function(data){
+		var start_val=data["start_button"];
+		console.log(start_val);
+		// document.getElementById('clickme').text == start_val;
+		if(start_val =='START'){
+			document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
+			document.getElementById('flat-slider2').addEventListener('mouseup', changeSpeed);
+			loadDeafultValues();
+		
+			$('.flat-slider').slider({
+				disabled: false
+			});
+			chrome.tabs.executeScript(null, {
+			file: 'insert.js'
 
-	loadDeafultValues();
-	
-	$('.flat-slider').slider({
-		disabled: false
+			}, function (result) {
+				console.log(result);
+			}); 
+			var obj= {
+				'start_button' : 'STOP'
+			};
+			setObjectdata(obj);
+			document.getElementById('clickme').text ='STOP';
+		}
+
+		else if(start_val =='STOP'){
+			chrome.tabs.executeScript(null, {
+				file: 'removeArrows.js'
+				// code: ' var myElements = document.querySelectorAll(\'.arrows\');Array.prototype.forEach.call( myElements, function( node ) {node.parentNode.removeChild( node );});'
+				// code: ' var myElements = document.querySelectorAll(\'.arrows\');console.log(myElements);'
+			});
+			$('.flat-slider').slider({
+				disabled: true
+			});
+			var obj= {
+				'start_button' : 'START'
+			};
+			setObjectdata(obj);
+			document.getElementById('clickme').text ='START';
+
+		}
+
 	});
-	chrome.tabs.executeScript(null, {
-	file: 'insert.js'
+	
 
-	}, function (result) {
-		console.log(result);
-	}); 
+
+
+	// loadDeafultValues();
+	
+	// $('.flat-slider').slider({
+	// 	disabled: false
+	// });
+	// chrome.tabs.executeScript(null, {
+	// file: 'insert.js'
+
+	// }, function (result) {
+	// 	console.log(result);
+	// }); 
 }
 
 function changeSpeed(){
-	var value = $( "#flat-slider2" ).slider( "values", 0 );
+	var value = $( '#flat-slider2' ).slider( 'values', 0 );
 	var scroll_speed;
 	var scroll_speed_slider_val;
 	getObjectdata( function(data){
-		 	scroll_speed_slider_val = data["scroll_speed_slider"];
+		 	scroll_speed_slider_val = data['scroll_speed_slider'];
 
 
 		getObjectdata( function(data2){
 
-		 	scroll_speed = data2["scroll_speed"];
-			console.log("scroll_speed" +scroll_speed);
+		 	scroll_speed = data2['scroll_speed'];
+			console.log('scroll_speed' +scroll_speed);
 
 			if ( value > scroll_speed_slider_val ) new_scroll_speed = scroll_speed + value*5;
 			else new_scroll_speed = scroll_speed  - (value)*5;
 			// var 
-			console.log("new scroll_speed");
+			console.log('new scroll_speed');
 			console.log(new_scroll_speed);
 			
 			chrome.tabs.executeScript(null, {
 				code: 'scroll_speed = ' + new_scroll_speed +';'
 			});
 			var obj= {
-				"scroll_speed" : new_scroll_speed 
+				'scroll_speed' : new_scroll_speed 
 			};
 			setObjectdata(obj);
-			getObjectdata("scroll_speed", function(res){
+			getObjectdata('scroll_speed', function(res){
 				console.log(res);	
 			});
 
-			$("#flat-slider2").slider('value', value).change();
+			$('#flat-slider2').slider('value', value).change();
 		});
 	});
 	var obj= {
-		"scroll_speed_slider" : value
+		'scroll_speed_slider' : value
 	};
 	setObjectdata(obj);
 	
 }
 function changeOpacity(){
-	var value = $( "#flat-slider1" ).slider( "values", 0 );
+	var value = $( '#flat-slider1' ).slider( 'values', 0 );
 	chrome.tabs.executeScript(null, {
-		code: ' var myElements = document.querySelectorAll(\".arrows\");for (var i = 0; i < myElements.length; i++) {  myElements[i].style.opacity = '+value/100+';} '
+		code: ' var myElements = document.querySelectorAll(\'.arrows\');for (var i = 0; i < myElements.length; i++) {  myElements[i].style.opacity = '+value/100+';} '
 	});
-	// $("#flat-slider1").slider('value', value).change();
+	// $('#flat-slider1').slider('value', value).change();
 	var obj= {
-		"opacity" : value
+		'opacity' : value
 	};
 	setObjectdata(obj);
 
@@ -135,7 +214,7 @@ function changeOpacity(){
 // message passing
 // chrome.tabs.getSelected(null, function(tab) {
 //   // Send a request to the content script.
-//   chrome.tabs.sendMessage(tab.id, {action: "getDOM"}, function(response) {
+//   chrome.tabs.sendMessage(tab.id, {action: 'getDOM'}, function(response) {
 //     console.log(response.dom);
 //   });
 // });
@@ -144,9 +223,9 @@ function changeOpacity(){
 
 
 function myFunction() {
-	    // document.getElementById("myDropdown").classList.toggle("show");
-	var myDropdown = document.getElementById("myDropdown");
-	myDropdown.classList.toggle("show");
+	    // document.getElementById('myDropdown').classList.toggle('show');
+	var myDropdown = document.getElementById('myDropdown');
+	myDropdown.classList.toggle('show');
 }
 
 
@@ -155,25 +234,25 @@ $(function() {
 
 	$('#flat-slider1').slider({
 		slide: function( event, ui ) {
-                $( "#slider-value-opacity" ).html( ui.value );
+                $( '#slider-value-opacity' ).html( ui.value );
             }
 	});
 	$('#flat-slider2').slider({
 		slide: function( event, ui ) {
-                $( "#slider-value-scroll" ).html( ui.value );
+                $( '#slider-value-scroll' ).html( ui.value );
             }
 	});
 	$('.flat-slider').slider({
 	  orientation: 'horizontal',
-	  range:       false
+	  range:       false,
+      disabled: true
 	  // values:      [50]
-      // disabled: true
  
 	});
 
 	// slide: function(event, ui) {
- //        if (ui.value > last) $("#amount").val("this is increasing");
- //        if (ui.value < last) $("#amount").val("this is decreasing");
+ //        if (ui.value > last) $('#amount').val('this is increasing');
+ //        if (ui.value < last) $('#amount').val('this is decreasing');
  //        last = ui.value;
  //    }
 
@@ -182,5 +261,5 @@ $(function() {
 document.addEventListener('yourCustomEvent', function (e)
 {
   var data=e.detail;
-  console.log("received "+data);
+  console.log('received '+data);
 });

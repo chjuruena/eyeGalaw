@@ -244,7 +244,7 @@ chrome.storage.local.get(null, function (items) {
 });
 
 $(document).ready(function(){
-	alert('scroll_speed'+scroll_speed);
+	// alert('scroll_speed'+scroll_speed);
 
     	
     $("#arrow_down").on("click" ,function(){
