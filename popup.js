@@ -186,11 +186,10 @@ function hello() {
 
 					console.log(result);
 					console.log(result);
-					Array.prototype.forEach.call( result, function( node ) {
-							console.log(node);
-						
-					});
-									
+					for (var key in result) {
+  console.log(key);
+}
+							
 				}); 
 				
 			});
