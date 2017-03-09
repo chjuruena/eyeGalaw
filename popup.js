@@ -128,11 +128,17 @@ window.addEventListener('beforeunload', function(e) {
 
 function startWebgazer(){
 	// chrome.webNavigation.onCompleted.addListener(function(details) {
-    chrome.tabs.executeScript(null, {file: "src/thirdParty/webgazer.js"}, function(){
-        file:  'webgazerjs.js'      	
+  //   chrome.tabs.executeScript(null, {file: "src/thirdParty/webgazer.js"}, 
+  //   	function(){ file:  'webgazerjs.js'      	
+		// alert("UY");
 
 
-    	});
+  //   	});
+
+    chrome.tabs.executeScript({file: 'src/thirdParty/webgazer.js'}, function(){
+            chrome.tabs.executeScript({file: 'webgazerjs.js'});
+    });
+
     // });
 }
 
