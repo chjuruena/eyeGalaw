@@ -107,10 +107,10 @@ $(document).ready(function(){
 		   });
 
 				// console.log( "pageX: " + event.pageX + ", pageY: " + event.pageY );
-	  	var p = $( "#arrow_down" );
-		var position = p.position();
-		var offset = p.offset();
-		console.log( "left: " + offset.left + ", top: " + position.top );
+	 //  	var p = $( "#arrow_down" );
+		// var position = p.position();
+		// var offset = p.offset();
+		// console.log( "left: " + offset.left + ", top: " + position.top );
 
 				
 

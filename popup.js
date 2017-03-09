@@ -162,12 +162,38 @@ function hello() {
 			$('.flat-slider').slider({
 				disabled: false
 			});
+			
+			var getText = Array();
+
 			chrome.tabs.executeScript(null, {
+				allFrames: true, 
 			file: 'insert.js'
 
 			}, function (result) {
-				console.log(result);
-			}); 
+	            chrome.tabs.executeScript(null, {
+	            	// code: 'webgazerjs.js'
+	            	file: 'getposition.js'
+					
+					// code: 
+					// '$(function() {'+
+					// 'var obj;'+
+					// ' var arrow_down = $(\'#arrow_down\');'+
+					// 'obj={ \'position\': arrow_down.position(), \'offset\': arrow_down.offset() };'+
+					// 'var position = arrow_down.position(); var offset = arrow_down.offset(); '+
+					// 'console.log( "left: " + offset.left + ", top: " + position.top );'+
+					// '}); obj; '
+				}, function (result) {
+
+					console.log(result);
+					console.log(result);
+					Array.prototype.forEach.call( result, function( node ) {
+							console.log(node);
+						
+					});
+									
+				}); 
+				
+			});
 			var obj= {
 				'start_button' : 'STOP'
 			};
@@ -176,7 +202,7 @@ function hello() {
 		}
 
 		else if(start_val =='STOP'){
-			chrome.tabs.executeScript(null, {
+			chrome.tabs.executeScript(null,  {
 				file: 'removeArrows.js'
 				// code: ' var myElements = document.querySelectorAll(\'.arrows\');Array.prototype.forEach.call( myElements, function( node ) {node.parentNode.removeChild( node );});'
 				// code: ' var myElements = document.querySelectorAll(\'.arrows\');console.log(myElements);'
