@@ -150,7 +150,7 @@ function hello() {
 // uncomment later
 	loadDeafultValues();
 	getObjectdata( function(data){
-		startWebgazer();
+		// startWebgazer();
 
 		var start_val=data["start_button"];
 		console.log(start_val);

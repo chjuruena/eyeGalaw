@@ -99,14 +99,23 @@ $(document).ready(function(){
 	// alert('scroll_speed'+scroll_speed);
 
     	
-    $("#arrow_down").on("click" ,function(){
-                scrolled=scrolled+scroll_speed;
-        
-				$("html, body").animate({
-				        scrollTop:  scrolled
-				   });
+    $("#arrow_down").on("click" ,function(event){
+        scrolled=scrolled+scroll_speed;
 
-			});
+		$("html, body").animate({
+		        scrollTop:  scrolled
+		   });
+
+				// console.log( "pageX: " + event.pageX + ", pageY: " + event.pageY );
+	  	var p = $( "#arrow_down" );
+		var position = p.position();
+		var offset = p.offset();
+		console.log( "left: " + offset.left + ", top: " + position.top );
+
+				
+
+
+	});
 
     
     $("#arrow_up").on("click" ,function(){
