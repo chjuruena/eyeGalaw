@@ -1,5 +1,6 @@
 // var app = chrome.runtime.getBackgroundPage();
 var running;
+var first=1;
 
 // var obj= {
 // 	'start_button' : 'START'
@@ -8,6 +9,8 @@ var running;
 getObjectdata( function(data){
 	console.log(data);
 });
+
+
 
 
 // obj['`'] = 300;
@@ -36,9 +39,13 @@ function getObjectdata(callback) {
 }
 
 function loadDeafultValues(){
+	
+
 	var obj= {
 		'scroll_speed' : 300,
 		'opacity' : 50
+		// 'start_button' : 'START'
+
 		
 	};
 	setObjectdata(obj);
@@ -48,6 +55,7 @@ function loadDeafultValues(){
 
 function loadSliders(){
 	getObjectdata( function(data){
+		console.log(data)
 		var scroll_speed_slider = data['scroll_speed_slider'];
 		var opacity_slider = data['opacity'];
 
@@ -62,6 +70,7 @@ function loadSliders(){
 	});
 }
 function loadButtonVal(){
+	
 	getObjectdata( function(data){
 		var start_val=data["start_button"];
 		console.log(start_val);
@@ -76,12 +85,37 @@ function loadButtonVal(){
 // document.addEventListener('DOMContentLoaded', function() {
 window.onload=function(){
 	//set value of sliders
+	// getObjectdata( function(data){
+	// 	console.log(data);
+	// 	var start=data["start_button"];
+
+	// 	if (!data["start_button"]){
+
+	// 		var obj= {
+	// 			'start_button' :'START'
+	// 		};
+	// 		setObjectdata(obj);
+	// 	}
+	// }	
+
 	loadSliders();
 	loadButtonVal();
+	// document.getElementById('clickme').text ='START';
+
+
 	document.getElementById('clickme').addEventListener('click', hello);
+	
 
 	// document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
 	// document.getElementById('flat-slider2').addEventListener('mouseup', changeSpeed);	
+}
+window.onbeforeunload = function (e) {
+	chrome.storage.local.clear(function() {
+	    var error = chrome.runtime.lastError;
+	    if (error) {
+	        console.error(error);
+	    }
+	});
 }
 window.addEventListener('beforeunload', function(e) {
 	chrome.storage.local.clear(function() {
@@ -92,6 +126,15 @@ window.addEventListener('beforeunload', function(e) {
 	});
 }, false);
 
+function startWebgazer(){
+	// chrome.webNavigation.onCompleted.addListener(function(details) {
+    chrome.tabs.executeScript(null, {file: "src/thirdParty/webgazer.js"}, function(){
+        file:  'webgazerjs.js'      	
+
+
+    	});
+    // });
+}
 
 function hello() {
 
@@ -99,14 +142,16 @@ function hello() {
    //          chrome.tabs.executeScript({file: 'insert.js'});
    //      });
 // uncomment later
+	loadDeafultValues();
 	getObjectdata( function(data){
+		startWebgazer();
+
 		var start_val=data["start_button"];
 		console.log(start_val);
 		// document.getElementById('clickme').text == start_val;
 		if(start_val =='START'){
 			document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
 			document.getElementById('flat-slider2').addEventListener('mouseup', changeSpeed);
-			loadDeafultValues();
 		
 			$('.flat-slider').slider({
 				disabled: false
