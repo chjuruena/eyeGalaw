@@ -135,9 +135,9 @@ function startWebgazer(){
 
   //   	});
 
-    chrome.tabs.executeScript({file: 'src/thirdParty/webgazer.js'}, function(){
-            chrome.tabs.executeScript({file: 'webgazerjs.js'});
-    });
+    // chrome.tabs.executeScript({file: 'src/thirdParty/webgazer.js'}, function(){
+            chrome.tabs.executeScript({file: 'webgazerjs.js'}, function(){});
+    // });
 
     // });
 }
@@ -150,12 +150,15 @@ function hello() {
 // uncomment later
 	loadDeafultValues();
 	getObjectdata( function(data){
-		// startWebgazer();
+		
 
 		var start_val=data["start_button"];
 		console.log(start_val);
 		// document.getElementById('clickme').text == start_val;
 		if(start_val =='START'){
+			startWebgazer();
+
+
 			document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
 			document.getElementById('flat-slider2').addEventListener('mouseup', changeSpeed);
 		
