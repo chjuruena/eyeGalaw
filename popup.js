@@ -109,7 +109,11 @@ window.onload=function(){
 	// document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
 	// document.getElementById('flat-slider2').addEventListener('mouseup', changeSpeed);	
 }
+
+
 window.onbeforeunload = function (e) {
+    window.localStorage.clear(); //Comment out if you want to save data across different sessions 
+
 	chrome.storage.local.clear(function() {
 	    var error = chrome.runtime.lastError;
 	    if (error) {
