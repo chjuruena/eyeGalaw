@@ -110,6 +110,14 @@ $(document).ready(function(){
     var y = event.clientY;
      console.log("clickX:" + x+ " clickY:" +y);
 
+     var currclick = {
+            'x': x, 
+            'y': y
+        };
+     chrome.storage.local.set(currclick, function () {
+        console.log('currclick', currclick);
+    });
+
 				// console.log( "pageX: " + event.pageX + ", pageY: " + event.pageY );
 	 //  	var p = $( "#arrow_down" );
 		// var position = p.position();
