@@ -135,9 +135,9 @@ function startWebgazer(){
 
   //   	});
 
-    // chrome.tabs.executeScript({file: 'src/thirdParty/webgazer.js'}, function(){
+    chrome.tabs.executeScript({file: 'src/thirdParty/webgazer.js'}, function(){
             chrome.tabs.executeScript({file: 'webgazerjs.js'}, function(){});
-    // });
+    });
 
     // });
 }
@@ -156,7 +156,6 @@ function hello() {
 		console.log(start_val);
 		// document.getElementById('clickme').text == start_val;
 		if(start_val =='START'){
-			startWebgazer();
 
 
 			document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
@@ -173,29 +172,11 @@ function hello() {
 			file: 'insert.js'
 
 			}, function (result) {
-	            chrome.tabs.executeScript(null, {
-	            	// code: 'webgazerjs.js'
-	            	file: 'getposition.js'
-					
-					// code: 
-					// '$(function() {'+
-					// 'var obj;'+
-					// ' var arrow_down = $(\'#arrow_down\');'+
-					// 'obj={ \'position\': arrow_down.position(), \'offset\': arrow_down.offset() };'+
-					// 'var position = arrow_down.position(); var offset = arrow_down.offset(); '+
-					// 'console.log( "left: " + offset.left + ", top: " + position.top );'+
-					// '}); obj; '
-				}, function (result) {
-
-					console.log(result);
-					console.log(result);
-					for (var key in result) {
-  console.log(key);
-}
-							
+	            chrome.tabs.executeScript(null, {file: 'getposition.js'}, function (result) {								
 				}); 
-				
 			});
+			startWebgazer();
+
 			var obj= {
 				'start_button' : 'STOP'
 			};

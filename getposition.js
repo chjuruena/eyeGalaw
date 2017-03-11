@@ -5,12 +5,14 @@ $(function() {
 	arr.forEach(function(element) {
 	    console.log(element);
 	    var position = $(element).position();
-	    var offset = $(element).offset();
-	     	 	
+	    var offset = $(element).offset();    	 	
+
+
 		var objelement = {
 			'x': offset.left, 
 			'y': position.top
 		};
+	
 		// obj_element[element]=coords;
 		obj[element] = objelement;
 		
