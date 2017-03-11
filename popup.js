@@ -1,58 +1,36 @@
+// small letter for start then Pascal for functions ex. startEvent
+// css class and ids are snake-case
+
 // var app = chrome.runtime.getBackgroundPage();
 var running;
 var first=1;
 
-// var obj= {
-// 	'start_button' : 'START'
-// };
-// setObjectdata(obj);
 getObjectdata( function(data){
 	console.log(data);
 });
 
 
-
-
-// obj['`'] = 300;
- // chrome.storage.sync.set({'value': theValue}
-
-
-// function getObjectdata(key){
-// 	var data;
-// 	chrome.storage.local.get(null, function (items) {
-//     	data = items[key];
-
-//     	// return(items[key])
-
-//     });
-//     	console.log(data);
-//     	return data;
-
-// }
+// saving data to chrome local storage
 function setObjectdata(obj){
 	chrome.storage.local.set(obj, function () {
         console.log('Saved', obj);
     });
 }
+// retrieving data from chrome local storage
+
 function getObjectdata(callback) {
 	chrome.storage.local.get(null, callback);
 }
 
-function loadDeafultValues(){
-	
-
+function loadDeafultValues(){	
 	var obj= {
-		'scroll_speed' : 1000,
+		'scroll_speed' : 300,
 		'opacity' : 50
-		// 'start_button' : 'START'
-
-		
 	};
 	setObjectdata(obj);
-	
-
 }
 
+//load slider values for opacity adn scroll value
 function loadSliders(){
 	getObjectdata( function(data){
 		console.log(data)
@@ -63,8 +41,6 @@ function loadSliders(){
 			$('#flat-slider2').slider('value',scroll_speed_slider);
 			$('#flat-slider1').slider('value',opacity_slider);
 		});
-		
-
 		// add opcaity
 
 	});
@@ -74,40 +50,31 @@ function loadButtonVal(){
 	getObjectdata( function(data){
 		var start_val=data["start_button"];
 		console.log(start_val);
-		document.getElementById('clickme').text = start_val;
-		// if(start_val =='START')document.getElementById('clickme').text = 'START';
-		// else document.getElementById('clickme').text = 'STOP';
+		document.getElementById('start_button').text = start_val;
 
 	});
 		
 	
 }
-// document.addEventListener('DOMContentLoaded', function() {
 window.onload=function(){
-	//set value of sliders
-	// getObjectdata( function(data){
-	// 	console.log(data);
-	// 	var start=data["start_button"];
+	getObjectdata( function(data){
+		console.log(data);
+		var start=data["start_button"];
 
-	// 	if (!data["start_button"]){
+		if (!data["start_button"]){
 
-	// 		var obj= {
-	// 			'start_button' :'START'
-	// 		};
-	// 		setObjectdata(obj);
-	// 	}
-	// }	
+			var obj= {
+				'start_button' :'START'
+			};
+			setObjectdata(obj);
+		}
+	});	
 
 	loadSliders();
 	loadButtonVal();
-	// document.getElementById('clickme').text ='START';
 
 
-	document.getElementById('clickme').addEventListener('click', hello);
-	
-
-	// document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
-	// document.getElementById('flat-slider2').addEventListener('mouseup', changeSpeed);	
+	document.getElementById('start_button').addEventListener('click', startEvent);	
 }
 
 
@@ -122,6 +89,8 @@ window.onbeforeunload = function (e) {
 	});
 }
 window.addEventListener('beforeunload', function(e) {
+    window.localStorage.clear(); //Comment out if you want to save data across different sessions 
+
 	chrome.storage.local.clear(function() {
 	    var error = chrome.runtime.lastError;
 	    if (error) {
@@ -131,45 +100,30 @@ window.addEventListener('beforeunload', function(e) {
 }, false);
 
 function startWebgazer(){
-	// chrome.webNavigation.onCompleted.addListener(function(details) {
-  //   chrome.tabs.executeScript(null, {file: "src/thirdParty/webgazer.js"}, 
-  //   	function(){ file:  'webgazerjs.js'      	
-		// alert("UY");
-
-
-  //   	});
 
     chrome.tabs.executeScript({file: 'src/thirdParty/webgazer.js'}, function(){
             chrome.tabs.executeScript({file: 'webgazerjs.js'}, function(){});
-    });
-
-    // });
+    });  
 }
 
-function hello() {
+function startEvent() {
 
-   // chrome.tabs.executeScript({file: 'src/thirdParty/webgazer.js'}, function(){
-   //          chrome.tabs.executeScript({file: 'insert.js'});
-   //      });
-// uncomment later
+   
 	loadDeafultValues();
-	getObjectdata( function(data){
-		
+	getObjectdata( function(data){		
 
 		var start_val=data["start_button"];
 		console.log(start_val);
-		// document.getElementById('clickme').text == start_val;
+
+		//
 		if(start_val =='START'){
-
-
 			document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
 			document.getElementById('flat-slider2').addEventListener('mouseup', changeSpeed);
 		
+			//enable sliders
 			$('.flat-slider').slider({
 				disabled: false
-			});
-			
-			var getText = Array();
+			});			
 
 			chrome.tabs.executeScript(null, {
 				allFrames: true, 
@@ -179,13 +133,14 @@ function hello() {
 	            chrome.tabs.executeScript(null, {file: 'getposition.js'}, function (result) {								
 				}); 
 			});
+			//tarting webgazer - dito siya inilagay para masave muna yung position sa taas
 			startWebgazer();
-
+			
 			var obj= {
 				'start_button' : 'STOP'
 			};
 			setObjectdata(obj);
-			document.getElementById('clickme').text ='STOP';
+			document.getElementById('start_button').text ='STOP';
 		}
 
 		else if(start_val =='STOP'){
@@ -201,7 +156,7 @@ function hello() {
 				'start_button' : 'START'
 			};
 			setObjectdata(obj);
-			document.getElementById('clickme').text ='START';
+			document.getElementById('start_button').text ='START';
 
 		}
 
