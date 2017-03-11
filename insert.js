@@ -100,23 +100,23 @@ $(document).ready(function(){
 
     	
     $("#arrow_down").on("click" ,function(event){
-        scrolled=scrolled+scroll_speed;
+        // scrolled=scrolled+scroll_speed;
 
 		// $("html, body").animate({
 		//         scrollTop:  scrolled
 		//    });
 
         var x = event.clientX;
-    var y = event.clientY;
-     console.log("clickX:" + x+ " clickY:" +y);
+        var y = event.clientY;
+         console.log("clickX:" + x+ " clickY:" +y);
 
-     var currclick = {
-            'x': x, 
-            'y': y
-        };
-     chrome.storage.local.set(currclick, function () {
-        console.log('currclick', currclick);
-    });
+         var currclick = {
+                'x': x, 
+                'y': y
+            };
+         chrome.storage.local.set(currclick, function () {
+            console.log('currclick', currclick);
+        });
 
 				// console.log( "pageX: " + event.pageX + ", pageY: " + event.pageY );
 	 //  	var p = $( "#arrow_down" );

@@ -42,7 +42,7 @@ function loadDeafultValues(){
 	
 
 	var obj= {
-		'scroll_speed' : 300,
+		'scroll_speed' : 1000,
 		'opacity' : 50
 		// 'start_button' : 'START'
 

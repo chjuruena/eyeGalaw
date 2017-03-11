@@ -4,6 +4,9 @@ function getObjectdata(callback) {
     chrome.storage.local.get(null, callback);
 }
 
+var scrolled=0;
+var scroll_speed;
+
 webgazer.setGazeListener(function(data, elapsedTime) {
 // alert("buloy");
 
@@ -21,19 +24,31 @@ webgazer.setGazeListener(function(data, elapsedTime) {
          // console.log("data" + data);
 
          // console.log("from webgazer" + data["#arrow_down"]);
+         
          var arrow_down=data["#arrow_down"];
         console.log("X-gaze:" + xprediction+ " Y-gaze:" +yprediction);
         console.log("X-click:" + data["x"]+ " Y-click:" +data["y"]);
 
         console.log("X-data:" + arrow_down.x+ " Y-data:" +arrow_down.y);
 
-         
+         // scroll_speed
+         var scroll_speed=data["scroll_speed"];
+        scrolled=scrolled+scroll_speed;
+
+
 
          if ((arrow_down.x < xprediction &&  xprediction<(arrow_down.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
             console.log("TUUUT");
             console.log("TUUUT");
             console.log("TUUUT");
             console.log("TUUUT");
+
+            // scrolled=scrolled+scroll_speed;
+
+            $("html, body").animate({
+                scrollTop:  scrolled
+           });
+
          }
          
 
