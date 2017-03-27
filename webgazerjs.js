@@ -25,37 +25,62 @@ webgazer.setGazeListener(function(data, elapsedTime) {
 
          // console.log("from webgazer" + data["#arrow_down"]);
          
-         var arrow_down=data["#arrow_down"];
-        console.log("X-gaze:" + xprediction+ " Y-gaze:" +yprediction);
-        console.log("X-click:" + data["x"]+ " Y-click:" +data["y"]);
+        var arrow_down=data["#arrow_down"];
+        var arrow_up=data["#arrow_up"];
+        var arrow_left=data["#arrow_left"];
+        var arrow_right=data["#arrow_right"];
 
-        console.log("X-data:" + arrow_down.x+ " Y-data:" +arrow_down.y);
+         // /////////////////////////////////
+            console.log("X-gaze:" + xprediction+ " Y-gaze:" +yprediction);
+            console.log("X-click:" + data["x"]+ " Y-click:" +data["y"]);
+            console.log("X-data:" + arrow_down.x+ " Y-data:" +arrow_down.y);
+         // /////////////////////////////////
 
          // scroll_speed
-         var scroll_speed=data["scroll_speed"];
-        scrolled=scrolled+scroll_speed;
-
-
-
-         if ((arrow_down.x < xprediction &&  xprediction<(arrow_down.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
-            console.log("TUUUT");
-            console.log("TUUUT");
-            console.log("TUUUT");
-            console.log("TUUUT");
-
-            // scrolled=scrolled+scroll_speed;
-
+        var scroll_speed=data["scroll_speed"];
+        
+        if ((arrow_down.x < xprediction &&  xprediction<(arrow_down.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
+            scrolled=scrolled+scroll_speed;
+            console.log("down");           
             $("html, body").animate({
                 scrollTop:  scrolled
            });
-
          }
+         if ((arrow_up.x < xprediction &&  xprediction<(arrow_up.x+100))&& (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))){
+            if (scrolled>0) scrolled=scrolled-scroll_speed;
+            
+            console.log("down");           
+            $("html, body").animate({
+                scrollTop:  scrolled
+           });
+         }
+
+//          (function($) {
+//     $.fn.has_scrollbar = function() {
+//         var divnode = this.get(0);
+//         if(divnode.scrollHeight > divnode.clientHeight)
+//             return true;
+//     }
+// })(jQuery);
+
+         // jQuery.fn.hasScrollBar = function(direction)
+         //  {
+         //    if (direction == 'vertical')
+         //    {
+         //      return this.get(0).scrollHeight > this.innerHeight();
+         //    }
+         //    else if (direction == 'horizontal')
+         //    {
+         //      return this.get(0).scrollWidth > this.innerWidth();
+         //    }
+         //    return false;
+
+         //  }
          
 
          // console.log();
     });
-}).begin()
-        .showPredictionPoints(true); /* shows a square every 100 milliseconds where current prediction is */
+}).begin().showPredictionPoints(true); /* shows a square every 100 milliseconds where current prediction is */
 
     var width = 320;
     var height = 240;

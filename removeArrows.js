@@ -2,7 +2,7 @@ var myElements = document.querySelectorAll(".arrows");
 
 for (var i = 0; i < myElements.length; i++) {  
 	// myElements[i].style.opacity = '+value/100+'
-	document.body.removeChild(child);
+	document.body.removeChild(myElements[i]);
 };
 		
 

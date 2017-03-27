@@ -133,8 +133,8 @@ $(document).ready(function(){
       
 
         var x = event.clientX;
-    var y = event.clientY;
-     console.log("clickX:" + x+ " clickY:" +y);
+        var y = event.clientY;
+        console.log("clickX:" + x+ " clickY:" +y);
 
                 // console.log( "pageX: " + event.pageX + ", pageY: " + event.pageY );
      //     var p = $( "#arrow_down" );
