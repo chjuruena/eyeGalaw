@@ -146,7 +146,7 @@ function loadStartBtnFxns(start_val, action){
 					
 					
 				}
-				else if((start_val =='STOP' && action=="click") ){
+				else if((start_val =='STOP' && action=="click") || (start_val =='START' && action=="reload")  ){
 					console.log("start_val =='STOP' && action==click");
 
 						chrome.tabs.executeScript(null,  {
