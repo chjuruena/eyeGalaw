@@ -51,33 +51,58 @@ function loadButtonVal(){
 		console.log(start_val);
 		document.getElementById('start_button').text = start_val;
 
-	});
+	});	
 }
+
+function setBtntoStop(){
+	var obj= {
+		'start_button' : 'STOP'
+	};
+	setObjectdata(obj);
+	document.getElementById('start_button').text ='STOP';
+}
+function setBtntoStart(){
+	var obj= {
+		'start_button' : 'START'
+	};
+	setObjectdata(obj);
+	document.getElementById('start_button').text ='START';
+}
+function startEvent() {   
+	loadDeafultValues();
+
+	getObjectdata( function(data){	
+		loadStartBtnFxns(data["start_button"], "click");	
+	});	
+}
+
 window.onload=function(){
 	getObjectdata( function(data){
 		console.log(data);
 
 
 
-			document.getElementById('start_button').text = "START";
 
 		if (!data["start_button"]){
+			console.log("wala pang start_button");
+			document.getElementById('start_button').text ='START';
 
-			var obj= {
-				'start_button' : "START"
-			};
-			setObjectdata(obj);
-			document.getElementById('start_button').text = "START";
+
+			setBtntoStart();
 
 		}else {
+			console.log("MERON NAAAAAAAA start_button");
+
 				loadStartBtnFxns(data["start_button"], "reload");
+				loadButtonVal();
+
 			//opening otehr pages or new
 
 		}
 	});	
 
 	loadSliders();
-	loadButtonVal();
+	// loadButtonVal();
 
 
 	document.getElementById('start_button').addEventListener('click', startEvent);	
@@ -93,6 +118,7 @@ function loadStartBtnFxns(start_val, action){
 				// relaod =value after clicking
 				// click=value before clicking
 				if((start_val =='START' && action=="click") || (start_val =='STOP' && action=="reload") ){
+					console.log("start_val =='START' && action==click");
 					loadDeafultValues();
 
 					document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
@@ -116,25 +142,24 @@ function loadStartBtnFxns(start_val, action){
 					if (action=="click"){
 						setBtntoStop();
 					}
+
 					
 					
 				}
 				else if((start_val =='STOP' && action=="click") ){
-
-					alert("what")
-
+					console.log("start_val =='STOP' && action==click");
 
 						chrome.tabs.executeScript(null,  {
 							file: 'removeArrows.js'
-							// code: ' var myElements = document.querySelectorAll(\'.arrows\');Array.prototype.forEach.call( myElements, function( node ) {node.parentNode.removeChild( node );});'
-							// code: ' var myElements = document.querySelectorAll(\'.arrows\');console.log(myElements);'
 						});
 						$('.flat-slider').slider({
 							disabled: true
 						});
 					if (action=="click") setBtntoStart();
+					loadButtonVal();
 
 				}
+
 
 			// });
 }
@@ -166,140 +191,6 @@ function startWebgazer(){
     chrome.tabs.executeScript({file: 'src/thirdParty/webgazer.js'}, function(){
             chrome.tabs.executeScript({file: 'webgazerjs.js'}, function(){});
     });  
-}
-function setBtntoStop(){
-	var obj= {
-		'start_button' : 'STOP'
-	};
-	setObjectdata(obj);
-	document.getElementById('start_button').text ='STOP';
-}
-function setBtntoStart(){
-	var obj= {
-		'start_button' : 'START'
-	};
-	setObjectdata(obj);
-	document.getElementById('start_button').text ='START';
-}
-function startEvent() {
-
-	
-	// var scrollHeight=
-	 // jQuery.fn.hasScrollBar = function(direction)
-        
-
-         //  }
-// $(function() {
-       console.log(document.body.clientWidth);
-       console.log(document.body.clientWidth);
-       console.log("ooooooooooooooooooooooooops")
-       console.log($(window).width() );
-       console.log($(window).width());
-       // console.log("ooooooooooooooooooooooooops")
-       // console.log("ooooooooooooooooooooooooops")
-       // console.log("ooooooooooooooooooooooooops");
-       // console.log( window.innerWidth);
-       // console.log( window.innerWidth);
-       // console.log( window.innerWidth);
-     
-
-//scrol 1px to the left
-// $(document).scrollLeft(1);
-
-// if($(document).scrollLeft() != 0){
-//    //there's a scroll bar
-//    alert("hasleft")
-//    console.log("hasleft");
-//    console.log("hasleft");
-//    console.log("hasleft");
-//    console.log("hasleft");
-//    console.log("hasleft");
-//    console.log("hasleft");
-//    console.log("hasleft");
-// }else{
-//    //there's no scrollbar
-//    console.log("NOOOOOOOO");
-//    console.log("NOOOOOOOO");
-//    console.log("NOOOOOOOO");
-//    console.log("NOOOOOOOO");
-
-// }
-
-// jQuery.fn.hasScrollBar = function(direction)
-//           {
-//             if (direction == 'vertical')
-//             {
-//               return this.get(0).scrollHeight > this.innerHeight();
-//             }
-//             else if (direction == 'horizontal')
-//             {
-//               return this.get(0).scrollWidth > this.innerWidth();
-//             }
-//             return false;
-
-//           }
-
-//           console.log($("html, body").hasScrollBar('vertical'));
-
-
-
-   
-	loadDeafultValues();
-
-	getObjectdata( function(data){		
-		loadStartBtnFxns(data["start_button"], "click");
-
-		// var start_val=data["start_button"];
-		// 		console.log(start_val);
-
-		// 		//
-		// 		if(start_val == null || start_val =='START'){ //first time clickng start
-		// 			document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
-		// 			document.getElementById('flat-slider2').addEventListener('mouseup', changeSpeed);
-				
-		// 			//enable sliders
-		// 			$('.flat-slider').slider({
-		// 				disabled: false
-		// 			});			
-
-		// 			chrome.tabs.executeScript(null, {
-		// 				allFrames: true, 
-		// 			file: 'insert.js'
-
-		// 			}, function (result) {
-		// 	            chrome.tabs.executeScript(null, {file: 'getposition.js'}, function (result) {								
-		// 				}); 
-		// 			});
-		// 			//tarting webgazer - dito siya inilagay para masave muna yung position sa taas
-		// 			startWebgazer();
-		// 			setBtntoStop();
-					
-					
-		// 		}
-
-		// 		else if(start_val =='STOP'){
-		// 			loadStartBtnFxns(data, "click");
-					
-
-		// 		}
-				
-
-	});
-	
-
-
-
-	// loadDeafultValues();
-	
-	// $('.flat-slider').slider({
-	// 	disabled: false
-	// });
-	// chrome.tabs.executeScript(null, {
-	// file: 'insert.js'
-
-	// }, function (result) {
-	// 	console.log(result);
-	// }); 
 }
 
 function changeSpeed(){
