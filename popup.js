@@ -161,34 +161,14 @@ function loadStartBtnFxns(start_val, action){
 
 					chrome.tabs.executeScript(null,  {
 						file: 'removeArrows.js'
-					},function(){
-
-						// chrome.tabs.executeScript({file: 'src/thirdParty/webgazer.js'}, function(){
-					 //            chrome.tabs.executeScript({file: 'stopwebgazer.js'}, function(){});
-					 //    });
-						// chrome.tabs.query({active: true, currentWindow: true}, function (arrayOfTabs) {
-					 //    var code = 'window.location.reload();';
-						// chrome.tabs.executeScript({file: 'src/thirdParty/webgazer.js'}, function(){
-					 //            chrome.tabs.executeScript({file: 'stopwebgazer.js'}, function(){});
-					 //    });
-						// });
 					});
 					$('.flat-slider').slider({
 						disabled: true
 					});
 					if (action=="click") setBtnto("START");
 					loadButtonVal();
-					// chrome.runtime.reload();
-
-
-					// removing the webgazer
-					
-
-
 				}
 
-
-			// });
 }
 
 

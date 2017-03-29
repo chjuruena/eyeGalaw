@@ -14,7 +14,6 @@ function startWebgazer(){
 
 
     webgazer.setGazeListener(function(data, elapsedTime) {
-    // alert("buloy");
 
         if (data == null) {
             console.log("nagnull");
@@ -27,9 +26,7 @@ function startWebgazer(){
 
 
         getObjectdata( function(data){
-             // console.log("data" + data);
 
-             // console.log("from webgazer" + data["#arrow_down"]);
              
             var arrow_down=data["#arrow_down"];
             var arrow_up=data["#arrow_up"];
@@ -94,7 +91,7 @@ function startWebgazer(){
 }
 
 
-function showRedDot(){
+function showVideo(){
 
     var width = 320;
     var height = 240;
