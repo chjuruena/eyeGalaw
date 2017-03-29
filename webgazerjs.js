@@ -7,80 +7,94 @@ function getObjectdata(callback) {
 var scrolled=0;
 var scroll_speed;
 
-webgazer.setGazeListener(function(data, elapsedTime) {
-// alert("buloy");
 
-    if (data == null) {
-        console.log("nagnull");
-        return;
-    }
-    
-    var xprediction = data.x; //these x coordinates are relative to the viewport 
-    var yprediction = data.y; //these y coordinates are relative to the viewport
-    console.log(elapsedTime); //elapsed time is based on time since begin was called
+startWebgazer();
+
+function startWebgazer(){
 
 
-    getObjectdata( function(data){
-         // console.log("data" + data);
+    webgazer.setGazeListener(function(data, elapsedTime) {
+    // alert("buloy");
 
-         // console.log("from webgazer" + data["#arrow_down"]);
-         
-        var arrow_down=data["#arrow_down"];
-        var arrow_up=data["#arrow_up"];
-        var arrow_left=data["#arrow_left"];
-        var arrow_right=data["#arrow_right"];
-
-         // /////////////////////////////////
-            console.log("X-gaze:" + xprediction+ " Y-gaze:" +yprediction);
-            console.log("X-click:" + data["x"]+ " Y-click:" +data["y"]);
-            console.log("X-data:" + arrow_down.x+ " Y-data:" +arrow_down.y);
-         // /////////////////////////////////
-
-         // scroll_speed
-        var scroll_speed=data["scroll_speed"];
+        if (data == null) {
+            console.log("nagnull");
+            return;
+        }
         
-        if ((arrow_down.x < xprediction &&  xprediction<(arrow_down.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
-            scrolled=scrolled+scroll_speed;
-            console.log("down");           
-            $("html, body").animate({
-                scrollTop:  scrolled
-           });
-         }
-         if ((arrow_up.x < xprediction &&  xprediction<(arrow_up.x+100))&& (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))){
-            if (scrolled>0) scrolled=scrolled-scroll_speed;
+        var xprediction = data.x; //these x coordinates are relative to the viewport 
+        var yprediction = data.y; //these y coordinates are relative to the viewport
+        console.log(elapsedTime); //elapsed time is based on time since begin was called
+
+
+        getObjectdata( function(data){
+             // console.log("data" + data);
+
+             // console.log("from webgazer" + data["#arrow_down"]);
+             
+            var arrow_down=data["#arrow_down"];
+            var arrow_up=data["#arrow_up"];
+            var arrow_left=data["#arrow_left"];
+            var arrow_right=data["#arrow_right"];
+
+             // /////////////////////////////////
+                console.log("X-gaze:" + xprediction+ " Y-gaze:" +yprediction);
+                console.log("X-click:" + data["x"]+ " Y-click:" +data["y"]);
+                console.log("X-data:" + arrow_down.x+ " Y-data:" +arrow_down.y);
+             // /////////////////////////////////
+
+             // scroll_speed
+            var scroll_speed=data["scroll_speed"];
             
-            console.log("down");           
-            $("html, body").animate({
-                scrollTop:  scrolled
-           });
-         }
+            if ((arrow_down.x < xprediction &&  xprediction<(arrow_down.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
+                scrolled=scrolled+scroll_speed;
+                console.log("down");           
+                $("html, body").animate({
+                    scrollTop:  scrolled
+               });
+             }
+             if ((arrow_up.x < xprediction &&  xprediction<(arrow_up.x+100))&& (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))){
+                if (scrolled>0) scrolled=scrolled-scroll_speed;
+                
+                console.log("down");           
+                $("html, body").animate({
+                    scrollTop:  scrolled
+               });
+             }
 
-//          (function($) {
-//     $.fn.has_scrollbar = function() {
-//         var divnode = this.get(0);
-//         if(divnode.scrollHeight > divnode.clientHeight)
-//             return true;
-//     }
-// })(jQuery);
+    //          (function($) {
+    //     $.fn.has_scrollbar = function() {
+    //         var divnode = this.get(0);
+    //         if(divnode.scrollHeight > divnode.clientHeight)
+    //             return true;
+    //     }
+    // })(jQuery);
 
-         // jQuery.fn.hasScrollBar = function(direction)
-         //  {
-         //    if (direction == 'vertical')
-         //    {
-         //      return this.get(0).scrollHeight > this.innerHeight();
-         //    }
-         //    else if (direction == 'horizontal')
-         //    {
-         //      return this.get(0).scrollWidth > this.innerWidth();
-         //    }
-         //    return false;
+             // jQuery.fn.hasScrollBar = function(direction)
+             //  {
+             //    if (direction == 'vertical')
+             //    {
+             //      return this.get(0).scrollHeight > this.innerHeight();
+             //    }
+             //    else if (direction == 'horizontal')
+             //    {
+             //      return this.get(0).scrollWidth > this.innerWidth();
+             //    }
+             //    return false;
 
-         //  }
-         
+             //  }
+             
 
-         // console.log();
-    });
-}).begin().showPredictionPoints(true); /* shows a square every 100 milliseconds where current prediction is */
+             // console.log();
+
+            if (data["start_button"] == "START") webgazer.showPredictionPoints(false).clearGazeListener();
+
+        });
+    }).begin().showPredictionPoints(true); /* shows a square every 100 milliseconds where current prediction is */
+    
+}
+
+
+function showRedDot(){
 
     var width = 320;
     var height = 240;
@@ -124,4 +138,5 @@ webgazer.setGazeListener(function(data, elapsedTime) {
     };
 
 
+}
 

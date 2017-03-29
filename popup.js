@@ -54,19 +54,13 @@ function loadButtonVal(){
 	});	
 }
 
-function setBtntoStop(){
+
+function setBtnto(action){
 	var obj= {
-		'start_button' : 'STOP'
+		'start_button' : action
 	};
 	setObjectdata(obj);
-	document.getElementById('start_button').text ='STOP';
-}
-function setBtntoStart(){
-	var obj= {
-		'start_button' : 'START'
-	};
-	setObjectdata(obj);
-	document.getElementById('start_button').text ='START';
+	document.getElementById('start_button').text = action;
 }
 function startEvent() {   
 	loadDeafultValues();
@@ -88,17 +82,24 @@ window.onload=function(){
 			document.getElementById('start_button').text ='START';
 
 
-			setBtntoStart();
+			setBtnto("START");
+
 
 		}else {
 			console.log("MERON NAAAAAAAA start_button");
 
 				loadStartBtnFxns(data["start_button"], "reload");
 				loadButtonVal();
+				console.log(data);
+		// console.log(data["stopped"]);
+
+
 
 			//opening otehr pages or new
 
 		}
+		console.log(data);
+		console.log(data["stopped"]);
 	});	
 
 	loadSliders();
@@ -121,6 +122,11 @@ function loadStartBtnFxns(start_val, action){
 					console.log("start_val =='START' && action==click");
 					loadDeafultValues();
 
+					var obj= {
+						'stopped' : null 
+					};
+					setObjectdata(obj);
+
 					document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
 					document.getElementById('flat-slider2').addEventListener('mouseup', changeSpeed);
 				
@@ -140,7 +146,7 @@ function loadStartBtnFxns(start_val, action){
 					//tarting webgazer - dito siya inilagay para masave muna yung position sa taas
 					startWebgazer();
 					if (action=="click"){
-						setBtntoStop();
+						setBtnto("STOP");
 					}
 
 					
@@ -148,15 +154,36 @@ function loadStartBtnFxns(start_val, action){
 				}
 				else if((start_val =='STOP' && action=="click") || (start_val =='START' && action=="reload")  ){
 					console.log("start_val =='STOP' && action==click");
+					var obj= {
+						'stopped' : true 
+					};
+					setObjectdata(obj);
 
-						chrome.tabs.executeScript(null,  {
-							file: 'removeArrows.js'
-						});
-						$('.flat-slider').slider({
-							disabled: true
-						});
-					if (action=="click") setBtntoStart();
+					chrome.tabs.executeScript(null,  {
+						file: 'removeArrows.js'
+					},function(){
+
+						// chrome.tabs.executeScript({file: 'src/thirdParty/webgazer.js'}, function(){
+					 //            chrome.tabs.executeScript({file: 'stopwebgazer.js'}, function(){});
+					 //    });
+						// chrome.tabs.query({active: true, currentWindow: true}, function (arrayOfTabs) {
+					 //    var code = 'window.location.reload();';
+						// chrome.tabs.executeScript({file: 'src/thirdParty/webgazer.js'}, function(){
+					 //            chrome.tabs.executeScript({file: 'stopwebgazer.js'}, function(){});
+					 //    });
+						// });
+					});
+					$('.flat-slider').slider({
+						disabled: true
+					});
+					if (action=="click") setBtnto("START");
 					loadButtonVal();
+					// chrome.runtime.reload();
+
+
+					// removing the webgazer
+					
+
 
 				}
 
