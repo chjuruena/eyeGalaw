@@ -50,10 +50,18 @@ var arrow_up = document.createElement( 'div' );
 var arrow_down = document.createElement( 'div' )
 var arrow_right = document.createElement( 'div' )
 var arrow_left = document.createElement( 'div' )
+
+var prev_page = document.createElement( 'div' )
+prev_page.setAttribute('id', 'prev_page');
+prev_page.setAttribute('class', 'arrows');
+
+
+
 arrow_up.setAttribute('id', 'arrow_up');
 arrow_down.setAttribute('id', 'arrow_down');
 arrow_left.setAttribute('id', 'arrow_left');
 arrow_right.setAttribute('id','arrow_right');
+
 arrow_up.setAttribute('class', 'arrows');
 arrow_down.setAttribute('class', 'arrows');
 arrow_left.setAttribute('class', 'arrows');
@@ -68,6 +76,7 @@ document.body.appendChild( arrow_up);
 document.body.appendChild( arrow_down);
 document.body.appendChild(arrow_left );
 document.body.appendChild(arrow_right );
+document.body.appendChild(prev_page );
 
 
 
@@ -99,6 +108,11 @@ $(document).ready(function(){
 	// alert('scroll_speed'+scroll_speed);
 
     	
+    $("#prev_page").on("click" ,function(event){
+        window.history.back();
+
+    });
+    
     $("#arrow_down").on("click" ,function(event){
         // scrolled=scrolled+scroll_speed;
 

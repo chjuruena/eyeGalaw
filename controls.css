@@ -139,3 +139,13 @@ position:fixed;
 background-color:red;
     
 }
+
+
+#prev_page{
+  top: 0;
+  left: 0;
+  /*right: 0;*/
+border-right: 50px solid black;
+  border-top: 50px solid transparent; 
+  border-bottom: 50px solid transparent;
+}
