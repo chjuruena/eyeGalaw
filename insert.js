@@ -169,12 +169,19 @@ $(document).ready(function(){
 				        scrollTop:  scrolled
 				   });
 
-			});
+	});
+
+    
+    // options
+
+    
 
 
 // $(".clearValue").on("click" ,function(){
-// 				scrolled=0;
-// 		});
+//              scrolled=0;
+//      });
+
+
 
 
 });

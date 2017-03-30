@@ -324,6 +324,20 @@ $(function() {
  
 	});
 
+	var clicked=true;
+    $("#options").on("click", function(){
+        if(clicked)
+        {
+            clicked=false;
+            $(".dropdown").css({"top": 0});
+        }
+        else
+        {
+            clicked=true;
+            $(".dropdown").css({"top": "-200px"});
+        }
+    });
+
 	// slide: function(event, ui) {
  //        if (ui.value > last) $('#amount').val('this is increasing');
  //        if (ui.value < last) $('#amount').val('this is decreasing');
