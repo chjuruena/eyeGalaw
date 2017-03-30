@@ -114,11 +114,11 @@ $(document).ready(function(){
     });
     
     $("#arrow_down").on("click" ,function(event){
-        // scrolled=scrolled+scroll_speed;
+        scrolled=scrolled+scroll_speed;
 
-		// $("html, body").animate({
-		//         scrollTop:  scrolled
-		//    });
+		$("html, body").animate({
+		        scrollTop:  scrolled
+		   });
 
         var x = event.clientX;
         var y = event.clientY;
