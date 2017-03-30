@@ -35,6 +35,11 @@ function loadSliders(){
 	getObjectdata( function(data){
 		console.log(data)
 		var scroll_speed_slider = data['scroll_speed_slider'];
+		console.log(scroll_speed_slider)
+		console.log(scroll_speed_slider)
+		console.log(scroll_speed_slider)
+		console.log(scroll_speed_slider)
+		console.log(scroll_speed_slider)
 		
 		var opacity_slider = data['opacity'];
 
@@ -71,6 +76,16 @@ function startEvent() {
 	});	
 }
 
+function setSliderValAtStart(){
+	$('.flat-slider').slider({
+		disabled: true
+	});	
+	var obj= {
+		"scroll_speed_slider" : 1
+	};
+	setObjectdata(obj);
+}
+
 window.onload=function(){
 	getObjectdata( function(data){
 		console.log(data);
@@ -84,9 +99,7 @@ window.onload=function(){
 
 
 			setBtnto("START");
-			$('.flat-slider').slider({
-				disabled: true
-			});	
+			setSliderValAtStart();
 
 
 		}else {
