@@ -24,7 +24,7 @@ function startWebgazer(){
         var yprediction = data.y; //these y coordinates are relative to the viewport
         console.log(elapsedTime); //elapsed time is based on time since begin was called
 
-
+        
         getObjectdata( function(data){
 
              
@@ -41,21 +41,42 @@ function startWebgazer(){
 
              // scroll_speed
             var scroll_speed=data["scroll_speed"];
+            function scrollz(scrolled){
+                $("html, body").animate({
+                    scrollTop:  scrolled
+               });
+            }
+
+            function startTimer( ) {
+                var i = 0;
+                var timer = setInterval(function() {
+                    console.log(++i);
+                    if (i === 4) { //seconds from RRL
+                        clearInterval(timer);
+                    }
+                    console.log('post-interval'); //this will still run after clearing
+                }, 200);
+            }
             
             if ((arrow_down.x < xprediction &&  xprediction<(arrow_down.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
                 scrolled=scrolled+scroll_speed;
-                console.log("down");           
-                $("html, body").animate({
-                    scrollTop:  scrolled
-               });
+                console.log("down"); 
+                startTimer();
+                scrollz(scrolled);
+
+                
              }
              if ((arrow_up.x < xprediction &&  xprediction<(arrow_up.x+100))&& (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))){
-                if (scrolled>0) scrolled=scrolled-scroll_speed;
+                if(scrolled<=0) {
+                    console.log("top top top top" +scrolled);
+                    scrolled=0;
+                }
+                else if (scrolled>0) scrolled=scrolled-scroll_speed;
+                console.log("up");           
+                startTimer();
+                scrollz(scrolled);
+                // startTimer(4, scrolled);
                 
-                console.log("down");           
-                $("html, body").animate({
-                    scrollTop:  scrolled
-               });
              }
 
     //          (function($) {

@@ -149,6 +149,13 @@ function loadStartBtnFxns(start_val, action){
 						setBtnto("STOP");
 					}
 
+					// var i = 0;
+					// var timer = setInterval(function() {
+					//   console.log(++i);
+					//   if (i === 5) clearInterval(timer);
+					//   console.log('post-interval'); //this will still run after clearing
+					// }, 200);
+                
 					
 					
 				}
@@ -230,7 +237,7 @@ function changeSpeed(){
 				console.log(res);	
 			});
 
-			$('#flat-slider2').slider('value', value).change();
+			// $('#flat-slider2').slider('value', value).change();
 		});
 	});
 	var obj= {
