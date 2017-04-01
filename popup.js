@@ -35,11 +35,6 @@ function loadSliders(){
 	getObjectdata( function(data){
 		console.log(data)
 		var scroll_speed_slider = data['scroll_speed_slider'];
-		console.log(scroll_speed_slider)
-		console.log(scroll_speed_slider)
-		console.log(scroll_speed_slider)
-		console.log(scroll_speed_slider)
-		console.log(scroll_speed_slider)
 		
 		var opacity_slider = data['opacity'];
 
@@ -235,12 +230,7 @@ function changeSpeed(){
 	var scroll_speed_slider_val;
 	getObjectdata( function(data){
 		 	scroll_speed_slider_val = data["scroll_speed_slider"];
-		 	console.log(scroll_speed_slider_val);
-		 	console.log(scroll_speed_slider_val);
-		 	console.log(scroll_speed_slider_val);
-		 	console.log(scroll_speed_slider_val);
-
-
+		 	
 		getObjectdata( function(data2){
 
 		 	scroll_speed = data2["scroll_speed"];
@@ -319,22 +309,21 @@ $(function() {
 	$('.flat-slider').slider({
 	  orientation: 'horizontal',
 	  range:       false,
-      // disabled: true
-	  // values:      [50]
- 
+      
 	});
 
+	// options
 	var clicked=true;
     $("#options").on("click", function(){
         if(clicked)
         {
             clicked=false;
-            $(".dropdown").css({"top": 0});
+            $(".dropdown").css({"top": "-200px"});
         }
         else
         {
             clicked=true;
-            $(".dropdown").css({"top": "-200px"});
+            $(".dropdown").css({"top": "0px"});
         }
     });
 

@@ -137,6 +137,7 @@ margin: auto;
 
 position:fixed;
 background-color:red;
+z-index: 1000 !important;
     
 }
 
