@@ -209,6 +209,7 @@ function startWebgazerfeed(data){
 
         
 
+            if (data["start_button"] == "START") webgazer.showPredictionPoints(false).clearGazeListener();
             
 
 
