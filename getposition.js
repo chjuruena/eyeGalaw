@@ -1,7 +1,7 @@
 // $(document).ready(function(){
 $(function() {
 	var obj={};
-	var arr =["#arrow_down","#arrow_up","#arrow_left","#arrow_right"];
+	var arr =["#arrow_down","#arrow_up","#arrow_left","#arrow_right", "#prev_page"];
 	arr.forEach(function(element) {
 	    console.log(element);
 	    var position = $(element).position();

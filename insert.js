@@ -107,7 +107,21 @@ chrome.storage.local.get(null, function (items) {
 $(document).ready(function(){
 	// alert('scroll_speed'+scroll_speed);
 
-    	
+     $(document.body ).on("click" ,function(event){
+        var x = event.clientX;
+        var y = event.clientY;
+         console.log("clickX:" + x+ " clickY:" +y);
+
+         var currclick = {
+                'x': x, 
+                'y': y
+            };
+         chrome.storage.local.set(currclick, function () {
+            console.log('currclick', currclick);
+        });
+
+    });
+
     $("#prev_page").on("click" ,function(event){
         window.history.back();
 
@@ -120,17 +134,17 @@ $(document).ready(function(){
 		        scrollTop:  scrolled
 		   });
 
-        var x = event.clientX;
-        var y = event.clientY;
-         console.log("clickX:" + x+ " clickY:" +y);
+        // var x = event.clientX;
+        // var y = event.clientY;
+        //  console.log("clickX:" + x+ " clickY:" +y);
 
-         var currclick = {
-                'x': x, 
-                'y': y
-            };
-         chrome.storage.local.set(currclick, function () {
-            console.log('currclick', currclick);
-        });
+        //  var currclick = {
+        //         'x': x, 
+        //         'y': y
+        //     };
+        //  chrome.storage.local.set(currclick, function () {
+        //     console.log('currclick', currclick);
+        // });
 
 				// console.log( "pageX: " + event.pageX + ", pageY: " + event.pageY );
 	 //  	var p = $( "#arrow_down" );

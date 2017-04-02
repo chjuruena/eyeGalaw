@@ -76,9 +76,12 @@ function setSliderValAtStart(){
 		disabled: true
 	});	
 	var obj= {
-		"scroll_speed_slider" : 1
+		"scroll_speed_slider" : 1,
+		'wgvideofeed' : false
+		
 	};
 	setObjectdata(obj);
+
 }
 
 window.onload=function(){
@@ -97,6 +100,8 @@ window.onload=function(){
 			setSliderValAtStart();
 
 
+
+
 		}else {
 			console.log("MERON NAAAAAAAA start_button");
 
@@ -111,6 +116,12 @@ window.onload=function(){
 
 			loadSliders();
 		}
+
+		if (data["wgvideofeed"]) 	$('#myonoffswitch').prop('checked', true);
+		else $('#myonoffswitch').prop('checked', false);
+
+
+
 		console.log(data);
 		console.log(data["stopped"]);
 	});	
@@ -135,11 +146,8 @@ function loadStartBtnFxns(start_val, action){
 					else if(start_val =='STOP' && action=="reload") console.log("start_val =='STOP' && action==reload");
 
 					loadDeafultValues();
-
-					var obj= {
-						'stopped' : null 
-					};
-					setObjectdata(obj);
+					// webgaer video feed
+					
 
 					document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
 					document.getElementById('flat-slider2').addEventListener('mouseup', changeSpeed);
@@ -148,7 +156,8 @@ function loadStartBtnFxns(start_val, action){
 
 					$('.flat-slider').slider({
 						disabled: false
-					});			
+					});	
+					$('.onoffswitch-checkbox').prop('disabled', false);		
 
 					chrome.tabs.executeScript(null, {
 						allFrames: true, 
@@ -159,7 +168,7 @@ function loadStartBtnFxns(start_val, action){
 						}); 
 					});
 					//tarting webgazer - dito siya inilagay para masave muna yung position sa taas
-					// startWebgazer();
+					startWebgazer();
 					if (action=="click"){
 						setBtnto("STOP");
 					}
@@ -178,10 +187,7 @@ function loadStartBtnFxns(start_val, action){
 					if(start_val =='STOP' && action=="click") 
 					console.log("start_val =='STOP' && action==click");
 				else if (start_val =='START' && action=="reload")  console.log("(start_val =='START' && action==reload");
-					var obj= {
-						'stopped' : true 
-					};
-					setObjectdata(obj);
+					
 
 					chrome.tabs.executeScript(null,  {
 						file: 'removeArrows.js'
@@ -189,6 +195,8 @@ function loadStartBtnFxns(start_val, action){
 					$('.flat-slider').slider({
 						disabled: true
 					});
+					$('.onoffswitch-checkbox').prop('disabled', true);		
+
 					if (action=="click") setBtnto("START");
 					loadButtonVal();
 				}
@@ -292,7 +300,7 @@ function myFunction() {
 	myDropdown.classList.toggle('show');
 }
 
-
+// initialization of UI
 $(function() {
 	var last = 0;
 
@@ -312,27 +320,48 @@ $(function() {
       
 	});
 
-	// options
-	var clicked=true;
+	// options dropdown	
     $("#options").on("click", function(){
-        if(clicked)
-        {
-            clicked=false;
-            $(".dropdown").css({"top": "-200px"});
-        }
-        else
-        {
-            clicked=true;
-            $(".dropdown").css({"top": "0px"});
-        }
+      $( "#effect" ).toggle( "blind", null, 500 );
     });
 
-	// slide: function(event, ui) {
- //        if (ui.value > last) $('#amount').val('this is increasing');
- //        if (ui.value < last) $('#amount').val('this is decreasing');
- //        last = ui.value;
- //    }
+    
+    // $(".onoffswitch-checkbox").is(':checked') = true;
+	// document.getElementById('myonoffswitch').checked=true;
+ //    if ( $(".onoffswitch-checkbox").is(':checked') ) {
+	// 	        // alert("enabled");
+	// 		        var wgvideofeed= {
+	// 					'wgvideofeed' : true
+	// 				};
+	// 				setObjectdata(wgvideofeed);
+	
 
+	// } 
+    $(".onoffswitch-checkbox").on("click", function(){
+
+		    	if ( $(this).is(':checked') ) {
+		        // alert("enabled");
+			        var wgvideofeed= {
+						'wgvideofeed' : true
+					};
+					setObjectdata(wgvideofeed);
+
+			    } 
+			    else {
+			    	var wgvideofeed= {
+					'wgvideofeed' : false
+					};
+					setObjectdata(wgvideofeed);
+
+
+
+				}
+			 
+});
+
+   
+
+	
 });
 
 document.addEventListener('yourCustomEvent', function (e)

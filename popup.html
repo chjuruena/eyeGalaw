@@ -4,6 +4,8 @@
     <title>Getting Started Extension's Popup</title>
       <link rel="stylesheet" href="popup.css">
       <link href = "src/thirdParty/jquery-ui.css"   rel = "stylesheet">
+      <link href = "src/thirdParty/jquery.switchButton.css"   rel = "stylesheet">
+
       
    
 
@@ -29,7 +31,7 @@
       <img src="icon.png" alt="eyeGalaw-icon" id="eyeGalaw-icon">
       <a class="ghost-button" id="start_button" href="#" ></a>
       <a class="ghost-button options" href="#" id="options">Options</a>
-      <div class="dropdown" >
+      <div class="dropdown" id="effect" >
         <h5> scrolling speed </h5> 
         <div class="flat-slider" id="flat-slider2"></div>
         <p> <span id="slider-value-scroll" class="slider-value"></span></p>
@@ -37,8 +39,15 @@
         <h5> opacity </h5>
         <div class="flat-slider" id="flat-slider1"></div>      
         <p> <span id="slider-value-opacity" class="slider-value"></span></p>
-        <!-- <h5> enable eye pointer </h5>
-        <div class="flat-slider" id="flat-slider"></div> -->
+        <h5> eye video </h5>
+        <div class="onoffswitch">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+            <label class="onoffswitch-label" for="myonoffswitch">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+            </label>
+        </div>
+
 
       </div>
     </div>
