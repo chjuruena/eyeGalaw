@@ -10,22 +10,37 @@ function setObjectdata(obj){
 
 
 init();
-// getObjectdata( function(data){
-//     if (data["wgvideofeed"]) showVideo(true);
-//     else {
-//         // alert("neh");
-//         showVideo(false);             
-//     }
-// });
+getObjectdata( function(data){
+
+
+    if (data["wgvideofeed"]) showVideo(true);
+    else {
+        // alert("neh");
+        showVideo(false);             
+    }
+});
 var scrolled=0;
 var scroll_speed;
 var startvid;
 
 function init(){
      // startvid = null;
-         startWebgazerfeed(); 
-         // run if null = wala pang instance
 
+    getObjectdata( function(data){
+                startWebgazerfeed(data); 
+
+          if(data["start_button"] =='START' && data["action"]=="click") {
+                // alert("start");
+                
+                startWebgazerfeed(data); 
+            }
+            else if(data["start_button"] =='STOP' && data["action"]=="reload"){
+                // alert("resume");
+                webgazer.resume();
+            }     
+             // run if null = wala pang instance
+
+    });
 
 
 // function showVideo(enabled){
@@ -50,7 +65,7 @@ function showVideo(enabled){
     }
 }
 
-function setupvid(){
+// function setupvid(){
 
 
 
@@ -107,13 +122,13 @@ function setupvid(){
     
 
 
-}
+// }
 
-function startWebgazerfeed(){
-    getObjectdata( function(data){
+function startWebgazerfeed(data){
+    // getObjectdata( function(data){
 
-        var localstorageLabel = 'webgazerGlobalData';
-        window.localStorage.setItem(localstorageLabel, null);
+        // var localstorageLabel = 'webgazerGlobalData';
+        // window.localStorage.setItem(localstorageLabel, null);
    
     webgazer.setRegression('ridge') /* currently must set regression and tracker */
     .setTracker('clmtrackr')
@@ -200,12 +215,12 @@ function startWebgazerfeed(){
         // });
     }).begin().showPredictionPoints(true); /* shows a square every 100 milliseconds where current prediction is */
 
-    });
+    // });
 
 }
 
 
  window.onbeforeunload = function() {
-    //webgazer.end(); //Uncomment if you want to save the data even if you reload the page.
+    // webgazer.end(); //Uncomment if you want to save the data even if you reload the page.
     window.localStorage.clear(); //Comment out if you want to save data across different sessions 
   }

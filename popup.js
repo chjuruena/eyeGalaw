@@ -67,7 +67,11 @@ function startEvent() {
 	loadDeafultValues();
 
 	getObjectdata( function(data){	
-		loadStartBtnFxns(data["start_button"], "click");	
+		loadStartBtnFxns(data["start_button"], "click");
+		var obj= {
+			"action" : "click" 
+		};
+		setObjectdata(obj);	
 	});	
 }
 
@@ -106,6 +110,11 @@ window.onload=function(){
 			console.log("MERON NAAAAAAAA start_button");
 
 				loadStartBtnFxns(data["start_button"], "reload");
+				var obj= {
+					"action" : "reload" 
+				};
+				setObjectdata(obj);
+
 				loadButtonVal();
 				console.log(data);
 		// console.log(data["stopped"]);
@@ -204,26 +213,7 @@ function loadStartBtnFxns(start_val, action){
 }
 
 
-window.onbeforeunload = function (e) {
-    window.localStorage.clear(); //Comment out if you want to save data across different sessions 
 
-	chrome.storage.local.clear(function() {
-	    var error = chrome.runtime.lastError;
-	    if (error) {
-	        console.error(error);
-	    }
-	});
-}
-window.addEventListener('beforeunload', function(e) {
-    window.localStorage.clear(); //Comment out if you want to save data across different sessions 
-
-	chrome.storage.local.clear(function() {
-	    var error = chrome.runtime.lastError;
-	    if (error) {
-	        console.error(error);
-	    }
-	});
-}, false);
 
 function startWebgazer(){
 
@@ -352,20 +342,28 @@ $(function() {
 					'wgvideofeed' : false
 					};
 					setObjectdata(wgvideofeed);
-
-
-
-				}
-			 
-});
-
-   
+				}			 
+	});   
 
 	
 });
+window.onbeforeunload = function (e) {
+    window.localStorage.clear(); //Comment out if you want to save data across different sessions 
 
-document.addEventListener('yourCustomEvent', function (e)
-{
-  var data=e.detail;
-  console.log('received '+data);
-});
+	chrome.storage.local.clear(function() {
+	    var error = chrome.runtime.lastError;
+	    if (error) {
+	        console.error(error);
+	    }
+	});
+}
+window.addEventListener('beforeunload', function(e) {
+    window.localStorage.clear(); //Comment out if you want to save data across different sessions 
+
+	chrome.storage.local.clear(function() {
+	    var error = chrome.runtime.lastError;
+	    if (error) {
+	        console.error(error);
+	    }
+	});
+}, false);
