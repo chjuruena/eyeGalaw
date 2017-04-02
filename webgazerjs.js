@@ -8,7 +8,6 @@ function setObjectdata(obj){
     });
 }
 
-
 init();
 getObjectdata( function(data){
 
@@ -27,15 +26,39 @@ function init(){
      // startvid = null;
 
     getObjectdata( function(data){
-                startWebgazerfeed(data); 
-
-          if(data["start_button"] =='START' && data["action"]=="click") {
+                // startWebgazerfeed(data); 
+        // alert(data["start_button"] + data["action"] );
+          if(data["start_button"] =='STOP' && data["action"]=="click" || (data["start_button"] =='STOP' && data["page-action"]=="reload")) {
                 // alert("start");
                 
                 startWebgazerfeed(data); 
+                // webgazer.pause();
+
             }
-            else if(data["start_button"] =='STOP' && data["action"]=="reload"){
-                // alert("resume");
+          if(data["start_button"] =='START' && data["action"]=="click") {
+                webgazer.pause();
+
+          }
+           if(data["start_button"] =='STOP' && data["action"]=="reload"){
+                console.log("resume");
+                console.log("resume");
+                console.log("resume");
+                console.log("resume");
+                console.log("resume");
+                console.log("resume");
+                console.log("resume");
+                console.log("resume");
+                console.log("resume");
+                console.log("resume");
+                console.log("resume");
+                console.log("resume");
+                console.log("resume");
+                console.log("resume");
+                console.log("resume");
+                console.log("resume");
+                console.log("resume");
+                console.log("resume");
+                console.log("resume");
                 webgazer.resume();
             }     
              // run if null = wala pang instance
@@ -223,5 +246,5 @@ function startWebgazerfeed(data){
 
  window.onbeforeunload = function() {
     // webgazer.end(); //Uncomment if you want to save the data even if you reload the page.
-    window.localStorage.clear(); //Comment out if you want to save data across different sessions 
+    // window.localStorage.clear(); //Comment out if you want to save data across different sessions 
   }
