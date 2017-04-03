@@ -12,37 +12,7 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 
 
 document.documentElement.style.height = '100%';
-// document.body.style.height = '100%';
 document.documentElement.style.width = '100%';
-// document.body.style.width = '100%';
-
-
-// var main_frame = document.createElement( 'div' );
-// main_frame.setAttribute('class', 'main_frame');
-
-
-// var div = document.createElement( 'div' );
-// var btnForm = document.createElement( 'form' );
-// var btn = document.createElement( 'input' );
-
-//append all elements
-// document.body.appendChild( main_frame);
-// main_frame.appendChild(div);
-// div.appendChild( btnForm );
-// btnForm.appendChild( btn );
-//set attributes for div
-// div.id = 'myDivId';
-// div.setAttribute('id', 'myDivId');
-
-//set attributes for btnForm
-// btnForm.action = '';
-
-//set attributes for btn
-//'btn.removeAttribute( 'style' );
-
-
-
-
 
 
 // create arrows
@@ -55,8 +25,6 @@ var prev_page = document.createElement( 'div' )
 prev_page.setAttribute('id', 'prev_page');
 prev_page.setAttribute('class', 'arrows');
 
-
-
 arrow_up.setAttribute('id', 'arrow_up');
 arrow_down.setAttribute('id', 'arrow_down');
 arrow_left.setAttribute('id', 'arrow_left');
@@ -66,11 +34,6 @@ arrow_up.setAttribute('class', 'arrows');
 arrow_down.setAttribute('class', 'arrows');
 arrow_left.setAttribute('class', 'arrows');
 arrow_right.setAttribute('class', 'arrows');
-// append arrows
-// main_frame.appendChild(arrow_up);
-// main_frame.appendChild(arrow_down);
-// main_frame.appendChild(arrow_left);
-// main_frame.appendChild(arrow_right);
 
 document.body.appendChild( arrow_up);
 document.body.appendChild( arrow_down);
@@ -78,14 +41,8 @@ document.body.appendChild(arrow_left );
 document.body.appendChild(arrow_right );
 document.body.appendChild(prev_page );
 
-
-
-
-
 var scrolled=0;
 var scroll_speed;
-
-// var storage = chrome.storage.local;
 
 chrome.storage.local.get(null, function(items) {
     var allKeys = Object.keys(items);
@@ -94,20 +51,46 @@ chrome.storage.local.get(null, function(items) {
 });
 
 chrome.storage.local.get(null, function (items) {
-    // assignTextToTextareas(items.scroll_speed);
-    // var allKeys = Object.keys(items);    
     scroll_speed = items.scroll_speed;
-    // storage.remove('scroll_speed');
-    // console.log(items[0])
     console.log(items.scroll_speed)
-    // chrome.storage.sync.clear();
 
 });
+getPosition();
+
+
+function getPosition(){
+    var obj={};
+    var arr =["arrow_down","arrow_up","arrow_left","arrow_right", "prev_page"];
+    // var arr =["#arrow_down","#arrow_up","#arrow_left","#arrow_right", "#prev_page"];
+    arr.forEach(function(element) {
+        console.log(document.getElementById(element));
+        // var position = document.getElementById(element).offsetParent.offsetTop;
+        // // $(element).position();
+        // var offset = $(element).offset();   
+
+
+        var x = document.getElementById(element).offsetLeft;
+        var y = document.getElementById(element).offsetTop;
+
+
+
+        var objelement = {
+            'x': x,
+            'y': y
+        };
+    
+        obj[element] = objelement;
+        
+    });
+
+    chrome.storage.local.set(obj, function () {
+        console.log('position', obj);
+    });
+}
+
 
 $(document).ready(function(){
-	// alert('scroll_speed'+scroll_speed);
-
-     $(document.body ).on("click" ,function(event){
+     $(document.body ).on("click" , function(event){
         var x = event.clientX;
         var y = event.clientY;
          console.log("clickX:" + x+ " clickY:" +y);
@@ -156,48 +139,22 @@ $(document).ready(function(){
 
 
 	});
-    $("#arrow_left").on("click" ,function(event){
-
-      
+    $("#arrow_left").on("click" ,function(event){     
 
         var x = event.clientX;
         var y = event.clientY;
-        console.log("clickX:" + x+ " clickY:" +y);
-
-                // console.log( "pageX: " + event.pageX + ", pageY: " + event.pageY );
-     //     var p = $( "#arrow_down" );
-        // var position = p.position();
-        // var offset = p.offset();
-        // console.log( "left: " + offset.left + ", top: " + position.top );
-
-                
-
-
+        console.log("clickX:" + x+ " clickY:" +y);    
     });
 
     
     $("#arrow_up").on("click" ,function(){
 				scrolled=scrolled-scroll_speed;
 				
-				$("html, body").animate({
-				        scrollTop:  scrolled
-				   });
-
-	});
-
+		$("html, body").animate({
+		        scrollTop:  scrolled
+		   });
+	});   
     
-    // options
-
-    
-
-
-// $(".clearValue").on("click" ,function(){
-//              scrolled=0;
-//      });
-
-
-
-
 });
 
 

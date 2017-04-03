@@ -26,60 +26,24 @@ function init(){
      // startvid = null;
 
     getObjectdata( function(data){
-        console.log(data);
-                // startWebgazerfeed(data); 
-        // alert( "data[\"page-action\"]" + data["start_button"] );
           if((data["start_button"] =='STOP' && data["action"]=="click") || (data["start_button"] =='STOP' && data["page-action"]=="reload" && data["action"]=="reload")) {
-                // alert("start");
+                alert("start");
                 startWebgazerfeed(data); 
                 var obj= {
                      "page-action" : null 
                  };
-                 setObjectdata(obj);
-
-                // if ((data["start_button"] =='STOP' && data["page-action"]=="reload" && data["action"]=="reload")) {
-                //     var obj= {
-                //          "page-action" : null 
-                //      };
-                //      setObjectdata(obj);
-                // }
-                // alert("start");)
-                
-                // webgazer.pause();
+                 setObjectdata(obj);              
 
             }
           else if(data["start_button"] =='START' && data["action"]=="click") {
                 webgazer.pause();
 
           }
-          if(data["start_button"] =='STOP' && data["action"]=="reload" ){
-                console.log("resume");
-                console.log("resume");
-                console.log("resume");
-                console.log("resume");
-                console.log("resume");
-                console.log("resume");
-                console.log("resume");
-                console.log("resume");
-                console.log("resume");
-                console.log("resume");
-                console.log("resume");
-                console.log("resume");
-                console.log("resume");
-                console.log("resume");
-                console.log("resume");
-                console.log("resume");
-                console.log("resume");
-                console.log("resume");
-                console.log("resume");
+          if(data["start_button"] =='STOP' && data["action"]=="reload" ){                
                 webgazer.resume();
-            }     
-             // run if null = wala pang instance
+            }  
 
     });
-
-
-// function showVideo(enabled){
     
 }
 
@@ -102,9 +66,6 @@ function showVideo(enabled){
 }
 
 // function setupvid(){
-
-
-
     var width = 320;
     var height = 240;
     var topDist = '0px';
@@ -152,20 +113,10 @@ function showVideo(enabled){
             setTimeout(checkIfReady, 100);
         }
     }
-
-    // setTimeout(checkIfReady,100);
-    
-    
-
-
+    // setTimeout(checkIfReady,100); 
 // }
 
 function startWebgazerfeed(data){
-    // getObjectdata( function(data){
-
-        // var localstorageLabel = 'webgazerGlobalData';
-        // window.localStorage.setItem(localstorageLabel, null);
-   
     webgazer.setRegression('ridge') /* currently must set regression and tracker */
     .setTracker('clmtrackr')
     .setGazeListener(function(eyedata, elapsedTime) {
@@ -177,30 +128,21 @@ function startWebgazerfeed(data){
 
         if (data["start_button"] == "START") webgazer.showPredictionPoints(false).clearGazeListener();
 
-
-        
-
-        
         var xprediction = eyedata.x; //these x coordinates are relative to the viewport 
         var yprediction = eyedata.y; //these y coordinates are relative to the viewport
         console.log(elapsedTime); //elapsed time is based on time since begin was called
-
-        
-        // getObjectdata( function(data){
-
-             
-            var arrow_down=data["#arrow_down"];
-            var arrow_up=data["#arrow_up"];
-            var arrow_left=data["#arrow_left"];
-            var arrow_right=data["#arrow_right"];
-            var prev_page=data["#prev_page"];
-
-            // alert("webgazer"+ arrow_down);
-            
+       
+        // getObjectdata( function(data){            
+            var arrow_down=data["arrow_down"];
+            var arrow_up=data["arrow_up"];
+            var arrow_left=data["arrow_left"];
+            var arrow_right=data["arrow_right"];
+            var prev_page=data["prev_page"];
 
              // /////////////////////////////////
                 console.log("X-gaze:" + xprediction+ " Y-gaze:" +yprediction);
-                console.log("X-data:" + arrow_down.x+ " Y-data:" +arrow_down.y);
+                console.log("X-arrow:" + arrow_down.x + " Y-arrow:" +arrow_down.y);
+                console.log("X-arrow:" + arrow_up.x + " Y-arrow:" +arrow_up.y);
                 console.log("X-click:" + data["x"]+ " Y-click:" +data["y"]);
              // /////////////////////////////////
 
@@ -226,15 +168,13 @@ function startWebgazerfeed(data){
             if ((prev_page.x < xprediction &&  xprediction<(prev_page.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
                 startTimer();                
                 window.history.back();
-
             }
 
             if ((arrow_down.x < xprediction &&  xprediction<(arrow_down.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
                 scrolled=scrolled+scroll_speed;
                 console.log("down"); 
                 startTimer();
-                scrollz(scrolled);
-                
+                scrollz(scrolled);                
              }
              if ((arrow_up.x < xprediction &&  xprediction<(arrow_up.x+100))&& (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))){
                 if(scrolled<=0) {
@@ -247,17 +187,8 @@ function startWebgazerfeed(data){
                 scrollz(scrolled);
                 
              }
-
-        
-
-            
-
-
-        // });
     }).begin().showPredictionPoints(true); /* shows a square every 100 milliseconds where current prediction is */
-
     // });
-
 }
 
 

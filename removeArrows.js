@@ -1,9 +1,9 @@
-// var myElements = document.querySelectorAll(".arrows");
+var myElements = document.querySelectorAll(".arrows");
 
-// for (var i = 0; i < myElements.length; i++) {  
-// 	// myElements[i].style.opacity = '+value/100+'
-// 	document.body.removeChild(myElements[i]);
-// };
+for (var i = 0; i < myElements.length; i++) {  
+	// myElements[i].style.opacity = '+value/100+'
+	document.body.removeChild(myElements[i]);
+};
 		
 
 

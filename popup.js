@@ -153,8 +153,8 @@ function loadStartBtnFxns(start_val, action){
 				// relaod =value after clicking
 				// click=value before clicking
 				if((start_val =='START' && action=="click") || (start_val =='STOP' && action=="reload") ){
-					if(start_val =='START' && action=="click") alert("start_val =='START' && action==click");
-					else if(start_val =='STOP' && action=="reload") alert("start_val =='STOP' && action==reload");
+					if(start_val =='START' && action=="click") console.log("start_val =='START' && action==click");
+					else if(start_val =='STOP' && action=="reload") console.log("start_val =='STOP' && action==reload");
 
 					loadDeafultValues();
 					// webgaer video feed
@@ -169,18 +169,19 @@ function loadStartBtnFxns(start_val, action){
 						disabled: false
 					});	
 					$('.onoffswitch-checkbox').prop('disabled', false);		
-					chrome.tabs.executeScript({file: 'src/thirdParty/jquery-3.1.1.min.js'}, function(){
-						chrome.tabs.executeScript(null, {
+					chrome.tabs.executeScript(null, {
 							allFrames: true, 
 						file: 'insert.js'
 
-						}, function (result) {
-				            chrome.tabs.executeScript(null, {file: 'getposition.js'}, function (result) {								
-							}); 
+						// }, function (result) {
+				  //           chrome.tabs.executeScript(null, {file: 'getposition.js'}, function (result) {
+
+				  //           alert("after getposition.js")								;
+						// 	}); 
 						});
-				    });  
 					
 					//tarting webgazer - dito siya inilagay para masave muna yung position sa taas
+					
 					startWebgazer();
 					if (action=="click"){
 						setBtnto("STOP");
@@ -222,7 +223,8 @@ function loadStartBtnFxns(start_val, action){
 function startWebgazer(){
 
     chrome.tabs.executeScript({file: 'src/thirdParty/webgazer.js'}, function(){
-            chrome.tabs.executeScript({file: 'webgazerjs.js'}, function(){});
+            chrome.tabs.executeScript({file: 'webgazerjs.js'}, function(){
+            });
     });  
 }
 

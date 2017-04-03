@@ -25,32 +25,37 @@ function getObjectdata(callback) {
     chrome.storage.local.get(null, callback);
 }
 
+
+
+chrome.tabs.onActivated.addListener(function(activeInfo) {
+	getObjectdata( function(data){
+		if (activeInfo.tabId != data["activetabId"] ){
+			var obj= {
+				"page-action" : "reload" 
+			};
+			setObjectdata(obj);
+		}
+	});
+}); 
+
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
    // alert(changeInfo.status);
 
-   if (changeInfo.status == "loading"){
-   		// alert(changeInfo.status);
-
+	if(tab.active) {
+		var obj= {
+			"activetabId" : tab.id 
+		};
+		setObjectdata(obj);
+	}
+   if (changeInfo.status == "loading" || changeInfo.status == "complete"){
 	   	var obj= {
 			"page-action" : "reload" 
 		};
 		setObjectdata(obj);
    }
 	// getObjectdata( function(data){
-	// 	alert(data["page-action"]);
+	// 	alert("activetabId" + data["activetabId"]);
 	// });
 
 }); 
-
-// var views = chrome.extension.getViews({ type: "popup" });
-// //views => [] //popup is closed -> false
-// //views => [DOMWindow] //popup is open
-
-// if (views){ // open pop-up
-// 	var obj= {
-// 			"page-action" : null 
-// 		};
-// 		setObjectdata(obj);
-// }
-
 
