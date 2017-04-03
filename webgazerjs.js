@@ -26,20 +26,33 @@ function init(){
      // startvid = null;
 
     getObjectdata( function(data){
+        console.log(data);
                 // startWebgazerfeed(data); 
-        // alert(data["start_button"] + data["action"] );
-          if(data["start_button"] =='STOP' && data["action"]=="click" || (data["start_button"] =='STOP' && data["page-action"]=="reload")) {
+        // alert( "data[\"page-action\"]" + data["start_button"] );
+          if((data["start_button"] =='STOP' && data["action"]=="click") || (data["start_button"] =='STOP' && data["page-action"]=="reload" && data["action"]=="reload")) {
                 // alert("start");
-                
                 startWebgazerfeed(data); 
+                var obj= {
+                     "page-action" : null 
+                 };
+                 setObjectdata(obj);
+
+                // if ((data["start_button"] =='STOP' && data["page-action"]=="reload" && data["action"]=="reload")) {
+                //     var obj= {
+                //          "page-action" : null 
+                //      };
+                //      setObjectdata(obj);
+                // }
+                // alert("start");)
+                
                 // webgazer.pause();
 
             }
-          if(data["start_button"] =='START' && data["action"]=="click") {
+          else if(data["start_button"] =='START' && data["action"]=="click") {
                 webgazer.pause();
 
           }
-           if(data["start_button"] =='STOP' && data["action"]=="reload"){
+          if(data["start_button"] =='STOP' && data["action"]=="reload" ){
                 console.log("resume");
                 console.log("resume");
                 console.log("resume");
@@ -162,6 +175,9 @@ function startWebgazerfeed(data){
             return;
         }
 
+        if (data["start_button"] == "START") webgazer.showPredictionPoints(false).clearGazeListener();
+
+
         
 
         
@@ -232,7 +248,6 @@ function startWebgazerfeed(data){
 
         
 
-            if (data["start_button"] == "START") webgazer.showPredictionPoints(false).clearGazeListener();
             
 
 

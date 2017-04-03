@@ -28,16 +28,35 @@ function getObjectdata(callback) {
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
    // alert(changeInfo.status);
 
-   if (changeInfo.status == "complete"){
-   		alert(changeInfo.status);
+   if (changeInfo.status == "loading"){
+   		// alert(changeInfo.status);
 
 	   	var obj= {
 			"page-action" : "reload" 
 		};
 		setObjectdata(obj);
    }
-	// getObjectdata( function(data){
-	// 	alert(data["action"]);
-	// });
+	getObjectdata( function(data){
+		alert(data["page-action"]);
+	});
 
 }); 
+
+// var views = chrome.extension.getViews({ type: "popup" });
+// //views => [] //popup is closed -> false
+// //views => [DOMWindow] //popup is open
+
+// if (views){ // open pop-up
+// 	var obj= {
+// 			"page-action" : null 
+// 		};
+// 		setObjectdata(obj);
+// }
+
+chrome.tabs.remove(function(tabId, changeInfo, tab) {
+	var obj= {
+			"page-action" : "closed" 
+		};
+		setObjectdata(obj);
+}); 
+

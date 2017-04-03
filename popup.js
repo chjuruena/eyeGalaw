@@ -70,8 +70,10 @@ function startEvent() {
 		loadStartBtnFxns(data["start_button"], "click");
 		var obj= {
 			"action" : "click" 
+
 		};
 		setObjectdata(obj);	
+		console.log(data)
 	});	
 }
 
@@ -151,8 +153,8 @@ function loadStartBtnFxns(start_val, action){
 				// relaod =value after clicking
 				// click=value before clicking
 				if((start_val =='START' && action=="click") || (start_val =='STOP' && action=="reload") ){
-					if(start_val =='START' && action=="click") console.log("start_val =='START' && action==click");
-					else if(start_val =='STOP' && action=="reload") console.log("start_val =='STOP' && action==reload");
+					if(start_val =='START' && action=="click") alert("start_val =='START' && action==click");
+					else if(start_val =='STOP' && action=="reload") alert("start_val =='STOP' && action==reload");
 
 					loadDeafultValues();
 					// webgaer video feed
