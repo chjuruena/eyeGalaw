@@ -36,9 +36,9 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 		};
 		setObjectdata(obj);
    }
-	getObjectdata( function(data){
-		alert(data["page-action"]);
-	});
+	// getObjectdata( function(data){
+	// 	alert(data["page-action"]);
+	// });
 
 }); 
 
@@ -53,10 +53,4 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 // 		setObjectdata(obj);
 // }
 
-chrome.tabs.remove(function(tabId, changeInfo, tab) {
-	var obj= {
-			"page-action" : "closed" 
-		};
-		setObjectdata(obj);
-}); 
 

@@ -1,5 +1,7 @@
 // $(document).ready(function(){
 $(function() {
+
+
 	var obj={};
 	var arr =["#arrow_down","#arrow_up","#arrow_left","#arrow_right", "#prev_page"];
 	arr.forEach(function(element) {
@@ -44,5 +46,11 @@ $(function() {
 	chrome.storage.local.set(obj, function () {
 		console.log('position', obj);
 	});
+
+	function getObjectdata(callback) {
+    	chrome.storage.local.get(null, callback);
+	}
+
+
 });
 					 // obj

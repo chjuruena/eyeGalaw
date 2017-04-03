@@ -169,15 +169,17 @@ function loadStartBtnFxns(start_val, action){
 						disabled: false
 					});	
 					$('.onoffswitch-checkbox').prop('disabled', false);		
+					chrome.tabs.executeScript({file: 'src/thirdParty/jquery-3.1.1.min.js'}, function(){
+						chrome.tabs.executeScript(null, {
+							allFrames: true, 
+						file: 'insert.js'
 
-					chrome.tabs.executeScript(null, {
-						allFrames: true, 
-					file: 'insert.js'
-
-					}, function (result) {
-			            chrome.tabs.executeScript(null, {file: 'getposition.js'}, function (result) {								
-						}); 
-					});
+						}, function (result) {
+				            chrome.tabs.executeScript(null, {file: 'getposition.js'}, function (result) {								
+							}); 
+						});
+				    });  
+					
 					//tarting webgazer - dito siya inilagay para masave muna yung position sa taas
 					startWebgazer();
 					if (action=="click"){

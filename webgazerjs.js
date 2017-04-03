@@ -93,7 +93,7 @@ function showVideo(enabled){
         // document.body.removeChild(video);
         
         var overlay=document.getElementById('overlay');
-        document.body.removeChild(overlay);
+        // document.body.removeChild(overlay);
         video.style.display = 'overlay';
 
 
@@ -194,6 +194,8 @@ function startWebgazerfeed(data){
             var arrow_left=data["#arrow_left"];
             var arrow_right=data["#arrow_right"];
             var prev_page=data["#prev_page"];
+
+            // alert("webgazer"+ arrow_down);
             
 
              // /////////////////////////////////
