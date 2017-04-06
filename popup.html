@@ -2,9 +2,11 @@
 <!-- saved from url=(0080)https://developer.chrome.com/extensions/examples/tutorials/getstarted/popup.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>eyeGalaw</title>
-      <link rel="stylesheet" href="popup.css">
       <link href = "src/thirdParty/jquery-ui.css"   rel = "stylesheet">
       <link href = "src/thirdParty/jquery.switchButton.css"   rel = "stylesheet">
+      <link rel="stylesheet" href="flat-slider.css">
+      <link rel="stylesheet" href="popup.css">
+
 
       
    
@@ -28,10 +30,12 @@
 
   <div id="main">
     <div id="inner-div">
-      <img src="icon.png" alt="eyeGalaw-icon" id="eyeGalaw-icon">
-      <a class="ghost-button" id="start_button" href="#" ></a>
-      <a class="ghost-button options" href="#" id="options">Options</a>
-      <div class="dropdown" id="effect" >
+      <div id="curve-div">
+        <img src="icon.png" class="center" alt="eyeGalaw-icon" id="eyeGalaw-icon">
+        <a class="center myButton " id="start_button" href="#" ></a>
+      </div>
+      <a class="ghost-button options center" href="#" id="options">Options</a>
+      <div class="dropdown center" id="effect" >
         <h5> scrolling speed </h5> 
         <div class="flat-slider" id="flat-slider2"></div>
         <p> <span id="slider-value-scroll" class="slider-value"></span></p>
@@ -40,7 +44,7 @@
         <div class="flat-slider" id="flat-slider1"></div>      
         <p> <span id="slider-value-opacity" class="slider-value"></span></p>
         <h5> eye video </h5>
-        <div class="onoffswitch">
+        <div class="onoffswitch ">
             <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
             <label class="onoffswitch-label" for="myonoffswitch">
                 <span class="onoffswitch-inner"></span>

@@ -27,7 +27,7 @@ function init(){
 
     getObjectdata( function(data){
           if((data["start_button"] =='STOP' && data["action"]=="click") || (data["start_button"] =='STOP' && data["page-action"]=="reload" && data["action"]=="reload")) {
-                alert("start");
+                // alert("start");
                 startWebgazerfeed(data); 
                 var obj= {
                      "page-action" : null 

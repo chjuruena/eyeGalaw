@@ -91,6 +91,7 @@ function setSliderValAtStart(){
 }
 
 window.onload=function(){
+
 	getObjectdata( function(data){
 		console.log(data);
 
@@ -319,6 +320,15 @@ $(function() {
 	// options dropdown	
     $("#options").on("click", function(){
       $( "#effect" ).toggle( "blind", null, 500 );
+      
+
+    //   if($('#menu').height() != 200)
+    //         $("#menu").css('height', '200px');
+    
+    // else $("#menu").css('height', '40px');
+
+
+
     });
 
     
