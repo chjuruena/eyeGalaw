@@ -25,7 +25,8 @@ function getObjectdata(callback) {
 function loadDeafultValues(){	
 	var obj= {
 		'scroll_speed' : 300,
-		'opacity' : 50
+		'opacity' : 50,
+		'longpop-up' : true
 	};
 	setObjectdata(obj);
 }
@@ -81,6 +82,8 @@ function setSliderValAtStart(){
 	$('.flat-slider').slider({
 		disabled: true
 	});	
+	
+    				
 	var obj= {
 		"scroll_speed_slider" : 1,
 		'wgvideofeed' : false
@@ -91,10 +94,12 @@ function setSliderValAtStart(){
 }
 
 window.onload=function(){
+	// if($("#mainr").height;)
+
 
 	getObjectdata( function(data){
+		setPopupsize(data);
 		console.log(data);
-
 
 
 
@@ -111,6 +116,7 @@ window.onload=function(){
 
 		}else {
 			console.log("MERON NAAAAAAAA start_button");
+
 
 				loadStartBtnFxns(data["start_button"], "reload");
 				var obj= {
@@ -134,6 +140,8 @@ window.onload=function(){
 
 
 
+
+
 		console.log(data);
 		console.log(data["stopped"]);
 	});	
@@ -144,6 +152,37 @@ window.onload=function(){
 	document.getElementById('start_button').addEventListener('click', startEvent);	
 }
 
+function setPopupsize(data){
+	if(data["longpop-up"]) {
+        $('.dropdown').css('display', 'none');
+		
+	}else{
+        $(".dropdown").css('display', 'block');
+      // $( "#effect" ).toggle( "blind", null, 500 );
+
+		
+	}
+
+
+    //   if($('#menu').height() != 200)
+    //         $("#menu").css('height', '200px');
+    
+}
+function disablebtn(){
+	if($('.flat-slider').is(':disabled')){
+		alert('ya')
+					$(".onoffswitch-inner").css('opacity', '0.40');
+					$(".onoffswitch-switch").css('opacity', '0.40');
+					$(".onoffswitch-checkbox").css('opacity', '0.40');
+					$(".onoffswitch-label").css('opacity', '0.40');
+							
+				}else{
+					$(".onoffswitch-inner").css('opacity', '100');
+					$(".onoffswitch-switch").css('opacity', '100');
+					$(".onoffswitch-checkbox").css('opacity', '100');
+					$(".onoffswitch-label").css('opacity', '100');
+				}
+}
 function loadStartBtnFxns(start_val, action){
 	// getObjectdata( function(data){		
 
@@ -153,6 +192,11 @@ function loadStartBtnFxns(start_val, action){
 				//opposite azng reload at click
 				// relaod =value after clicking
 				// click=value before clicking
+
+				
+
+
+
 				if((start_val =='START' && action=="click") || (start_val =='STOP' && action=="reload") ){
 					if(start_val =='START' && action=="click") console.log("start_val =='START' && action==click");
 					else if(start_val =='STOP' && action=="reload") console.log("start_val =='STOP' && action==reload");
@@ -169,6 +213,9 @@ function loadStartBtnFxns(start_val, action){
 					$('.flat-slider').slider({
 						disabled: false
 					});	
+
+
+
 					$('.onoffswitch-checkbox').prop('disabled', false);		
 					chrome.tabs.executeScript(null, {
 							allFrames: true, 
@@ -183,7 +230,7 @@ function loadStartBtnFxns(start_val, action){
 					
 					//tarting webgazer - dito siya inilagay para masave muna yung position sa taas
 					
-					startWebgazer();
+					// startWebgazer();
 					if (action=="click"){
 						setBtnto("STOP");
 					}
@@ -194,7 +241,9 @@ function loadStartBtnFxns(start_val, action){
 					//   if (i === 5) clearInterval(timer);
 					//   console.log('post-interval'); //this will still run after clearing
 					// }, 200);
-                
+
+					
+                disablebtn();
 					
 					
 				}
@@ -214,6 +263,8 @@ function loadStartBtnFxns(start_val, action){
 
 					if (action=="click") setBtnto("START");
 					loadButtonVal();
+                disablebtn();
+
 				}
 
 }
@@ -320,12 +371,22 @@ $(function() {
 	// options dropdown	
     $("#options").on("click", function(){
       $( "#effect" ).toggle( "blind", null, 500 );
+		getObjectdata( function(data){
+			// alert(data["longpop-up"]);
+			if(data["longpop-up"]) {
+				var obj= {
+					'longpop-up' : false
+				};
+			}else{
+				var obj= {
+					'longpop-up' : true
+				};
+			}
+			setObjectdata(obj);
+		});
+ 
       
 
-    //   if($('#menu').height() != 200)
-    //         $("#menu").css('height', '200px');
-    
-    // else $("#menu").css('height', '40px');
 
 
 
@@ -358,7 +419,10 @@ $(function() {
 					'wgvideofeed' : false
 					};
 					setObjectdata(wgvideofeed);
-				}			 
+				}	
+
+
+						 
 	});   
 
 	
