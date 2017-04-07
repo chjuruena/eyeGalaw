@@ -34,6 +34,7 @@ function loadDeafultValues(){
 //load slider values for opacity adn scroll value
 function loadSliders(){
 	getObjectdata( function(data){
+
 		console.log(data)
 		var scroll_speed_slider = data['scroll_speed_slider'];
 		
@@ -67,7 +68,9 @@ function setBtnto(action){
 function startEvent() {   
 	loadDeafultValues();
 
-	getObjectdata( function(data){	
+	getObjectdata( function(data){
+		disablebtn(data["start_button"]);
+
 		loadStartBtnFxns(data["start_button"], "click");
 		var obj= {
 			"action" : "click" 
@@ -95,10 +98,16 @@ function setSliderValAtStart(){
 
 window.onload=function(){
 	// if($("#mainr").height;)
+	
 
 
 	getObjectdata( function(data){
 		setPopupsize(data);
+		disablebtn(data["start_button"]);
+		
+		// alert(data["wgvideofeed"]);
+		if (data["wgvideofeed"]) $('#myonoffswitch').prop('checked', true);
+		else $('#myonoffswitch').prop('checked', false);
 		console.log(data);
 
 
@@ -116,6 +125,8 @@ window.onload=function(){
 
 		}else {
 			console.log("MERON NAAAAAAAA start_button");
+                // disablebtn(start_val);
+
 
 
 				loadStartBtnFxns(data["start_button"], "reload");
@@ -135,12 +146,8 @@ window.onload=function(){
 			loadSliders();
 		}
 
-		if (data["wgvideofeed"]) 	$('#myonoffswitch').prop('checked', true);
-		else $('#myonoffswitch').prop('checked', false);
 
-
-
-
+		
 
 		console.log(data);
 		console.log(data["stopped"]);
@@ -168,19 +175,26 @@ function setPopupsize(data){
     //         $("#menu").css('height', '200px');
     
 }
-function disablebtn(){
-	if($('.flat-slider').is(':disabled')){
-		alert('ya')
+function disablebtn(start_val){
+	if(start_val!="START"){
+		// alert('ya')
 					$(".onoffswitch-inner").css('opacity', '0.40');
 					$(".onoffswitch-switch").css('opacity', '0.40');
 					$(".onoffswitch-checkbox").css('opacity', '0.40');
-					$(".onoffswitch-label").css('opacity', '0.40');
+					$(".onoffswitch-checkbox").css('opacity', '0.40');
+					$(".onoffswitch-label").css('cursor', 'not-allowed');
+
 							
 				}else{
+		// alert('ya')
+
+
 					$(".onoffswitch-inner").css('opacity', '100');
 					$(".onoffswitch-switch").css('opacity', '100');
 					$(".onoffswitch-checkbox").css('opacity', '100');
 					$(".onoffswitch-label").css('opacity', '100');
+					$(".onoffswitch-label").css('cursor', 'pointer');
+
 				}
 }
 function loadStartBtnFxns(start_val, action){
@@ -243,7 +257,6 @@ function loadStartBtnFxns(start_val, action){
 					// }, 200);
 
 					
-                disablebtn();
 					
 					
 				}
@@ -263,7 +276,6 @@ function loadStartBtnFxns(start_val, action){
 
 					if (action=="click") setBtnto("START");
 					loadButtonVal();
-                disablebtn();
 
 				}
 
@@ -395,15 +407,7 @@ $(function() {
     
     // $(".onoffswitch-checkbox").is(':checked') = true;
 	// document.getElementById('myonoffswitch').checked=true;
- //    if ( $(".onoffswitch-checkbox").is(':checked') ) {
-	// 	        // alert("enabled");
-	// 		        var wgvideofeed= {
-	// 					'wgvideofeed' : true
-	// 				};
-	// 				setObjectdata(wgvideofeed);
-	
-
-	// } 
+    
     $(".onoffswitch-checkbox").on("click", function(){
 
 		    	if ( $(this).is(':checked') ) {
