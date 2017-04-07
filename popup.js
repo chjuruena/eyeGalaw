@@ -25,8 +25,8 @@ function getObjectdata(callback) {
 function loadDeafultValues(){	
 	var obj= {
 		'scroll_speed' : 300,
-		'opacity' : 50,
-		'longpop-up' : true
+		'opacity' : 50
+		// 'longpop-up' : true
 	};
 	setObjectdata(obj);
 }
@@ -102,7 +102,7 @@ window.onload=function(){
 
 
 	getObjectdata( function(data){
-		setPopupsize(data);
+		setPopupsize(data["longpop-up"]);
 		disablebtn(data["start_button"]);
 
 		// alert(data["wgvideofeed"]);
@@ -124,6 +124,8 @@ window.onload=function(){
 
 
 		}else {
+		// setPopupsize(data["longpop-up"]);
+
 			console.log("MERON NAAAAAAAA start_button");
                 // disablebtn(start_val);
 
@@ -160,7 +162,7 @@ window.onload=function(){
 }
 
 function setPopupsize(data){
-	if(data["longpop-up"]) {
+	if(data) {
         $('.dropdown').css('display', 'none');
 		
 	}else{
@@ -207,8 +209,6 @@ function loadStartBtnFxns(start_val, action){
 				// relaod =value after clicking
 				// click=value before clicking
 
-				
-
 
 
 				if((start_val =='START' && action=="click") || (start_val =='STOP' && action=="reload") ){
@@ -235,11 +235,7 @@ function loadStartBtnFxns(start_val, action){
 							allFrames: true, 
 						file: 'insert.js'
 
-						// }, function (result) {
-				  //           chrome.tabs.executeScript(null, {file: 'getposition.js'}, function (result) {
-
-				  //           alert("after getposition.js")								;
-						// 	}); 
+						
 						});
 					
 					//tarting webgazer - dito siya inilagay para masave muna yung position sa taas
@@ -249,13 +245,7 @@ function loadStartBtnFxns(start_val, action){
 						setBtnto("STOP");
 					}
 
-					// var i = 0;
-					// var timer = setInterval(function() {
-					//   console.log(++i);
-					//   if (i === 5) clearInterval(timer);
-					//   console.log('post-interval'); //this will still run after clearing
-					// }, 200);
-
+				
 					
 					
 					
@@ -383,18 +373,8 @@ $(function() {
 	// options dropdown	
     $("#options").on("click", function(){
 	// $( "#effect" ).toggle( "blind", null, 500 );
-	$( "#effect" ).toggle( "blind", null, 500 );
-	$( "#curve-div" ).toggleClass("padding");
-	// $( ".padding" ).toggleClass(function() {
-        // $( this ).addClass( "padding" );
-        // $('.padding').css('padding-top', '0px');
-
-	// }, function() {
-	// 	// $( this ).removeClass( "padding" );
- //        // $('.padding').css('padding-top', '100px');
-
-	// 	}
-	// );
+		$( "#effect" ).toggle( "blind", null, 500 );
+	
 		getObjectdata( function(data){
 			// alert(data["longpop-up"]);
 			if(data["longpop-up"]) {
