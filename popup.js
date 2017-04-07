@@ -104,7 +104,7 @@ window.onload=function(){
 	getObjectdata( function(data){
 		setPopupsize(data);
 		disablebtn(data["start_button"]);
-		
+
 		// alert(data["wgvideofeed"]);
 		if (data["wgvideofeed"]) $('#myonoffswitch').prop('checked', true);
 		else $('#myonoffswitch').prop('checked', false);
@@ -382,7 +382,19 @@ $(function() {
 
 	// options dropdown	
     $("#options").on("click", function(){
-      $( "#effect" ).toggle( "blind", null, 500 );
+	// $( "#effect" ).toggle( "blind", null, 500 );
+	$( "#effect" ).toggle( "blind", null, 500 );
+	$( "#curve-div" ).toggleClass("padding");
+	// $( ".padding" ).toggleClass(function() {
+        // $( this ).addClass( "padding" );
+        // $('.padding').css('padding-top', '0px');
+
+	// }, function() {
+	// 	// $( this ).removeClass( "padding" );
+ //        // $('.padding').css('padding-top', '100px');
+
+	// 	}
+	// );
 		getObjectdata( function(data){
 			// alert(data["longpop-up"]);
 			if(data["longpop-up"]) {
