@@ -74,7 +74,7 @@ function showVideo(enabled){
     var setup = function() {
         var video = document.getElementById('webgazerVideoFeed');
         video.style.display = 'block';
-        video.style.position = 'absolute';
+        video.style.position = 'fixed';
         video.style.top = topDist;
         video.style.left = leftDist;
         video.width = width;
@@ -86,7 +86,7 @@ function showVideo(enabled){
 
         var overlay = document.createElement('canvas');
         overlay.id = 'overlay';
-        overlay.style.position = 'absolute';
+        overlay.style.position = 'fixed';
         overlay.width = width;
         overlay.height = height;
         overlay.style.top = topDist;

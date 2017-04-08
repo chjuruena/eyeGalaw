@@ -189,7 +189,6 @@ function setPopupsize(data){
 		
 	}else{
         $(".dropdown").css('display', 'block');
-      // $( "#effect" ).toggle( "blind", null, 500 );
 
 		
 	}
@@ -201,98 +200,76 @@ function setPopupsize(data){
 }
 function disablebtn(start_val){
 	if(start_val!="START"){
-		// alert('ya')
-					$(".onoffswitch-inner").css('opacity', '0.40');
-					$(".onoffswitch-switch").css('opacity', '0.40');
-					$(".onoffswitch-checkbox").css('opacity', '0.40');
-					$(".onoffswitch-checkbox").css('opacity', '0.40');
-					$(".onoffswitch-label").css('cursor', 'not-allowed');
+		$(".onoffswitch-inner").css('opacity', '0.40');
+		$(".onoffswitch-switch").css('opacity', '0.40');
+		$(".onoffswitch-checkbox").css('opacity', '0.40');
+		$(".onoffswitch-checkbox").css('opacity', '0.40');
+		$(".onoffswitch-label").css('cursor', 'not-allowed');
 
-							
-				}else{
-		// alert('ya')
+				
+	}else{
+		$(".onoffswitch-inner").css('opacity', '100');
+		$(".onoffswitch-switch").css('opacity', '100');
+		$(".onoffswitch-checkbox").css('opacity', '100');
+		$(".onoffswitch-label").css('opacity', '100');
+		$(".onoffswitch-label").css('cursor', 'pointer');
 
-
-					$(".onoffswitch-inner").css('opacity', '100');
-					$(".onoffswitch-switch").css('opacity', '100');
-					$(".onoffswitch-checkbox").css('opacity', '100');
-					$(".onoffswitch-label").css('opacity', '100');
-					$(".onoffswitch-label").css('cursor', 'pointer');
-
-				}
+	}
 }
 function loadStartBtnFxns(start_val, action){
 	// getObjectdata( function(data){		
 
-				// var start_val=data["start_button"];
-				console.log(start_val);
+	// var start_val=data["start_button"];
+	console.log(start_val);
 
-				//opposite azng reload at click
-				// relaod =value after clicking
-				// click=value before clicking
+	//opposite azng reload at click
+	// relaod =value after clicking
+	// click=value before clicking
 
+	if((start_val =='START' && action=="click") || (start_val =='STOP' && action=="reload") ){
+		if(start_val =='START' && action=="click") console.log("start_val =='START' && action==click");
+		else if(start_val =='STOP' && action=="reload") console.log("start_val =='STOP' && action==reload");
 
+		document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
+		document.getElementById('flat-slider2').addEventListener('mouseup', newchangeSpeed);
+	
+		//enable sliders
+		$('.flat-slider').slider({
+			disabled: false
+		});	
+		$('.onoffswitch-checkbox').prop('disabled', false);		
+		chrome.tabs.executeScript(null, {
+				// allFrames: true, 
+			file: 'insert.js'						
+			});
+		
+		//tarting webgazer - dito siya inilagay para masave muna yung position sa taas
+		
+		startWebgazer();
+		if (action=="click"){
+			setBtnto("STOP");
+		}
+		
+	}
+	else if((start_val =='STOP' && action=="click") || (start_val =='START' && action=="reload")  ){
+		if(start_val =='STOP' && action=="click") 
+		console.log("start_val =='STOP' && action==click");
+	else if (start_val =='START' && action=="reload")  console.log("(start_val =='START' && action==reload");
+		
 
-				if((start_val =='START' && action=="click") || (start_val =='STOP' && action=="reload") ){
-					if(start_val =='START' && action=="click") console.log("start_val =='START' && action==click");
-					else if(start_val =='STOP' && action=="reload") console.log("start_val =='STOP' && action==reload");
+		chrome.tabs.executeScript(null,  {
+			file: 'removeArrows.js'
+		});
+		$('.flat-slider').slider({
+			disabled: true
+		});
+		$('.onoffswitch-checkbox').prop('disabled', true);		
 
-					// webgaer video feed
-					
+		if (action=="click") setBtnto("START");
+		loadButtonVal();
 
-					document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
-					document.getElementById('flat-slider2').addEventListener('mouseup', newchangeSpeed);
-				
-					//enable sliders
-
-					$('.flat-slider').slider({
-						disabled: false
-					});	
-
-
-
-					$('.onoffswitch-checkbox').prop('disabled', false);		
-					chrome.tabs.executeScript(null, {
-							// allFrames: true, 
-						file: 'insert.js'
-
-						
-						});
-					
-					//tarting webgazer - dito siya inilagay para masave muna yung position sa taas
-					
-					startWebgazer();
-					if (action=="click"){
-						setBtnto("STOP");
-					}
-
-				
-					
-					
-					
-				}
-				else if((start_val =='STOP' && action=="click") || (start_val =='START' && action=="reload")  ){
-					if(start_val =='STOP' && action=="click") 
-					console.log("start_val =='STOP' && action==click");
-				else if (start_val =='START' && action=="reload")  console.log("(start_val =='START' && action==reload");
-					
-
-					chrome.tabs.executeScript(null,  {
-						file: 'removeArrows.js'
-					});
-					$('.flat-slider').slider({
-						disabled: true
-					});
-					$('.onoffswitch-checkbox').prop('disabled', true);		
-
-					if (action=="click") setBtnto("START");
-					loadButtonVal();
-
-				}
-
+	}
 }
-
-
 
 
 function startWebgazer(){
