@@ -4,6 +4,11 @@
 // var app = chrome.runtime.getBackgroundPage();
 var running;
 var first=1;
+var defaultPixelMovement = 50;
+var pageheight = screen.height;
+
+// var sheight=$(document).height(); 
+
 
 getObjectdata( function(data){
 	console.log(data);
@@ -22,9 +27,33 @@ function getObjectdata(callback) {
 	chrome.storage.local.get(null, callback);
 }
 
-function loadDeafultValues(){	
+function setdefaultSpeed(){
+	var sheight=$(window).height(); 
+	var sliderVal= (defaultPixelMovement/sheight) * 100;
+	var defaultScrollSpeed = sheight * (sliderVal/100);
+
+}
+
+function loadDeafultValues(){
+	$('.flat-slider').slider({
+		disabled: true
+	});	
+
+					
+	
+	//setdefaultSpeed
+	
+	
+	var sliderVal= Math.round((defaultPixelMovement/pageheight) * 100);
+	var startingScrollSpeed = pageheight * (sliderVal/100);   				
+	
+
+
 	var obj= {
-		'scroll_speed' : 300,
+		"pageheight" : pageheight,
+		"scroll_speed_slider" : sliderVal,
+		'wgvideofeed' : false,
+		'scroll_speed' : startingScrollSpeed,
 		'opacity' : 50
 		// 'longpop-up' : true
 	};
@@ -34,13 +63,13 @@ function loadDeafultValues(){
 //load slider values for opacity adn scroll value
 function loadSliders(){
 	getObjectdata( function(data){
-
-		console.log(data)
 		var scroll_speed_slider = data['scroll_speed_slider'];
 		
 		var opacity_slider = data['opacity'];
 
 		$(function() {
+			$( '#slider-value-opacity' ).html( opacity_slider );
+			$( '#slider-value-scroll' ).html( scroll_speed_slider );
 			$('#flat-slider2').slider('value',scroll_speed_slider);
 			$('#flat-slider1').slider('value',opacity_slider);
 		});
@@ -66,7 +95,6 @@ function setBtnto(action){
 	document.getElementById('start_button').text = action;
 }
 function startEvent() {   
-	loadDeafultValues();
 
 	getObjectdata( function(data){
 		disablebtn(data["start_button"]);
@@ -82,24 +110,16 @@ function startEvent() {
 }
 
 function setSliderValAtStart(){
-	$('.flat-slider').slider({
-		disabled: true
-	});	
 	
-    				
-	var obj= {
-		"scroll_speed_slider" : 1,
-		'wgvideofeed' : false
-		
-	};
-	setObjectdata(obj);
 
 }
 
+function saveClicks(){
+	
+}
 window.onload=function(){
 	// if($("#mainr").height;)
-	
-
+	loadSliders();
 
 	getObjectdata( function(data){
 		setPopupsize(data["longpop-up"]);
@@ -118,7 +138,10 @@ window.onload=function(){
 
 
 			setBtnto("START");
-			setSliderValAtStart();
+
+			// setSliderValAtStart();
+			loadDeafultValues();
+
 
 
 
@@ -145,7 +168,6 @@ window.onload=function(){
 
 			//opening otehr pages or new
 
-			loadSliders();
 		}
 
 
@@ -215,12 +237,11 @@ function loadStartBtnFxns(start_val, action){
 					if(start_val =='START' && action=="click") console.log("start_val =='START' && action==click");
 					else if(start_val =='STOP' && action=="reload") console.log("start_val =='STOP' && action==reload");
 
-					loadDeafultValues();
 					// webgaer video feed
 					
 
 					document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
-					document.getElementById('flat-slider2').addEventListener('mouseup', changeSpeed);
+					document.getElementById('flat-slider2').addEventListener('mouseup', newchangeSpeed);
 				
 					//enable sliders
 
@@ -232,7 +253,7 @@ function loadStartBtnFxns(start_val, action){
 
 					$('.onoffswitch-checkbox').prop('disabled', false);		
 					chrome.tabs.executeScript(null, {
-							allFrames: true, 
+							// allFrames: true, 
 						file: 'insert.js'
 
 						
@@ -240,7 +261,7 @@ function loadStartBtnFxns(start_val, action){
 					
 					//tarting webgazer - dito siya inilagay para masave muna yung position sa taas
 					
-					// startWebgazer();
+					startWebgazer();
 					if (action=="click"){
 						setBtnto("STOP");
 					}
@@ -282,6 +303,23 @@ function startWebgazer(){
     });  
 }
 
+function newchangeSpeed(){
+	var value = $( "#flat-slider2" ).slider( "values", 0 );
+	var scroll_speed;
+	var scroll_speed_slider_val;
+	scroll_speed = pageheight * (value/100);
+
+
+
+	var obj= {
+		"scroll_speed_slider" : value,
+		"scroll_speed" : scroll_speed
+	};
+	setObjectdata(obj);
+
+}
+
+
 function changeSpeed(){
 	var value = $( "#flat-slider2" ).slider( "values", 0 );
 	var scroll_speed;
@@ -294,15 +332,21 @@ function changeSpeed(){
 		 	scroll_speed = data2["scroll_speed"];
 			console.log("scroll_speed" +scroll_speed);
 
-			if ( value > scroll_speed_slider_val ) new_scroll_speed = scroll_speed + value*5;
-			else new_scroll_speed = scroll_speed  - (value)*5;
+
+			var tempvalue = value;
+			if ( value > 50) tempvalue = value*5;
+
+
+			if ( value > scroll_speed_slider_val ) new_scroll_speed = scroll_speed + tempvalue;
+			else new_scroll_speed = scroll_speed  - tempvalue;
 			// var 
 			console.log("new scroll_speed");
 			console.log(new_scroll_speed);
 			
-			chrome.tabs.executeScript(null, {
-				code: 'scroll_speed = ' + new_scroll_speed +';'
-			});
+			alert("value"+value+","+new_scroll_speed)
+			// chrome.tabs.executeScript(null, {
+			// 	code: 'scroll_speed = ' + new_scroll_speed +';'
+			// });
 			var obj= {
 				"scroll_speed" : new_scroll_speed 
 			};
@@ -352,21 +396,27 @@ function myFunction() {
 
 // initialization of UI
 $(function() {
+
+	
+
+
 	var last = 0;
 
 	$('#flat-slider1').slider({
 		slide: function( event, ui ) {
+			// alert(ui.value);
                 $( '#slider-value-opacity' ).html( ui.value );
             }
 	});
 	$('#flat-slider2').slider({
 		slide: function( event, ui ) {
+
                 $( '#slider-value-scroll' ).html( ui.value );
             }
 	});
 	$('.flat-slider').slider({
 	  orientation: 'horizontal',
-	  range:       false,
+	  range:       false
       
 	});
 

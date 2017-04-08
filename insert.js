@@ -1,4 +1,6 @@
-
+function getObjectdata(callback) {
+    chrome.storage.local.get(null, callback);
+}
 
 // Listen for messages
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
@@ -44,6 +46,14 @@ document.body.appendChild(prev_page );
 var scrolled=0;
 var scroll_speed;
 
+// getObjectdata( function(items){
+//     scroll_speed = items.scroll_speed;
+//     console.log(items.scroll_speed)
+
+
+// });
+
+
 chrome.storage.local.get(null, function(items) {
     var allKeys = Object.keys(items);
     console.log(items);
@@ -56,7 +66,6 @@ chrome.storage.local.get(null, function (items) {
 
 });
 getPosition();
-
 
 function getPosition(){
     var obj={};
@@ -89,72 +98,73 @@ function getPosition(){
 }
 
 
-$(document).ready(function(){
-     $(document.body ).on("click" , function(event){
-        var x = event.clientX;
-        var y = event.clientY;
-         console.log("clickX:" + x+ " clickY:" +y);
+// $(function() {
+//      $(document.body ).on("click" , function(event){
+//         var x = event.clientX;
+//         var y = event.clientY;
+//          console.log("clickX:" + x+ " clickY:" +y);
 
-         var currclick = {
-                'x': x, 
-                'y': y
-            };
-         chrome.storage.local.set(currclick, function () {
-            console.log('currclick', currclick);
-        });
+//          var currclick = {
+//                 'x': x, 
+//                 'y': y
+//             };
+//          chrome.storage.local.set(currclick, function () {
+//             console.log('currclick', currclick);
+//         });
 
-    });
+//     });
 
-    $("#prev_page").on("click" ,function(event){
-        window.history.back();
+//     $("#prev_page").on("click" ,function(event){
+//         window.history.back();
 
-    });
+//     });
     
-    $("#arrow_down").on("click" ,function(event){
-        scrolled=scrolled+scroll_speed;
+//     $("#arrow_down").on("click" ,function(event){
+//         scrolled=scrolled+scroll_speed;
 
-		$("html, body").animate({
-		        scrollTop:  scrolled
-		   });
+// 		$("html, body").animate({
+// 		        scrollTop:  scrolled
+// 		   });
 
-        // var x = event.clientX;
-        // var y = event.clientY;
-        //  console.log("clickX:" + x+ " clickY:" +y);
+//         // var x = event.clientX;
+//         // var y = event.clientY;
+//         //  console.log("clickX:" + x+ " clickY:" +y);
 
-        //  var currclick = {
-        //         'x': x, 
-        //         'y': y
-        //     };
-        //  chrome.storage.local.set(currclick, function () {
-        //     console.log('currclick', currclick);
-        // });
+//         //  var currclick = {
+//         //         'x': x, 
+//         //         'y': y
+//         //     };
+//         //  chrome.storage.local.set(currclick, function () {
+//         //     console.log('currclick', currclick);
+//         // });
 
-				// console.log( "pageX: " + event.pageX + ", pageY: " + event.pageY );
-	 //  	var p = $( "#arrow_down" );
-		// var position = p.position();
-		// var offset = p.offset();
-		// console.log( "left: " + offset.left + ", top: " + position.top );
+// 				// console.log( "pageX: " + event.pageX + ", pageY: " + event.pageY );
+// 	 //  	var p = $( "#arrow_down" );
+// 		// var position = p.position();
+// 		// var offset = p.offset();
+// 		// console.log( "left: " + offset.left + ", top: " + position.top );
 
 				
 
 
-	});
-    $("#arrow_left").on("click" ,function(event){     
+// 	});
+//     $("#arrow_left").on("click" ,function(event){     
 
-        var x = event.clientX;
-        var y = event.clientY;
-        console.log("clickX:" + x+ " clickY:" +y);    
-    });
+//         var x = event.clientX;
+//         var y = event.clientY;
+//         console.log("clickX:" + x+ " clickY:" +y);    
+//     });
 
     
-    $("#arrow_up").on("click" ,function(){
-				scrolled=scrolled-scroll_speed;
+//     $("#arrow_up").on("click" ,function(){
+//         alert(scroll_speed);
+// 				scrolled=scrolled-scroll_speed;
 				
-		$("html, body").animate({
-		        scrollTop:  scrolled
-		   });
-	});   
+// 		$("html, body").animate({
+// 		        scrollTop:  scrolled
+// 		   });
+// 	});   
     
-});
+// });
 
 
