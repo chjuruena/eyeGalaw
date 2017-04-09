@@ -19,14 +19,21 @@ document.documentElement.style.width = '100%';
 
 // create arrows
 var arrow_up = document.createElement( 'div' );
-var arrow_down = document.createElement( 'div' )
-var arrow_right = document.createElement( 'div' )
-var arrow_left = document.createElement( 'div' )
+var arrow_down = document.createElement( 'div' );
+var arrow_right = document.createElement( 'div' );
+var arrow_left = document.createElement( 'div' );
+var prev_page = document.createElement( 'div' );
 
-var prev_page = document.createElement( 'div' )
+
+var gaze_down = document.createElement( 'div' )
+var gaze_up = document.createElement( 'div' )
+gaze_down.setAttribute('id', 'gaze_down');
+gaze_up.setAttribute('id', 'gaze_up');
+gaze_down.setAttribute('class', 'gaze_pads');
+gaze_up.setAttribute('class', 'gaze_pads');
+
 prev_page.setAttribute('id', 'prev_page');
 prev_page.setAttribute('class', 'arrows');
-
 arrow_up.setAttribute('id', 'arrow_up');
 arrow_down.setAttribute('id', 'arrow_down');
 arrow_left.setAttribute('id', 'arrow_left');
@@ -37,30 +44,24 @@ arrow_down.setAttribute('class', 'arrows');
 arrow_left.setAttribute('class', 'arrows');
 arrow_right.setAttribute('class', 'arrows');
 
+document.body.appendChild( gaze_down);
+document.body.appendChild( gaze_up);
+
 document.body.appendChild( arrow_up);
 document.body.appendChild( arrow_down);
 document.body.appendChild(arrow_left );
 document.body.appendChild(arrow_right );
 document.body.appendChild(prev_page );
 
-var scrolled=0;
-var scroll_speed;
+
 var screenwidth = screen.width;
+document.getElementById('gaze_down').style.width = screenwidth;
+document.getElementById('gaze_up').style.width = screenwidth;
 
 
-// var gaze_down = document.createElement( 'div' )
-// var gaze_up = document.createElement( 'div' )
-// gaze_down.setAttribute('id', 'gaze_down');
-// gaze_up.setAttribute('id', 'gaze_up');
-// gaze_down.setAttribute('class', 'gaze_pads');
-// gaze_up.setAttribute('class', 'gaze_pads');
-// document.body.appendChild( gaze_down);
-// document.body.appendChild( gaze_up);
 
 
-// document.getElementById('gaze_down').style.width = screenwidth;
-// document.getElementById('gaze_up').style.width = screenwidth;
-// alert(screenwidth);
+// // alert(screenwidth);
 
 // $('.gaze_pads').css('width', screenwidth);
 // getObjectdata( function(items){
@@ -71,17 +72,17 @@ var screenwidth = screen.width;
 // });
 
 
-chrome.storage.local.get(null, function(items) {
-    var allKeys = Object.keys(items);
-    console.log(items);
-    console.log(allKeys);
-});
+// chrome.storage.local.get(null, function(items) {
+//     var allKeys = Object.keys(items);
+//     console.log(items);
+//     console.log(allKeys);
+// });
 
-chrome.storage.local.get(null, function (items) {
-    scroll_speed = items.scroll_speed;
-    console.log(items.scroll_speed)
+// chrome.storage.local.get(null, function (items) {
+//     scroll_speed = items.scroll_speed;
+//     console.log(items.scroll_speed)
 
-});
+// });
 getPosition();
 
 function getPosition(){
