@@ -135,6 +135,8 @@ function startWebgazerfeed(){
             
             if (data["start_button"] == "START") webgazer.showPredictionPoints(false).clearGazeListener();
 
+            // var gaze_down=data["gaze_down"];
+            // var gaze_up=data["gaze_up"];
             var arrow_down=data["arrow_down"];
             var arrow_up=data["arrow_up"];
             var arrow_left=data["arrow_left"];
@@ -168,27 +170,45 @@ function startWebgazerfeed(){
                 }, 200);
             }
             
-            if ((prev_page.x < xprediction &&  xprediction<(prev_page.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
-                startTimer();                
-                window.history.back();
-            }
+            // if ((prev_page.x < xprediction &&  xprediction<(prev_page.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
+            //     startTimer();                
+            //     window.history.back();
+            // }
 
                 // alert(scrolled);
             if ((arrow_down.x < xprediction &&  xprediction<(arrow_down.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
-                
+            // if (gaze_down.y  < yprediction && yprediction<(arrogaze_downw_down.y+100)){
+
+            // if (((arrow_down.x < xprediction &&  xprediction<(arrow_down.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))) || 
+            //     (gaze_down.y  < yprediction && yprediction<(gaze_down.y+100))){
+
+                // $('#gaze_down').css('background-color', 'black');
                 
                 scrolled=pagePosition+scroll_speed;
                 console.log("down"); 
                 startTimer();
-                scrollz(scrolled);                
+                scrollz(scrolled);       
+
              }
+             // else $('#gaze_down').css('background-color', 'red');
+
              if ((arrow_up.x < xprediction &&  xprediction<(arrow_up.x+100))&& (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))){
+             // if (gaze_up.y  < yprediction && yprediction<(gaze_up.y+100)){
+            
+            // if (((arrow_up.x < xprediction &&  xprediction<(arrow_up.x+100))&& (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))) ||
+            //    (gaze_up.y  < yprediction && yprediction<(gaze_up.y+100))){
+
+                $('#gaze_up').css('background-color', 'black');
+                
                 scrolled=pagePosition-scroll_speed;
                 console.log("up");           
                 startTimer();
                 scrollz(scrolled);
                 
+
+                
              }
+             // else $('#gaze_up').css('background-color', 'red');
         });
 
     }).begin().showPredictionPoints(true); /* shows a square every 100 milliseconds where current prediction is */

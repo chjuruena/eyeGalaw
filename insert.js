@@ -45,7 +45,24 @@ document.body.appendChild(prev_page );
 
 var scrolled=0;
 var scroll_speed;
+var screenwidth = screen.width;
 
+
+// var gaze_down = document.createElement( 'div' )
+// var gaze_up = document.createElement( 'div' )
+// gaze_down.setAttribute('id', 'gaze_down');
+// gaze_up.setAttribute('id', 'gaze_up');
+// gaze_down.setAttribute('class', 'gaze_pads');
+// gaze_up.setAttribute('class', 'gaze_pads');
+// document.body.appendChild( gaze_down);
+// document.body.appendChild( gaze_up);
+
+
+// document.getElementById('gaze_down').style.width = screenwidth;
+// document.getElementById('gaze_up').style.width = screenwidth;
+// alert(screenwidth);
+
+// $('.gaze_pads').css('width', screenwidth);
 // getObjectdata( function(items){
 //     scroll_speed = items.scroll_speed;
 //     console.log(items.scroll_speed)
@@ -69,8 +86,8 @@ getPosition();
 
 function getPosition(){
     var obj={};
+     // var arr=["gaze_up", "gaze_down", "arrow_down","arrow_up","arrow_left","arrow_right", "prev_page"];
     var arr =["arrow_down","arrow_up","arrow_left","arrow_right", "prev_page"];
-    // var arr =["#arrow_down","#arrow_up","#arrow_left","#arrow_right", "#prev_page"];
     arr.forEach(function(element) {
         console.log(document.getElementById(element));
         // var position = document.getElementById(element).offsetParent.offsetTop;
