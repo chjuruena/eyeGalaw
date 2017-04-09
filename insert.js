@@ -55,8 +55,9 @@ document.body.appendChild(prev_page );
 
 
 var screenwidth = screen.width;
-document.getElementById('gaze_down').style.width = screenwidth;
-document.getElementById('gaze_up').style.width = screenwidth;
+document.getElementById('gaze_down').style.width = screenwidth+"px";
+document.getElementById('gaze_up').style.width = screenwidth+"px";
+alert(document.getElementById('gaze_down').style.width);
 
 
 
@@ -87,8 +88,8 @@ getPosition();
 
 function getPosition(){
     var obj={};
-     // var arr=["gaze_up", "gaze_down", "arrow_down","arrow_up","arrow_left","arrow_right", "prev_page"];
-    var arr =["arrow_down","arrow_up","arrow_left","arrow_right", "prev_page"];
+     var arr=["gaze_up", "gaze_down", "arrow_down","arrow_up","arrow_left","arrow_right", "prev_page"];
+    // var arr =["arrow_down","arrow_up","arrow_left","arrow_right", "prev_page"];
     arr.forEach(function(element) {
         console.log(document.getElementById(element));
         // var position = document.getElementById(element).offsetParent.offsetTop;

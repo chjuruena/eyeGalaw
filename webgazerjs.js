@@ -198,7 +198,7 @@ function startWebgazerfeed(){
             // if (((arrow_up.x < xprediction &&  xprediction<(arrow_up.x+100))&& (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))) ||
             //    (gaze_up.y  < yprediction && yprediction<(gaze_up.y+100))){
 
-                $('#gaze_up').css('background-color', 'black');
+                // $('#gaze_up').css('background-color', 'black');
                 
                 scrolled=pagePosition-scroll_speed;
                 console.log("up");           
