@@ -240,7 +240,7 @@ function loadStartBtnFxns(start_val, action){
 		$('.onoffswitch-checkbox').prop('disabled', false);		
 		chrome.tabs.executeScript(null, {
 				// allFrames: true, 
-			file: 'insert.js'						
+			file: 'src/js/insert.js'						
 			});
 		
 		//tarting webgazer - dito siya inilagay para masave muna yung position sa taas
@@ -258,7 +258,7 @@ function loadStartBtnFxns(start_val, action){
 		
 
 		chrome.tabs.executeScript(null,  {
-			file: 'removeArrows.js'
+			file: 'src/js/removeArrows.js'
 		});
 		$('.flat-slider').slider({
 			disabled: true
@@ -275,7 +275,7 @@ function loadStartBtnFxns(start_val, action){
 function startWebgazer(){
 
     chrome.tabs.executeScript({file: 'src/thirdParty/webgazer.js'}, function(){
-            chrome.tabs.executeScript({file: 'webgazerjs.js'}, function(){
+            chrome.tabs.executeScript({file: 'src/js/webgazerjs.js'}, function(){
             });
     });  
 }
