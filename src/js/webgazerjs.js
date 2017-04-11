@@ -135,8 +135,7 @@ function startWebgazerfeed(){
             
             if (data["start_button"] == "START") webgazer.showPredictionPoints(false).clearGazeListener();
 
-            // var gaze_down=data["gaze_down"];
-            // var gaze_up=data["gaze_up"];
+            
             var arrow_down=data["arrow_down"];
             var arrow_up=data["arrow_up"];
             var arrow_left=data["arrow_left"];
@@ -175,12 +174,15 @@ function startWebgazerfeed(){
             //     window.history.back();
             // }
 
-                // alert(scrolled);
+                
+            var gdown=data["gaze_down"];
+            var gup=data["gaze_up"];
+
             if ((arrow_down.x < xprediction &&  xprediction<(arrow_down.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
             // if (gaze_down.y  < yprediction && yprediction<(arrogaze_downw_down.y+100)){
 
             // if (((arrow_down.x < xprediction &&  xprediction<(arrow_down.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))) || 
-            //     (gaze_down.y  < yprediction && yprediction<(gaze_down.y+100))){
+            //     (gdown.y  < yprediction && yprediction<(gdown.y+100))){
 
                 // $('#gaze_down').css('background-color', 'black');
                 
@@ -195,8 +197,8 @@ function startWebgazerfeed(){
              if ((arrow_up.x < xprediction &&  xprediction<(arrow_up.x+100))&& (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))){
              // if (gaze_up.y  < yprediction && yprediction<(gaze_up.y+100)){
             
-            // if (((arrow_up.x < xprediction &&  xprediction<(arrow_up.x+100))&& (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))) ||
-            //    (gaze_up.y  < yprediction && yprediction<(gaze_up.y+100))){
+            // if (((arrow_up.x < xprediction &&  xprediction<(arrow_up.x+100)) && (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))) ||
+            //    (gup.y  < yprediction && yprediction<(gup.y+100))){
 
                 // $('#gaze_up').css('background-color', 'black');
                 
