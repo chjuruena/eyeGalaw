@@ -136,10 +136,10 @@ function startWebgazerfeed(){
             if (data["start_button"] == "START") webgazer.showPredictionPoints(false).clearGazeListener();
 
             
-            var arrow_down=data["arrow_down"];
-            var arrow_up=data["arrow_up"];
-            var arrow_left=data["arrow_left"];
-            var arrow_right=data["arrow_right"];
+            var arrow_down=data["gaze_down"];
+            var arrow_up=data["gaze_up"];
+            // var arrow_left=data["arrow_left"];
+            // var arrow_right=data["arrow_right"];
             var prev_page=data["prev_page"];
 
              // /////////////////////////////////
@@ -178,7 +178,7 @@ function startWebgazerfeed(){
             var gdown=data["gaze_down"];
             var gup=data["gaze_up"];
 
-            if ((arrow_down.x < xprediction &&  xprediction<(arrow_down.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
+            if  ((arrow_down.y < yprediction) && ((arrow_down.y+100)  > yprediction )){
             // if (gaze_down.y  < yprediction && yprediction<(arrogaze_downw_down.y+100)){
 
             // if (((arrow_down.x < xprediction &&  xprediction<(arrow_down.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))) || 
@@ -194,7 +194,7 @@ function startWebgazerfeed(){
              }
              // else $('#gaze_down').css('background-color', 'red');
 
-             if ((arrow_up.x < xprediction &&  xprediction<(arrow_up.x+100))&& (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))){
+             if ( (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))){
              // if (gaze_up.y  < yprediction && yprediction<(gaze_up.y+100)){
             
             // if (((arrow_up.x < xprediction &&  xprediction<(arrow_up.x+100)) && (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))) ||

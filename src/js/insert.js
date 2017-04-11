@@ -19,9 +19,11 @@ document.documentElement.style.width = '100%';
 
 // create arrows
 var arrow_up = document.createElement( 'div' );
+var line_arrow_up = document.createElement( 'div' );
 var arrow_down = document.createElement( 'div' );
-var arrow_right = document.createElement( 'div' );
-var arrow_left = document.createElement( 'div' );
+var line_arrow_down = document.createElement( 'div' );
+// var arrow_right = document.createElement( 'div' );
+// var arrow_left = document.createElement( 'div' );
 var prev_page = document.createElement( 'div' );
 
 
@@ -35,29 +37,33 @@ gaze_up.setAttribute('class', 'gaze_pads');
 prev_page.setAttribute('id', 'prev_page');
 prev_page.setAttribute('class', 'arrows');
 arrow_up.setAttribute('id', 'arrow_up');
+arrow_up.setAttribute('id', 'line_arrow_up');
 arrow_down.setAttribute('id', 'arrow_down');
-arrow_left.setAttribute('id', 'arrow_left');
-arrow_right.setAttribute('id','arrow_right');
+arrow_down.setAttribute('id', 'line_arrow_down');
+// arrow_left.setAttribute('id', 'arrow_left');
+// arrow_right.setAttribute('id','arrow_right');
 
 arrow_up.setAttribute('class', 'arrows');
 arrow_down.setAttribute('class', 'arrows');
-arrow_left.setAttribute('class', 'arrows');
-arrow_right.setAttribute('class', 'arrows');
+// arrow_left.setAttribute('class', 'arrows');
+// arrow_right.setAttribute('class', 'arrows');
 
 document.body.appendChild( gaze_down);
 document.body.appendChild( gaze_up);
 
-document.body.appendChild( arrow_up);
-document.body.appendChild( arrow_down);
-document.body.appendChild(arrow_left );
-document.body.appendChild(arrow_right );
+// document.body.appendChild( arrow_up);
+document.body.appendChild( line_arrow_up);
+// document.body.appendChild( arrow_down);
+document.body.appendChild( line_arrow_down);
+// document.body.appendChild(arrow_left );
+// document.body.appendChild(arrow_right );
 document.body.appendChild(prev_page );
 
 
 var screenwidth = screen.width;
 document.getElementById('gaze_down').style.width = screenwidth+"px";
 document.getElementById('gaze_up').style.width = screenwidth+"px";
-alert(document.getElementById('gaze_down').style.width);
+// alert(document.getElementById('gaze_down').style.width);
 
 
 
@@ -88,7 +94,8 @@ getPosition();
 
 function getPosition(){
     var obj={};
-     var arr=["gaze_up", "gaze_down", "arrow_down","arrow_up","arrow_left","arrow_right", "prev_page"];
+     // var arr=["gaze_up", "gaze_down", "arrow_down","arrow_up","arrow_left","arrow_right", "prev_page"];
+     var arr=["gaze_up", "gaze_down",  "prev_page"];
     // var arr =["arrow_down","arrow_up","arrow_left","arrow_right", "prev_page"];
     arr.forEach(function(element) {
         console.log(document.getElementById(element));
@@ -99,6 +106,7 @@ function getPosition(){
 
         var x = document.getElementById(element).offsetLeft;
         var y = document.getElementById(element).offsetTop;
+        console.log("x "+ x + ", y"+y);
 
 
 
