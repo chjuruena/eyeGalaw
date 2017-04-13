@@ -1,8 +1,11 @@
-var myElements = document.querySelectorAll(".arrows");
+var gaze_pads = document.querySelectorAll(".gaze_pads");
+var line_arrows = document.querySelectorAll(".line_arrows");
 
-for (var i = 0; i < myElements.length; i++) {  
+for (var i = 0; i < line_arrows.length; i++) {  
 	// myElements[i].style.opacity = '+value/100+'
-	document.body.removeChild(myElements[i]);
+	if(gaze_pads[i]) document.body.removeChild(gaze_pads[i]);
+	
+	document.body.removeChild(line_arrows[i]);
 };
 		
 

@@ -191,6 +191,8 @@ function startWebgazerfeed(){
                 startTimer();
                 scrollz(scrolled);       
 
+             }else{
+                scrollz(scrolled);                       
              }
              // else $('#gaze_down').css('background-color', 'red');
 
@@ -209,6 +211,8 @@ function startWebgazerfeed(){
                 
 
                 
+             }else{
+                scrollz(scrolled);                       
              }
              // else $('#gaze_up').css('background-color', 'red');
         });

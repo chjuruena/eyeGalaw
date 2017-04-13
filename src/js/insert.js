@@ -22,8 +22,10 @@ var arrow_up = document.createElement( 'div' );
 var line_arrow_up = document.createElement( 'div' );
 var arrow_down = document.createElement( 'div' );
 var line_arrow_down = document.createElement( 'div' );
-// var arrow_right = document.createElement( 'div' );
-// var arrow_left = document.createElement( 'div' );
+var hide_div = document.createElement( 'div' );
+var hold_div = document.createElement( 'div' );
+var hide = document.createElement( 'div' );
+var hold = document.createElement( 'div' );
 var prev_page = document.createElement( 'div' );
 
 
@@ -35,16 +37,18 @@ gaze_down.setAttribute('class', 'gaze_pads');
 gaze_up.setAttribute('class', 'gaze_pads');
 
 prev_page.setAttribute('id', 'prev_page');
-prev_page.setAttribute('class', 'arrows');
-arrow_up.setAttribute('id', 'arrow_up');
-arrow_up.setAttribute('id', 'line_arrow_up');
-arrow_down.setAttribute('id', 'arrow_down');
-arrow_down.setAttribute('id', 'line_arrow_down');
-// arrow_left.setAttribute('id', 'arrow_left');
-// arrow_right.setAttribute('id','arrow_right');
+prev_page.setAttribute('class', 'line_arrows');
+// arrow_up.setAttribute('id', 'arrow_up');
+line_arrow_up.setAttribute('id', 'line_arrow_up');
+// arrow_down.setAttribute('id', 'arrow_down');
+line_arrow_down.setAttribute('id', 'line_arrow_down');
+hide.setAttribute('id', 'hide');
+hold.setAttribute('id','hold');
 
-arrow_up.setAttribute('class', 'arrows');
-arrow_down.setAttribute('class', 'arrows');
+line_arrow_up.setAttribute('class', 'line_arrows');
+line_arrow_down.setAttribute('class', 'line_arrows');
+// arrow_down.setAttribute('class', 'arrows');
+// arrow_down.setAttribute('class', 'arrows');
 // arrow_left.setAttribute('class', 'arrows');
 // arrow_right.setAttribute('class', 'arrows');
 
