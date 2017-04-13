@@ -139,8 +139,8 @@ function startWebgazerfeed(){
             var arrow_down=data["gaze_down"];
             var arrow_up=data["gaze_up"];
             var prev_page=data["prev_page"];
-            var hide=data["hide"];
-            var hold=data["hold"];
+            var hide=data["hide_div"];
+            var hold=data["hold_div"];
 
              // /////////////////////////////////
                 console.log("X-gaze:" + xprediction+ " Y-gaze:" +yprediction);
