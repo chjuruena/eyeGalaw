@@ -138,9 +138,9 @@ function startWebgazerfeed(){
             
             var arrow_down=data["gaze_down"];
             var arrow_up=data["gaze_up"];
-            // var arrow_left=data["arrow_left"];
-            // var arrow_right=data["arrow_right"];
             var prev_page=data["prev_page"];
+            var hide=data["hide"];
+            var hold=data["hold"];
 
              // /////////////////////////////////
                 console.log("X-gaze:" + xprediction+ " Y-gaze:" +yprediction);
@@ -169,51 +169,57 @@ function startWebgazerfeed(){
                 }, 200);
             }
             
-            // if ((prev_page.x < xprediction &&  xprediction<(prev_page.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
-            //     startTimer();                
-            //     window.history.back();
-            // }
+            if ((prev_page.x < xprediction &&  xprediction<(prev_page.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
+                startTimer();                
+                window.history.back();
+            }
 
                 
             var gdown=data["gaze_down"];
             var gup=data["gaze_up"];
 
-            if  ((arrow_down.y < yprediction) && ((arrow_down.y+100)  > yprediction )){
-            // if (gaze_down.y  < yprediction && yprediction<(arrogaze_downw_down.y+100)){
-
-            // if (((arrow_down.x < xprediction &&  xprediction<(arrow_down.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))) || 
-            //     (gdown.y  < yprediction && yprediction<(gdown.y+100))){
-
-                // $('#gaze_down').css('background-color', 'black');
-                
+            if  ((arrow_down.y < yprediction) && ((arrow_down.y+100)  > yprediction )){                  
+               
+               // alert("down")
                 scrolled=pagePosition+scroll_speed;
                 console.log("down"); 
                 startTimer();
-                scrollz(scrolled);       
+                scrollz(scrolled);
+             } 
 
-             }else{
-                scrollz(scrolled);                       
-             }
-             // else $('#gaze_down').css('background-color', 'red');
-
-             if ( (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))){
-             // if (gaze_up.y  < yprediction && yprediction<(gaze_up.y+100)){
-            
-            // if (((arrow_up.x < xprediction &&  xprediction<(arrow_up.x+100)) && (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))) ||
-            //    (gup.y  < yprediction && yprediction<(gup.y+100))){
-
-                // $('#gaze_up').css('background-color', 'black');
-                
+             if ( (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))){                     
                 scrolled=pagePosition-scroll_speed;
                 console.log("up");           
                 startTimer();
-                scrollz(scrolled);
+                scrollz(scrolled);                
+             } 
+
+             if ((hide.x < xprediction &&  xprediction<(hide.x+100))&& (hide.y  < yprediction && yprediction<(hide.y+100))){
+                alert('hide');
+               //  startTimer();                
+               //  $("#hide_div").toggle(
+               //   function () {
+               //      chrome.tabs.executeScript(null, {
+               //          file: 'src/js/removeArrows.js'                        
+               //      });
+               //   },
+               //   function () {
+               //     chrome.tabs.executeScript(null, {
+               //          file: 'src/js/insert.js'                        
+               //      });
+               //   }
+               // );
                 
 
-                
-             }else{
-                scrollz(scrolled);                       
-             }
+            }
+
+            if ((hold.x < xprediction &&  xprediction<(hold.x+100))&& (hold.y  < yprediction && yprediction<(hold.y+100))){
+                // startTimer();
+                alert('hold');
+                // window.history.back();
+            }
+
+
              // else $('#gaze_up').css('background-color', 'red');
         });
 

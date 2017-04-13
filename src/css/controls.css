@@ -7,6 +7,7 @@
 body{
     height: 100%;
     width: 100%;
+    float: left;
 }
 .main_frame{
     top: 0%;
@@ -84,23 +85,42 @@ right: 0;
   /**/
  
 }
-/*#arrow_left{
+#hide_div{
     top: 0;
   left: 0;
   bottom: 0;
-  border-right: 50px solid black;
-  border-top: 50px solid transparent; 
-  border-bottom: 50px solid transparent;
-}
-#arrow_right{
+ }
+#hold_div{
     top: 0;
   bottom: 0;
   right: 0;
-  border-left: 50px solid black;
-  border-top: 50px solid transparent;
-  border-bottom: 50px solid transparent;
+  padding-right: 10px;
+ 
+}
+.hidehold_div{
+  width: 100px;
+  height: 100px;
+  margin: auto;
 
-}*/
+position:fixed;
+z-index: 1000 !important;
+
+}
+.hidehold_txt{
+  display: block; /*center*/
+  margin: 0 auto; /*center*/
+position:fixed;
+
+
+  font-size: 48px;
+font-style: normal;
+/*font-weight: bold;*/
+text-decoration: none;
+text-transform: none;
+color: #000000;
+background-color: #ffffff;
+  
+}
 .arrows{
 /*width:0;   
 height:0;*/

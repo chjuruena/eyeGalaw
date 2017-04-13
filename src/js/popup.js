@@ -245,7 +245,7 @@ function loadStartBtnFxns(start_val, action){
 		
 		//tarting webgazer - dito siya inilagay para masave muna yung position sa taas
 		
-		// startWebgazer();
+		startWebgazer();
 		if (action=="click"){
 			setBtnto("STOP");
 		}
