@@ -168,10 +168,32 @@ function startWebgazerfeed(){
                     console.log('post-interval'); //this will still run after clearing
                 }, 200);
             }
-            
+
+
+            if ((hold.x < xprediction &&  xprediction<(hold.x+100))&& (hold.y  < yprediction && yprediction<(hold.y+100))){
+                startTimer();
+                // alert('hold');
+                // window.history.back();
+                 var tempToggle = data["hold_toggle"];
+                alert("Toggle enabled: " + tempToggle);
+                if(tempToggle) {
+                   // tempToggle = !tempToggle;                    
+                    scroll_speed= data["pageheight"]*(data["scroll_speed_slider"]/100);
+                    // console.log()
+                }else {
+                    // tempToggle = true;
+                   scroll_speed=0;
+                }
+                tempToggle = !tempToggle; 
+                    var obj= {
+                         "hold_toggle" : tempToggle,
+                         "scroll_speed" : scroll_speed
+                     };
+                     setObjectdata(obj); 
+            }
             if ((prev_page.x < xprediction &&  xprediction<(prev_page.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
                 startTimer();                
-                window.history.back();
+                // window.history.back();
             }
 
                 
@@ -179,8 +201,7 @@ function startWebgazerfeed(){
             var gup=data["gaze_up"];
 
             if  ((arrow_down.y < yprediction) && ((arrow_down.y+100)  > yprediction )){                  
-               
-               // alert("down")
+               alert(scroll_speed)
                 scrolled=pagePosition+scroll_speed;
                 console.log("down"); 
                 startTimer();
@@ -188,6 +209,8 @@ function startWebgazerfeed(){
              } 
 
              if ( (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))){                     
+               alert(scroll_speed)
+                
                 scrolled=pagePosition-scroll_speed;
                 console.log("up");           
                 startTimer();
@@ -212,12 +235,15 @@ function startWebgazerfeed(){
                 
 
             }
+                
+            // }
+            
 
-            if ((hold.x < xprediction &&  xprediction<(hold.x+100))&& (hold.y  < yprediction && yprediction<(hold.y+100))){
-                // startTimer();
-                alert('hold');
-                // window.history.back();
-            }
+            // if ((hold.x < xprediction &&  xprediction<(hold.x+100))&& (hold.y  < yprediction && yprediction<(hold.y+100))){
+            //     // startTimer();
+            //     alert('hold');
+            //     // window.history.back();
+            // }
 
 
              // else $('#gaze_up').css('background-color', 'red');
