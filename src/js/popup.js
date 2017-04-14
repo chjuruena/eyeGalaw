@@ -7,6 +7,9 @@ var first=1;
 var defaultPixelMovement = 50;
 var pageheight = screen.height;
 
+// toaster
+
+
 // var sheight=$(document).height(); 
 
 
@@ -39,10 +42,7 @@ function loadDeafultValues(){
 		disabled: true
 	});	
 
-					
-	
 	//setdefaultSpeed
-	
 	
 	var sliderVal= Math.round((defaultPixelMovement/pageheight) * 100);
 	var startingScrollSpeed = pageheight * (sliderVal/100);   				
@@ -216,6 +216,55 @@ function disablebtn(start_val){
 
 	}
 }
+
+/**
+ * Injects resources provided as paths into active tab in chrome
+ * @param files {string[]}
+ * @returns {Promise}
+ */
+function injectResources(files) {
+    var getFileExtension = /(?:\.([^.]+))?$/;
+
+    //helper function that returns appropriate chrome.tabs function to load resource
+    var loadFunctionForExtension = (ext) => {
+      switch(ext) {
+          case 'js' : return chrome.tabs.executeScript;
+          case 'css' : return chrome.tabs.insertCSS;
+          default: throw new Error('Unsupported resource type')
+      }
+    };
+
+    return Promise.all(files.map(resource => new Promise((resolve, reject) => {
+        var ext = getFileExtension.exec(resource)[1];
+        var loadFunction = loadFunctionForExtension(ext);
+
+        loadFunction(null, {file: resource}, () => {
+            if (chrome.runtime.lastError) {
+                reject(chrome.runtime.lastError);
+            } else {
+                resolve();
+            }
+        });
+    })));
+}
+function showtoastr(type, msg){  
+	var arr=[];
+	arr.push(type, msg);
+	var obj= {
+		"toastr_val" : arr
+	};
+	setObjectdata(obj);
+
+    injectResources(['src/thirdParty/toastr.min.css', 'src/thirdParty/jquery-3.1.1.min.js', 'src/thirdParty/toastr.min.js']).then(() => {
+	  chrome.tabs.executeScript({
+	    file: 'src/js/toastrOptions.js'
+	  });
+	}).catch(err => {
+	  console.error(`Error occurred: ${err}`);
+	});
+		
+}
+
 function loadStartBtnFxns(start_val, action){
 	// getObjectdata( function(data){		
 
@@ -225,14 +274,23 @@ function loadStartBtnFxns(start_val, action){
 	//opposite azng reload at click
 	// relaod =value after clicking
 	// click=value before clicking
+	var msg;
+	var type;
 
 	if((start_val =='START' && action=="click") || (start_val =='STOP' && action=="reload") ){
-		if(start_val =='START' && action=="click") console.log("start_val =='START' && action==click");
-		else if(start_val =='STOP' && action=="reload") console.log("start_val =='STOP' && action==reload");
-
+		
+		if(start_val =='START' && action=="click") {
+			// alert("start_val =='START' && action==click");
+			type = "info";
+			msg= "Starting eyeGalaw";			
+		}
+		else if(start_val =='STOP' && action=="reload") {
+			// alert("start_val =='STOP' && action==reload");
+			type = "info";
+			msg= "eyeGalaw enabled! Loading settings.";
+		}
 		document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
-		document.getElementById('flat-slider2').addEventListener('mouseup', newchangeSpeed);
-	
+		document.getElementById('flat-slider2').addEventListener('mouseup', newchangeSpeed);	
 		//enable sliders
 		$('.flat-slider').slider({
 			disabled: false
@@ -241,20 +299,20 @@ function loadStartBtnFxns(start_val, action){
 		chrome.tabs.executeScript(null, {
 				// allFrames: true, 
 			file: 'src/js/insert.js'						
-			});
-		
-		//tarting webgazer - dito siya inilagay para masave muna yung position sa taas
-		
+		});		
 		startWebgazer();
 		if (action=="click"){
 			setBtnto("STOP");
-		}
-		
+		}		
 	}
 	else if((start_val =='STOP' && action=="click") || (start_val =='START' && action=="reload")  ){
-		if(start_val =='STOP' && action=="click") 
-		console.log("start_val =='STOP' && action==click");
-	else if (start_val =='START' && action=="reload")  console.log("(start_val =='START' && action==reload");
+		if(start_val =='STOP' && action=="click") {
+			type = "info";
+			msg= "eyeGalaw disabled!";
+			// alert("start_val =='STOP' && action==click");
+		}
+		else if (start_val =='START' && action=="reload")  
+			// alert("(start_val =='START' && action==reload");
 		
 
 		chrome.tabs.executeScript(null,  {
@@ -269,6 +327,8 @@ function loadStartBtnFxns(start_val, action){
 		loadButtonVal();
 
 	}
+	showtoastr(type, msg);
+
 }
 
 

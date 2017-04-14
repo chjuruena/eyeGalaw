@@ -126,6 +126,12 @@ function startWebgazerfeed(){
             console.log("nagnull");
             return;
         }
+        type = "success";
+        msg= "eyeGalaw successfully running";   
+
+        showtoastr(type,msg);
+        // if (eyedata != null) alert("yey")
+
 
         var xprediction = eyedata.x; //these x coordinates are relative to the viewport 
         var yprediction = eyedata.y; //these y coordinates are relative to the viewport
@@ -258,3 +264,71 @@ function startWebgazerfeed(){
     // webgazer.end(); //Uncomment if you want to save the data even if you reload the page.
     // window.localStorage.clear(); //Comment out if you want to save data across different sessions 
   }
+
+
+
+
+  /**
+ * Injects resources provided as paths into active tab in chrome
+ * @param files {string[]}
+ * @returns {Promise}
+ */
+function injectResources(files) {
+    var getFileExtension = /(?:\.([^.]+))?$/;
+
+    //helper function that returns appropriate chrome.tabs function to load resource
+    var loadFunctionForExtension = (ext) => {
+      switch(ext) {
+          case 'js' : return chrome.tabs.executeScript;
+          case 'css' : return chrome.tabs.insertCSS;
+          default: throw new Error('Unsupported resource type')
+      }
+    };
+
+    return Promise.all(files.map(resource => new Promise((resolve, reject) => {
+        var ext = getFileExtension.exec(resource)[1];
+        var loadFunction = loadFunctionForExtension(ext);
+
+        loadFunction(null, {file: resource}, () => {
+            if (chrome.runtime.lastError) {
+                reject(chrome.runtime.lastError);
+            } else {
+                resolve();
+            }
+        });
+    })));
+}
+function showtoastr(type, msg){  
+    
+    injectResources(['../thirdParty/jquery-3.1.1.min.js', '../thirdParty/toastr.min.js']).then(() => {
+      // chrome.tabs.executeScript({
+      //   file: 'src/js/toastrOptions.js'
+      // });
+        $(function() {
+            
+            toastr.options = {
+              "closeButton": true,
+              "debug": false,
+              "newestOnTop": true,
+              "progressBar": true,
+              "positionClass": "toast-bottom-right",
+              "preventDuplicates": true,
+              "onclick": null,
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "timeOut": "5000",
+              "extendedTimeOut": "1000",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut"
+            }
+            toastr[type]("", msg);                 
+        
+        });
+
+    }).catch(err => {
+      console.error(`Error occurred: ${err}`);
+    });
+        
+}

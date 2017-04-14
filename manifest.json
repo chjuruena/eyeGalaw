@@ -6,8 +6,8 @@
   "version": "1.0",
   
   "background": {
-    "scripts": ["src/js/background.js",  "src/thirdParty/jquery-3.1.1.min.js", 
-    "src/thirdParty/jquery-ui.js"],
+    "scripts": [ "src/thirdParty/jquery-3.1.1.min.js", "src/thirdParty/toastr.js", 
+    "src/thirdParty/jquery-ui.js", "src/js/background.js"],
     "persistent": false
   },
   "browser_action": {
@@ -20,19 +20,20 @@
       "matches": ["http://*/*", "https://*/*"],
       "css": ["src/css/controls.css"],
       "js": ["src/thirdParty/jquery-3.1.1.min.js", "src/thirdParty/jquery-ui.js",
-        "src/thirdParty/webgazer.js"]
+        "src/thirdParty/webgazer.js", "src/thirdParty/toastr.js"]
     }
   ],
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
 
    "web_accessible_resources": [
-        "src/css/controls.css"
+         "src/thirdParty/toastr.min.css", "src/css/controls.css"
     ],
 
     
 
   "permissions": [
   "storage",
+
   "webNavigation",
   "activeTab",
     "tabs", "http://*/*", "https://*/*"
