@@ -25,8 +25,15 @@ $(function() {
           "showMethod": "fadeIn",
           "hideMethod": "fadeOut"
         }
-        toastr[toastr_val[0]]("", toastr_val[1]);
+
+        if( toastr_val[1] == "Video feed is enabled"){
+            toastr[toastr_val[0]]("It will take a moment, at least 10 seconds to prepare! ", toastr_val[1])
+
+        }else toastr[toastr_val[0]]("", toastr_val[1]);
             
+            
+        
     });
+        
     
 });

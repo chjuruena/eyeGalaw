@@ -119,6 +119,9 @@ function saveClicks(){
 }
 window.onload=function(){
 	// if($("#mainr").height;)
+	var type;
+	var msg;
+
 	loadSliders();
 
 	getObjectdata( function(data){
@@ -132,18 +135,22 @@ window.onload=function(){
 
 
 
-		if (!data["start_button"]){
+		if (!data["start_button"]){			
+			type = "success";
+			msg="Welcome to eyeGalaw!";
+			showtoastr(type, msg);
+			popupBox();
+
+
+
+
+		
+			// tutorial
 			console.log("wala pang start_button");
 			document.getElementById('start_button').text ='START';
-
-
 			setBtnto("START");
-
 			// setSliderValAtStart();
 			loadDeafultValues();
-
-
-
 
 
 		}else {
@@ -289,26 +296,38 @@ function loadStartBtnFxns(start_val, action){
 			type = "info";
 			msg= "eyeGalaw enabled! Loading settings.";
 		}
+		showtoastr(type, msg);
+
 		document.getElementById('flat-slider1').addEventListener('mouseup', changeOpacity);
 		document.getElementById('flat-slider2').addEventListener('mouseup', newchangeSpeed);	
 		//enable sliders
 		$('.flat-slider').slider({
 			disabled: false
 		});	
-		$('.onoffswitch-checkbox').prop('disabled', false);		
+				
 		chrome.tabs.executeScript(null, {
 				// allFrames: true, 
 			file: 'src/js/insert.js'						
-		});		
+		});
+
 		startWebgazer();
+		getObjectdata( function(data){
+			var toastr_val=data["toastr_val"];
+			showtoastr(toastr_val[0], toastr_val[1]);
+			
+		});
+
 		if (action=="click"){
 			setBtnto("STOP");
 		}		
+		showtoastr(type, msg);
+
 	}
 	else if((start_val =='STOP' && action=="click") || (start_val =='START' && action=="reload")  ){
 		if(start_val =='STOP' && action=="click") {
 			type = "info";
 			msg= "eyeGalaw disabled!";
+			$('.onoffswitch-checkbox').prop('disabled', false);
 			// alert("start_val =='STOP' && action==click");
 		}
 		else if (start_val =='START' && action=="reload")  
@@ -326,17 +345,52 @@ function loadStartBtnFxns(start_val, action){
 		if (action=="click") setBtnto("START");
 		loadButtonVal();
 
+		showtoastr(type, msg);
 	}
-	showtoastr(type, msg);
 
 }
 
+function popupBox(){
+
+	injectResources(['src/css/modal.css', 'src/thirdParty/jquery-3.1.1.min.js']).then(() => {
+	  chrome.tabs.executeScript({
+	    file: 'src/js/insertPopCard.js'
+	  },function(){
+
+
+	  });
+	}).catch(err => {
+	  console.error(`Error occurred: ${err}`);
+	});
+
+		
+	// timer
+    
+    // setTimeout(checkIfReady,100);
+
+}
 
 function startWebgazer(){
 
     chrome.tabs.executeScript({file: 'src/thirdParty/webgazer.js'}, function(){
+    	var type="warning";
+    	var msg = "Click anywhere in the screen to initialize eyeGalaw."
+    	showtoastr(type, msg);
+    	chrome.tabs.executeScript(null, {
+            // file: 'src/js/insertLoading.js'                        
+            code:
+
+            "var preloader = document.createElement( \'div\' );" +
+            "preloader.setAttribute(\'class\', \'loader\');" +
+            "document.body.appendChild(preloader);"
+           
+
+            
+        }, function(){
             chrome.tabs.executeScript({file: 'src/js/webgazerjs.js'}, function(){
+
             });
+   		});  
     });  
 }
 
@@ -433,12 +487,7 @@ function myFunction() {
 
 // initialization of UI
 $(function() {
-
-	
-
-
 	var last = 0;
-
 	$('#flat-slider1').slider({
 		slide: function( event, ui ) {
 			// alert(ui.value);
@@ -446,6 +495,7 @@ $(function() {
             }
 	});
 	$('#flat-slider2').slider({
+		// alert( $('#flat-slider2').prop('disabled'));
 		slide: function( event, ui ) {
 
                 $( '#slider-value-scroll' ).html( ui.value );
@@ -455,7 +505,8 @@ $(function() {
 	  orientation: 'horizontal',
 	  range:       false
       
-	});
+	});  
+
 
 	// options dropdown	
     $("#options").on("click", function(){
@@ -488,21 +539,29 @@ $(function() {
 	// document.getElementById('myonoffswitch').checked=true;
     
     $(".onoffswitch-checkbox").on("click", function(){
+    	var type, msg;
 
-		    	if ( $(this).is(':checked') ) {
-		        // alert("enabled");
-			        var wgvideofeed= {
-						'wgvideofeed' : true
-					};
-					setObjectdata(wgvideofeed);
+    	if ( $(this).is(':checked') ) {
+        // alert("enabled");
+	        var wgvideofeed= {
+				'wgvideofeed' : true
+			};
+			setObjectdata(wgvideofeed);
+			msg = "Video feed is enabled;"
 
-			    } 
-			    else {
-			    	var wgvideofeed= {
-					'wgvideofeed' : false
-					};
-					setObjectdata(wgvideofeed);
-				}	
+
+	    } 
+	    else {
+	    	var wgvideofeed= {
+			'wgvideofeed' : false
+			};
+			setObjectdata(wgvideofeed);
+			msg = "Video feed is disabled;"
+
+		}	
+
+		type = "info;"
+		showtoastr(type, msg);
 
 
 						 

@@ -134,11 +134,11 @@ z-index: 1000 !important;
 .line_arrows{
 /*width:0;   
 height:0;*/
-margin: auto;
+margin: 0 auto;
 
 position:fixed;
 /*background-color:red;*/
-z-index: 1000 !important;
+z-index: 1000000 !important;
 
 
 /**/
@@ -187,30 +187,36 @@ right: 0;
 
 
 
-/*TOASTR*/
-#toast-container > .toast {
-    background-image: none !important;
+/*loader*/
+.loader { 
+  position: fixed; 
+   
+  left: 0; 
+  top: 0;
+    width: 100%; 
+    height: 100%; 
+  overflow: visible; 
+  background: rgba(51,51,51, 0.8) url('chrome-extension://ilgdhcbhjnidiblajhalcalmcacdbgef/src/img/loading.gif') no-repeat center center; 
+  /*background-size: 80% 80%;*/
+
+   /* z-index: 999; 
+    border: 16px solid #f3f3f3; 
+    border-top: 16px solid #3498db; 
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;*/
 }
 
-#toast-container > .toast:before {
-    position: fixed;
-    font-family: FontAwesome;
-    font-size: 24px;
-    line-height: 18px;
-    float: left;
-    color: #FFF;
-    padding-right: 0.5em;
-    margin: auto 0.5em auto -1.5em;
-}        
-#toast-container > .toast-warning:before {
-    content: "\f003";
-}
-#toast-container > .toast-error:before {
-    content: "\f001";
-}
-#toast-container > .toast-info:before {
-    content: "\f005";
-}
-#toast-container > .toast-success:before {
-    content: "\f002";
-}
+/*@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}*/
+
+
+
+
+/*pop-up*/
+
+
+

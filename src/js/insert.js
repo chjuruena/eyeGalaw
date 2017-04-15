@@ -44,6 +44,8 @@ hold_div.setAttribute('class', 'hidehold_div');
 
 
 
+
+
 var gaze_down = document.createElement( 'div' )
 var gaze_up = document.createElement( 'div' )
 gaze_down.setAttribute('id', 'gaze_down');

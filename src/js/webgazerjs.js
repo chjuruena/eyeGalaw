@@ -26,7 +26,8 @@ function init(){
      // startvid = null;
 
     getObjectdata( function(data){
-          if((data["start_button"] =='STOP' && data["action"]=="click") || (data["start_button"] =='STOP' && data["page-action"]=="reload" && data["action"]=="reload")) {
+          if((data["start_button"] =='STOP' && data["action"]=="click") || (data["start_button"] =='STOP' && 
+            data["page-action"]=="reload" && data["action"]=="reload")) {
                 // alert("start");
                 startWebgazerfeed(); 
                 var obj= {
@@ -115,21 +116,55 @@ function showVideo(enabled){
     }
     // setTimeout(checkIfReady,100); 
 // }
+// function showLoadingscreen(show){
+//      chrome.tabs.executeScript({file: '/thirdParty/jquery-3.1.1.min.js'}, function(){
+           
+//             chrome.tabs.executeScript(null, {
+//             // file: 'src/js/insertLoading.js'                        
+//             code:
+//             "var preloader = document.createElement( \'div\' );" +
+//             "preloader.setAttribute(\'id\', \'preloader\');" +
+//             "document.body.appendChild(preloader);"
+
+//         // },function(){            
+//         });           
+
+        
+//              // $('.toggle-loading').click(function () {
+//              //    if (target.hasClass('loading')) {
+//              //      target.loadingOverlay('remove');
+//              //    } else {
+//              //      target.loadingOverlay();
+//              //    };
+//              //  });
+
+//     });
+
+
+
+// }
 
 function startWebgazerfeed(){
     webgazer.setRegression('ridge') /* currently must set regression and tracker */
     .setTracker('clmtrackr')
     .setGazeListener(function(eyedata, elapsedTime) {
 
-
+        //show
+        //  executescript
+        // showLoadingscreen(true);
+        // var target = $('#target');
+        // target.loadingOverlay();  
         if (eyedata == null) {
             console.log("nagnull");
+            // loading screen
             return;
         }
-        type = "success";
-        msg= "eyeGalaw successfully running";   
+        $('.loader').fadeOut('slow',function(){$(this).remove();});
+        //hdie
 
-        showtoastr(type,msg);
+       
+
+        // showtoastr(type,msg);
         // if (eyedata != null) alert("yey")
 
 
@@ -207,7 +242,7 @@ function startWebgazerfeed(){
             var gup=data["gaze_up"];
 
             if  ((arrow_down.y < yprediction) && ((arrow_down.y+100)  > yprediction )){                  
-               alert(scroll_speed)
+               // alert(scroll_speed)
                 scrolled=pagePosition+scroll_speed;
                 console.log("down"); 
                 startTimer();
@@ -215,7 +250,7 @@ function startWebgazerfeed(){
              } 
 
              if ( (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))){                     
-               alert(scroll_speed)
+               // alert(scroll_speed)
                 
                 scrolled=pagePosition-scroll_speed;
                 console.log("up");           
@@ -267,68 +302,3 @@ function startWebgazerfeed(){
 
 
 
-
-  /**
- * Injects resources provided as paths into active tab in chrome
- * @param files {string[]}
- * @returns {Promise}
- */
-function injectResources(files) {
-    var getFileExtension = /(?:\.([^.]+))?$/;
-
-    //helper function that returns appropriate chrome.tabs function to load resource
-    var loadFunctionForExtension = (ext) => {
-      switch(ext) {
-          case 'js' : return chrome.tabs.executeScript;
-          case 'css' : return chrome.tabs.insertCSS;
-          default: throw new Error('Unsupported resource type')
-      }
-    };
-
-    return Promise.all(files.map(resource => new Promise((resolve, reject) => {
-        var ext = getFileExtension.exec(resource)[1];
-        var loadFunction = loadFunctionForExtension(ext);
-
-        loadFunction(null, {file: resource}, () => {
-            if (chrome.runtime.lastError) {
-                reject(chrome.runtime.lastError);
-            } else {
-                resolve();
-            }
-        });
-    })));
-}
-function showtoastr(type, msg){  
-    
-    injectResources(['../thirdParty/jquery-3.1.1.min.js', '../thirdParty/toastr.min.js']).then(() => {
-      // chrome.tabs.executeScript({
-      //   file: 'src/js/toastrOptions.js'
-      // });
-        $(function() {
-            
-            toastr.options = {
-              "closeButton": true,
-              "debug": false,
-              "newestOnTop": true,
-              "progressBar": true,
-              "positionClass": "toast-bottom-right",
-              "preventDuplicates": true,
-              "onclick": null,
-              "showDuration": "300",
-              "hideDuration": "1000",
-              "timeOut": "5000",
-              "extendedTimeOut": "1000",
-              "showEasing": "swing",
-              "hideEasing": "linear",
-              "showMethod": "fadeIn",
-              "hideMethod": "fadeOut"
-            }
-            toastr[type]("", msg);                 
-        
-        });
-
-    }).catch(err => {
-      console.error(`Error occurred: ${err}`);
-    });
-        
-}
