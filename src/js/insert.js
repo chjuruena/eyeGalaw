@@ -68,19 +68,37 @@ line_arrow_down.setAttribute('class', 'line_arrows');
 // arrow_left.setAttribute('class', 'arrows');
 // arrow_right.setAttribute('class', 'arrows');
 
+
+// delete this
+var container = document.createElement( 'div' )
+container.setAttribute('class', 'container');
+var triangle = document.createElement( 'div' )
+triangle.setAttribute('class', 'triangle');
+triangle.setAttribute('id', 'triangle_down');
+var triangle_up = document.createElement( 'div' )
+triangle_up.setAttribute('class', 'triangle');
+triangle_up.setAttribute('id', 'triangle_up');
+
+// container.appendChild( triangle);
+
+
+
 document.body.appendChild( gaze_down);
 document.body.appendChild( gaze_up);
 
 // document.body.appendChild( arrow_up);
-document.body.appendChild( line_arrow_up);
+document.body.appendChild( triangle_up);
+document.body.appendChild( triangle);
+// document.body.appendChild( line_arrow_up);
 // document.body.appendChild( arrow_down);
-document.body.appendChild( line_arrow_down);
+// document.body.appendChild( line_arrow_down);
 document.body.appendChild(hide_div );
 document.body.appendChild(hold_div);
 document.body.appendChild(prev_page );
 
 
 var screenwidth = screen.width;
+var screenheight = screen.width;
 document.getElementById('gaze_down').style.width = screenwidth+"px";
 document.getElementById('gaze_up').style.width = screenwidth+"px";
 // alert(document.getElementById('gaze_down').style.width);

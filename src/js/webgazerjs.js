@@ -160,6 +160,7 @@ function startWebgazerfeed(){
             return;
         }
         $('.loader').fadeOut('slow',function(){$(this).remove();});
+        // toastr["success"]("", "eyeGalaw succesfully launched");
         //hdie
 
        
@@ -172,7 +173,8 @@ function startWebgazerfeed(){
         var yprediction = eyedata.y; //these y coordinates are relative to the viewport
         console.log(elapsedTime); //elapsed time is based on time since begin was called
        
-        getObjectdata( function(data){            
+        getObjectdata( function(data){         
+
             
             if (data["start_button"] == "START") webgazer.showPredictionPoints(false).clearGazeListener();
 
@@ -216,21 +218,32 @@ function startWebgazerfeed(){
                 // alert('hold');
                 // window.history.back();
                  var tempToggle = data["hold_toggle"];
-                alert("Toggle enabled: " + tempToggle);
+                 var msg;
+                // alert("Toggle enabled: " + tempToggle);
                 if(tempToggle) {
                    // tempToggle = !tempToggle;                    
                     scroll_speed= data["pageheight"]*(data["scroll_speed_slider"]/100);
                     // console.log()
+                    msg= "Scrolling disabled";
                 }else {
                     // tempToggle = true;
+                    msg= "Scrolling enabled"
+
                    scroll_speed=0;
                 }
                 tempToggle = !tempToggle; 
-                    var obj= {
-                         "hold_toggle" : tempToggle,
-                         "scroll_speed" : scroll_speed
-                     };
-                     setObjectdata(obj); 
+
+                toastr["warning"]("", msg);
+                
+
+                // var arr = [];
+                // arr.push("warning", msg);
+                var obj= {
+                     "hold_toggle" : tempToggle,
+                     "scroll_speed" : scroll_speed
+                     
+                 };
+                 setObjectdata(obj); 
             }
             if ((prev_page.x < xprediction &&  xprediction<(prev_page.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
                 startTimer();                
@@ -259,20 +272,28 @@ function startWebgazerfeed(){
              } 
 
              if ((hide.x < xprediction &&  xprediction<(hide.x+100))&& (hide.y  < yprediction && yprediction<(hide.y+100))){
-                alert('hide');
-               //  startTimer();                
-               //  $("#hide_div").toggle(
-               //   function () {
-               //      chrome.tabs.executeScript(null, {
-               //          file: 'src/js/removeArrows.js'                        
-               //      });
-               //   },
-               //   function () {
-               //     chrome.tabs.executeScript(null, {
-               //          file: 'src/js/insert.js'                        
-               //      });
-               //   }
-               // );
+                // alert('hide');
+               //  startTimer(); 
+               startTimer();
+               startTimer();
+               startTimer();
+               startTimer();
+                
+                // function togglHide(){
+                    $("#hide_div").toggle(
+                     function () {
+                        $(".hidehold_div").css('opacity', '0');
+
+
+                  
+                     },function () {
+                        $(".hidehold_div").css('opacity', '1');
+
+                 
+                   });
+                    
+                // }
+
                 
 
             }
@@ -300,5 +321,20 @@ function startWebgazerfeed(){
     // window.localStorage.clear(); //Comment out if you want to save data across different sessions 
   }
 
-
-
+toastr.options = {
+          "closeButton": true,
+          "debug": false,
+          "newestOnTop": true,
+          "progressBar": true,
+          "positionClass": "toast-bottom-right",
+          "preventDuplicates": true,
+          "onclick": null,
+          "showDuration": "300",
+          "hideDuration": "1000",
+          "timeOut": "5000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+        }

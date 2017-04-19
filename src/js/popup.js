@@ -7,6 +7,7 @@ var first=1;
 var defaultPixelMovement = 50;
 var pageheight = screen.height;
 
+
 // toaster
 
 
@@ -310,17 +311,22 @@ function loadStartBtnFxns(start_val, action){
 			file: 'src/js/insert.js'						
 		});
 
-		startWebgazer();
-		getObjectdata( function(data){
-			var toastr_val=data["toastr_val"];
-			showtoastr(toastr_val[0], toastr_val[1]);
+		// startWebgazer();
+
+		// getObjectdata( function(data){
+		// 	var toastr_val=data["toastr_val"];
+		// 	showtoastr(toastr_val[0], toastr_val[1]);
+
+		// 	// if(  data["hold_toggle"]) alert( data["hold_toggle"])
 			
-		});
+		// });
 
 		if (action=="click"){
 			setBtnto("STOP");
 		}		
 		showtoastr(type, msg);
+
+
 
 	}
 	else if((start_val =='STOP' && action=="click") || (start_val =='START' && action=="reload")  ){
@@ -348,6 +354,7 @@ function loadStartBtnFxns(start_val, action){
 		showtoastr(type, msg);
 	}
 
+
 }
 
 function popupBox(){
@@ -371,9 +378,8 @@ function popupBox(){
 }
 
 function startWebgazer(){
-
-    chrome.tabs.executeScript({file: 'src/thirdParty/webgazer.js'}, function(){
-    	var type="warning";
+	injectResources([ 'src/thirdParty/webgazer.js','src/thirdParty/toastr.min.css', 'src/thirdParty/jquery-3.1.1.min.js', 'src/thirdParty/toastr.min.js']).then(() => {
+	  var type="warning";
     	var msg = "Click anywhere in the screen to initialize eyeGalaw."
     	showtoastr(type, msg);
     	chrome.tabs.executeScript(null, {
@@ -390,8 +396,33 @@ function startWebgazer(){
             chrome.tabs.executeScript({file: 'src/js/webgazerjs.js'}, function(){
 
             });
-   		});  
-    });  
+   		});
+	}).catch(err => {
+	  console.error(`Error occurred: ${err}`);
+	});
+
+
+
+    // chrome.tabs.executeScript({file: 'src/thirdParty/webgazer.js'}, function(){
+    // 	var type="warning";
+    // 	var msg = "Click anywhere in the screen to initialize eyeGalaw."
+    // 	showtoastr(type, msg);
+    // 	chrome.tabs.executeScript(null, {
+    //         // file: 'src/js/insertLoading.js'                        
+    //         code:
+
+    //         "var preloader = document.createElement( \'div\' );" +
+    //         "preloader.setAttribute(\'class\', \'loader\');" +
+    //         "document.body.appendChild(preloader);"
+           
+
+            
+    //     }, function(){
+    //         chrome.tabs.executeScript({file: 'src/js/webgazerjs.js'}, function(){
+
+    //         });
+   	// 	});  
+    // });  
 }
 
 function newchangeSpeed(){
