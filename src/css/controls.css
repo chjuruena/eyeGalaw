@@ -225,19 +225,17 @@ right: 0;
 
 /*triangle oops*/
 
-.container {
+/*.container {
     width: 200px;
     height: 200px;
     position: relative;
     border-top: 4px solid #e74c3c;
-}
+}*/
 
 .triangle {
     position: fixed;
     margin: auto;
     /*top: 0;*/
-    left: 0;
-    right: 0;
     width: 100px;
     height: 100px;
     border-right: 4px solid #e74c3c;
@@ -247,23 +245,25 @@ right: 0;
 #triangle_down {
     
     top: 0;
-    /*left: 0;*/
-    /*right: 0;*/
+    left: 0;
+    right: 0;
+    margin-top:20px;
     
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
+    transform: rotate(225deg);
+    -webkit-transform: rotate(225deg);
     -moz-transform: rotate(45deg);
     -o-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
 }
 #triangle_up {
+    margin-bottom:20px;
     
    bottom: 0;
- /* left: 0;
-  right: 0;*/
+  left: 0;
+  right: 0;
     
-    transform: rotate(225deg);
-    -webkit-transform: rotate(225deg);
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
     -o-transform: rotate(45deg);
     -ms-transform: rotate(45deg);

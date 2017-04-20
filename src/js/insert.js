@@ -70,7 +70,7 @@ line_arrow_down.setAttribute('class', 'line_arrows');
 
 
 // delete this
-var container = document.createElement( 'div' )
+var container = document.createElement( 'div' );
 container.setAttribute('class', 'container');
 var triangle = document.createElement( 'div' )
 triangle.setAttribute('class', 'triangle');
@@ -83,12 +83,12 @@ triangle_up.setAttribute('id', 'triangle_up');
 
 
 
+document.body.appendChild( triangle_up);
+document.body.appendChild( triangle);
 document.body.appendChild( gaze_down);
 document.body.appendChild( gaze_up);
 
 // document.body.appendChild( arrow_up);
-document.body.appendChild( triangle_up);
-document.body.appendChild( triangle);
 // document.body.appendChild( line_arrow_up);
 // document.body.appendChild( arrow_down);
 // document.body.appendChild( line_arrow_down);
