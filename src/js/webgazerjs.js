@@ -184,6 +184,12 @@ function startWebgazerfeed(){
             var prev_page=data["prev_page"];
             var hide=data["hide_div"];
             var hold=data["hold_div"];
+            var scrll_bottom = data["scrll_bottom"];
+            var scrll_top = data["scrll_top"];
+            var gdown=data["gaze_down"];
+            var gup=data["gaze_up"];
+
+
 
              // /////////////////////////////////
                 console.log("X-gaze:" + xprediction+ " Y-gaze:" +yprediction);
@@ -250,26 +256,71 @@ function startWebgazerfeed(){
                 // window.history.back();
             }
 
+
+
                 
-            var gdown=data["gaze_down"];
-            var gup=data["gaze_up"];
+            
+            if ((scrll_top.x < xprediction &&  xprediction<(scrll_top.x+50))&& (scrll_top.y  < yprediction && yprediction<(scrll_top.y+50))){
+                // alert("scrollTop")
+                startTimer();                
+                // window.history.back();
+                // $('html, body').scrollTop(0);
+                if (scroll_speed!=0){
+                    $('html, body').animate({ scrollTop: 0 }, 'fast');
 
-            if  ((arrow_down.y < yprediction) && ((arrow_down.y+100)  > yprediction )){                  
-               // alert(scroll_speed)
-                scrolled=pagePosition+scroll_speed;
-                console.log("down"); 
-                startTimer();
-                scrollz(scrolled);
-             } 
+                }
+                // alert("pagePosition scrll_top"+ pagePosition);
+                pagePosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+                startTimer();                
+                startTimer();                
+                
 
-             if ( (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))){                     
-               // alert(scroll_speed)
+
+
+            }
+            if ((scrll_bottom.x < xprediction &&  xprediction<(scrll_bottom.x+50))&& (scrll_bottom.y  < yprediction && yprediction<(scrll_bottom.y+50))){
+                // alert("scrll_bottom");
+                startTimer();                
+              // window.history.back();
+                if (scroll_speed!=0){
+                    // window.scrollTo(0,0);
+                        $("html, body").animate({ scrollTop: $(document).height() }, 'fast');
+
+                }
+                // alert("pagePosition scrll_bot" +pagePosition);
+                pagePosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+                startTimer();                
+                startTimer();                
+
+
+
+            }
+            if ((arrow_up.x < xprediction &&  xprediction<(screen.width-50))&& (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))){
+
+             // if ( (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))){                     
+               // alert("arr up")
+               if(scroll_speed==0)  toastr["danger"]("", "Scrolling is disabled");
+
                 
                 scrolled=pagePosition-scroll_speed;
                 console.log("up");           
                 startTimer();
                 scrollz(scrolled);                
              } 
+
+            if ((arrow_down.x < xprediction &&  xprediction<(screen.width-50))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
+            
+              // if  ((arrow_down.y < yprediction) && ((arrow_down.y+100)  > yprediction )){                  
+               // alert("down")
+                
+               if(scroll_speed==0)  toastr["danger"]("", "Scrolling is disabled");
+                scrolled=pagePosition+scroll_speed;
+                console.log("down"); 
+                startTimer();
+                scrollz(scrolled);
+
+             } 
+
 
              if ((hide.x < xprediction &&  xprediction<(hide.x+100))&& (hide.y  < yprediction && yprediction<(hide.y+100))){
                 // alert('hide');
@@ -282,21 +333,32 @@ function startWebgazerfeed(){
                 // function togglHide(){
                     $("#hide_div").toggle(
                      function () {
-                        $(".hidehold_div").css('opacity', '0');
-
-
-                  
+                        var arr=[ "#prev_page","#hide_div" ,"#hold_div", "#scrll_top", "#scrll_bottom"];
+                        arr.forEach(function(element) {
+                            console.log(document.getElementById(element));
+                            $(element).css('opacity', '0');
+                            
+                        });                  
                      },function () {
                         $(".hidehold_div").css('opacity', '1');
+                        var arr=[ "#prev_page","#hide_div" ,"#hold_div", "#scrll_top", "#scrll_bottom"];
+                        arr.forEach(function(element) {
+                            console.log(document.getElementById(element));
+                            
+                            $(element).css('opacity', data["opacity"]/100);
+                            
+                        });
 
                  
                    });
-                    
-                // }
-
-                
-
             }
+
+
+
+
+
+
+
                 
             // }
             
@@ -329,9 +391,9 @@ toastr.options = {
           "positionClass": "toast-bottom-right",
           "preventDuplicates": true,
           "onclick": null,
-          "showDuration": "300",
+          "showDuration": "1500",
           "hideDuration": "1000",
-          "timeOut": "5000",
+          "timeOut": "1500",
           "extendedTimeOut": "1000",
           "showEasing": "swing",
           "hideEasing": "linear",

@@ -42,6 +42,14 @@ hide_div.setAttribute('class', 'hidehold_div');
 hold_div.setAttribute('class', 'hidehold_div');
 
 
+var scrll_top = document.createElement( 'a' );
+var scrll_bottom = document.createElement( 'a' );
+scrll_top.innerHTML="up";
+scrll_bottom.innerHTML="bottom";
+
+scrll_top.setAttribute('id', 'scrll_top');
+scrll_bottom.setAttribute('id', 'scrll_bottom');
+
 
 
 
@@ -96,6 +104,9 @@ document.body.appendChild(hide_div );
 document.body.appendChild(hold_div);
 document.body.appendChild(prev_page );
 
+document.body.appendChild(scrll_top );
+document.body.appendChild(scrll_bottom );
+
 
 var screenwidth = screen.width;
 var screenheight = screen.width;
@@ -133,8 +144,8 @@ getPosition();
 function getPosition(){
     var obj={};
      // var arr=["gaze_up", "gaze_down", "arrow_down","arrow_up","arrow_left","arrow_right", "prev_page"];
-     var arr=["gaze_up", "gaze_down", "prev_page","hide_div" ,"hold_div"];
     // var arr =["arrow_down","arrow_up","arrow_left","arrow_right", "prev_page"];
+     var arr=["gaze_up", "gaze_down", "prev_page","hide_div" ,"hold_div", "scrll_top", "scrll_bottom"];
     arr.forEach(function(element) {
         console.log(document.getElementById(element));
         // var position = document.getElementById(element).offsetParent.offsetTop;

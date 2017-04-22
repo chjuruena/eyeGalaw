@@ -311,7 +311,7 @@ function loadStartBtnFxns(start_val, action){
 			file: 'src/js/insert.js'						
 		});
 
-		// startWebgazer();
+		startWebgazer();
 
 		// getObjectdata( function(data){
 		// 	var toastr_val=data["toastr_val"];
