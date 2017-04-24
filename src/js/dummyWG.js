@@ -22,12 +22,6 @@ var scrolled=0;
 var scroll_speed;
 var startvid;
 
- window.onload = function() {
-
-    var localstorageLabel = 'webgazerGlobalData';
-    window.localStorage.setItem(localstorageLabel, null);
-}
-
 function init(){
      // startvid = null;
 
@@ -35,7 +29,9 @@ function init(){
           if((data["start_button"] =='STOP' && data["action"]=="click") || (data["start_button"] =='STOP' && 
             data["page-action"]=="reload" && data["action"]=="reload")) {
                 // alert("start");
-                startWebgazerfeed(); 
+                // startWebgazerfeed(); 
+                dummystartWebgazerfeed(); 
+
                 var obj= {
                      "page-action" : null 
                  };
@@ -150,6 +146,20 @@ function showVideo(enabled){
 
 // }
 
+function dummystartWebgazerfeed(){
+  // webgazer.setRegression('ridge') /* currently must set regression and tracker */
+  //   .setTracker('clmtrackr')
+  //   .setGazeListener(function(eyedata, elapsedTime) {
+  //     // do something
+  //   }).begin().showPredictionPoints(true); /* shows a square every 100 milliseconds where current prediction is */
+  console.log(webgazer);
+  webgazer.begin().showPredictionPoints(true); /* shows a square every 100 milliseconds where current prediction is */
+  console.log(webgazer);
+  
+
+
+
+}
 function startWebgazerfeed(){
     webgazer.setRegression('ridge') /* currently must set regression and tracker */
     .setTracker('clmtrackr')

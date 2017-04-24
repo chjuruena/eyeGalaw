@@ -122,6 +122,7 @@ window.onload=function(){
 	// if($("#mainr").height;)
 	var type;
 	var msg;
+	popupBox();
 
 	loadSliders();
 
@@ -157,11 +158,7 @@ window.onload=function(){
 		}else {
 		// setPopupsize(data["longpop-up"]);
 
-			console.log("MERON NAAAAAAAA start_button");
-                // disablebtn(start_val);
-
-
-
+			console.log("MERON NAAAAAAAA start_button"); 
 				loadStartBtnFxns(data["start_button"], "reload");
 				var obj= {
 					"action" : "reload" 
@@ -170,12 +167,6 @@ window.onload=function(){
 
 				loadButtonVal();
 				console.log(data);
-		// console.log(data["stopped"]);
-
-
-
-			//opening otehr pages or new
-
 		}
 
 
@@ -393,7 +384,9 @@ function startWebgazer(){
 
             
         }, function(){
-            chrome.tabs.executeScript({file: 'src/js/webgazerjs.js'}, function(){
+            // chrome.tabs.executeScript({file: 'src/js/webgazerjs.js'}, function(){
+            chrome.tabs.executeScript({file: 'src/js/dummyWG.js'}, function(){
+
 
             });
    		});

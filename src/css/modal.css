@@ -1,13 +1,13 @@
 body{
     font-family: Arial, sans-serif;
-      position: relative;
+      /*position: relative;*/
 
 
   /*background-size: cover;*/
 }
 
 
-.overlay {
+#popup1 {
   position: fixed;
   /*background-size: cover;*/
 /*  width: 100%;
@@ -20,7 +20,9 @@ body{
   background: rgba(0, 0, 0, 0.7);
   transition: opacity 500ms;
   visibility: visible;
-  opacity: .5;
+  /*opacity: .5;*/
+  z-index: 1;
+
 }
 /*.overlay:target {
   visibility: visible;
@@ -31,21 +33,35 @@ body{
   /*position: absolute;*/
     /*margin: 0 auto;*/
     position: absolute;
-  top: 50%;
-  /*lef   t: 50%;*/
+  top: 30%;
+  left: 40%;
 
   padding: 20px;
   background: #fff;
   border-radius: 5px;
-  width: 30%;
+  width: 300px;
   /*position: relative;*/
   transition: all 5s ease-in-out;
+  opacity: 1;
+  z-index: 2;
+
 }
 
+.welcome {
+  top:20%;
+  font-size: 100px;
+  color: #42f492;
+    text-align: center;
+  opacity: 2;
+
+
+
+
+}
 .popup h2 {
   margin-top: 0;
   color: #333;
-  font-family: Tahoma, Arial, sans-serif;
+  /*font-family: Tahoma, Arial, sans-serif;*/
 }
 .popup .close {
   position: absolute;
@@ -56,6 +72,8 @@ body{
   font-weight: bold;
   text-decoration: none;
   color: #333;
+  float: right;
+  cursor: pointer;
 }
 .popup .close:hover {
   color: #06D85F;
