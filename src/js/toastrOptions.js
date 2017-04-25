@@ -7,6 +7,11 @@ $(function() {
 
     getObjectdata( function(data){
         var toastr_val= data["toastr_val"];
+        var data1 = toastr_val[1];
+        var data0 = toastr_val[0];
+        if (data1!= null && data0!= null ){
+          return;
+        }
 
         toastr.options = {
           "closeButton": true,
@@ -25,11 +30,14 @@ $(function() {
           "showMethod": "fadeIn",
           "hideMethod": "fadeOut"
         }
+        
+        alert(data0.typeof)
 
-        if( toastr_val[1] == "Video feed is enabled"){
-            toastr[toastr_val[0]]("It will take a moment, at least 10 seconds to prepare! ", toastr_val[1])
 
-        }else toastr[toastr_val[0]]("", toastr_val[1]);
+        if( data1 == "Video feed is enabled"){
+            toastr[data0]("It will take a moment, at least 10 seconds to prepare! ", toastr_val[1])
+
+        }else toastr[data0]("", data1);
             
             
         

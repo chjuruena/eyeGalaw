@@ -213,49 +213,80 @@ function startWebgazerfeed(){
                });
             }
 
-            function startTimer( ) {
+            // function startTimer(func) {
+            //     var i = 0;
+            //     var timer = setInterval(function() {
+            //         console.log(++i);
+            //         if (i === 4) { //seconds from RRL
+            //             clearInterval(timer);
+            //         }
+            //         console.log('post-interval'); //this will still run after clearing
+            //     }, 4000);
+            // }
+            function startTimer(func) {
+               // var func = new Function(fxn);
                 var i = 0;
-                var timer = setInterval(function() {
+                 var timer;
+                function fxn (func) {
+                    i++;
                     console.log(++i);
                     if (i === 4) { //seconds from RRL
+                        
+                         var temp = new Function(func);
+                         temp();
                         clearInterval(timer);
                     }
-                    console.log('post-interval'); //this will still run after clearing
-                }, 200);
+                    // console.log('post-interval'); //this will still run after clearing
+                }
+                // var fxn1 = fxn;
+               timer = setInterval(fxn, 1000);
             }
+           
 
 
             if ((hold.x < xprediction &&  xprediction<(hold.x+100))&& (hold.y  < yprediction && yprediction<(hold.y+100))){
-                startTimer();
+                // startTimer();
+                // startTimer();
+                // startTimer();
+                // startTimer();
+                // startTimer();
+                // startTimer();
                 // alert('hold');
                 // window.history.back();
-                 var tempToggle = data["hold_toggle"];
-                 var msg;
-                // alert("Toggle enabled: " + tempToggle);
-                if(tempToggle) {
-                   // tempToggle = !tempToggle;                    
-                    scroll_speed= data["pageheight"]*(data["scroll_speed_slider"]/100);
-                    // console.log()
-                    msg= "Scrolling disabled";
-                }else {
-                    // tempToggle = true;
-                    msg= "Scrolling enabled"
+                             
 
-                   scroll_speed=0;
+
+                function tempToggleFunc(){
+                    var tempToggle = data["hold_toggle"];
+                     var msg;
+                    if(tempToggle) {
+                       // tempToggle = !tempToggle;                    
+                        scroll_speed= data["pageheight"]*(data["scroll_speed_slider"]/100);
+                        // console.log()
+                        msg= "Scrolling disabled"  ;
+                    }else {
+                        // tempToggle = true;
+                        msg= "Scrolling enabled"
+
+                       scroll_speed=0;
+                    }
+                    tempToggle = !tempToggle; 
+
+                    toastr["warning"]("", msg);
+                    
+
+                    // var arr = [];
+                    // arr.push("warning", msg);
+                    var obj= {
+                         "hold_toggle" : tempToggle,
+                         "scroll_speed" : scroll_speed
+                         
+                     };
+                     setObjectdata(obj); 
+                  
                 }
-                tempToggle = !tempToggle; 
+               setTimeout(tempToggleFunc(), 4000);
 
-                toastr["warning"]("", msg);
-                
-
-                // var arr = [];
-                // arr.push("warning", msg);
-                var obj= {
-                     "hold_toggle" : tempToggle,
-                     "scroll_speed" : scroll_speed
-                     
-                 };
-                 setObjectdata(obj); 
             }
             if ((prev_page.x < xprediction &&  xprediction<(prev_page.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
                 startTimer();                
@@ -305,7 +336,7 @@ function startWebgazerfeed(){
 
              // if ( (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))){                     
                // alert("arr up")
-               if(scroll_speed==0)  toastr["danger"]("", "Scrolling is disabled");
+               if(scroll_speed==0)  toastr["error"]("", "Scrolling is disabled");
 
                 
                 scrolled=pagePosition-scroll_speed;
@@ -319,7 +350,7 @@ function startWebgazerfeed(){
               // if  ((arrow_down.y < yprediction) && ((arrow_down.y+100)  > yprediction )){                  
                // alert("down")
                 
-               if(scroll_speed==0)  toastr["danger"]("", "Scrolling is disabled");
+               if(scroll_speed==0)  toastr["error"]("", "Scrolling is disabled");
                 scrolled=pagePosition+scroll_speed;
                 console.log("down"); 
                 startTimer();
@@ -335,17 +366,29 @@ function startWebgazerfeed(){
                startTimer();
                startTimer();
                startTimer();
+                 if ((hide.x < xprediction &&  xprediction<(hide.x+100))&& (hide.y  < yprediction && yprediction<(hide.y+100))){
+                startTimer();
+               startTimer();
+               startTimer();
+               startTimer();
                 
                 // function togglHide(){
                     $("#hide_div").toggle(
                      function () {
-                        var arr=[ "#prev_page","#hide_div" ,"#hold_div", "#scrll_top", "#scrll_bottom"];
+                        var arr=[ "#prev_page","#hide_div","#hold_div", "#scrll_top", "#scrll_bottom"];
                         arr.forEach(function(element) {
                             console.log(document.getElementById(element));
                             $(element).css('opacity', '0');
+                            // $(element).toggle();
+
                             
                         });                  
-                     },function () {
+                     }
+                     ,function () {
+                       startTimer();
+               startTimer();
+               startTimer();
+               startTimer();
                         $(".hidehold_div").css('opacity', '1');
                         var arr=[ "#prev_page","#hide_div" ,"#hold_div", "#scrll_top", "#scrll_bottom"];
                         arr.forEach(function(element) {
@@ -357,7 +400,8 @@ function startWebgazerfeed(){
 
                  
                    });
-            }
+                }
+          }
 
 
 
@@ -390,19 +434,19 @@ function startWebgazerfeed(){
   }
 
 toastr.options = {
-          "closeButton": true,
-          "debug": false,
-          "newestOnTop": true,
-          "progressBar": true,
-          "positionClass": "toast-bottom-right",
-          "preventDuplicates": true,
-          "onclick": null,
-          "showDuration": "1500",
-          "hideDuration": "1000",
-          "timeOut": "1500",
-          "extendedTimeOut": "1000",
-          "showEasing": "swing",
-          "hideEasing": "linear",
-          "showMethod": "fadeIn",
-          "hideMethod": "fadeOut"
-        }
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": true,
+    "positionClass": "toast-bottom-right",
+    "preventDuplicates": true,
+    "onclick": null,
+    "showDuration": "200",
+    "hideDuration": "1000",
+    "timeOut": "1000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}

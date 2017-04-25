@@ -122,7 +122,6 @@ window.onload=function(){
 	// if($("#mainr").height;)
 	var type;
 	var msg;
-	popupBox();
 
 	loadSliders();
 
@@ -134,6 +133,8 @@ window.onload=function(){
 		if (data["wgvideofeed"]) $('#myonoffswitch').prop('checked', true);
 		else $('#myonoffswitch').prop('checked', false);
 		console.log(data);
+		var toastr_val = data["toastr_val"];
+
 
 
 
@@ -155,7 +156,8 @@ window.onload=function(){
 			loadDeafultValues();
 
 
-		}else {
+		}
+		else {
 		// setPopupsize(data["longpop-up"]);
 
 			console.log("MERON NAAAAAAAA start_button"); 
@@ -167,6 +169,12 @@ window.onload=function(){
 
 				loadButtonVal();
 				console.log(data);
+		}
+		
+		if(toastr_val[0] == null && toastr_val[1] == null ){
+			
+			popupBox();
+
 		}
 
 
@@ -385,7 +393,7 @@ function startWebgazer(){
             
         }, function(){
             // chrome.tabs.executeScript({file: 'src/js/webgazerjs.js'}, function(){
-            chrome.tabs.executeScript({file: 'src/js/dummyWG.js'}, function(){
+            chrome.tabs.executeScript({file: 'src/js/webgazerjs.js'}, function(){
 
 
             });
@@ -482,7 +490,7 @@ function changeSpeed(){
 function changeOpacity(){
 	var value = $( '#flat-slider1' ).slider( 'values', 0 );
 	chrome.tabs.executeScript(null, {
-		code: ' var myElements = document.querySelectorAll(\'.arrows\');for (var i = 0; i < myElements.length; i++) {  myElements[i].style.opacity = '+value/100+';} '
+		code: ' var myElements = document.querySelectorAll(\'.controls\');for (var i = 0; i < myElements.length; i++) {  myElements[i].style.opacity = '+value/100+';} '
 	});
 	// $('#flat-slider1').slider('value', value).change();
 	var obj= {

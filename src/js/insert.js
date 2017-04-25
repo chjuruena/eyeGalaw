@@ -38,18 +38,20 @@ hide.setAttribute('id', 'hide');
 hold.setAttribute('id','hold');
 hide.setAttribute('class', 'hidehold_txt');
 hold.setAttribute('class', 'hidehold_txt');
-hide_div.setAttribute('class', 'hidehold_div');
-hold_div.setAttribute('class', 'hidehold_div');
+hide_div.setAttribute('class', 'hidehold_div controls');
+hold_div.setAttribute('class', 'hidehold_div controls');
 
 
 var scrll_top = document.createElement( 'a' );
 var scrll_bottom = document.createElement( 'a' );
-scrll_top.innerHTML="up";
-scrll_bottom.innerHTML="bottom";
+scrll_top.innerHTML="scroll to top";
+scrll_bottom.innerHTML="scroll to bottom";
 
 scrll_top.setAttribute('id', 'scrll_top');
 scrll_bottom.setAttribute('id', 'scrll_bottom');
 
+scrll_top.setAttribute('class', 'controls');
+scrll_bottom.setAttribute('class', 'controls');
 
 
 
@@ -58,19 +60,13 @@ var gaze_down = document.createElement( 'div' )
 var gaze_up = document.createElement( 'div' )
 gaze_down.setAttribute('id', 'gaze_down');
 gaze_up.setAttribute('id', 'gaze_up');
-gaze_down.setAttribute('class', 'gaze_pads');
+gaze_down.setAttribute('class', 'gaze_pads ');
 gaze_up.setAttribute('class', 'gaze_pads');
 
 prev_page.setAttribute('id', 'prev_page');
 prev_page.setAttribute('class', 'line_arrows');
 // arrow_up.setAttribute('id', 'arrow_up');
-line_arrow_up.setAttribute('id', 'line_arrow_up');
-// arrow_down.setAttribute('id', 'arrow_down');
-line_arrow_down.setAttribute('id', 'line_arrow_down');
 
-
-line_arrow_up.setAttribute('class', 'line_arrows');
-line_arrow_down.setAttribute('class', 'line_arrows');
 // arrow_down.setAttribute('class', 'arrows');
 // arrow_down.setAttribute('class', 'arrows');
 // arrow_left.setAttribute('class', 'arrows');
@@ -81,10 +77,10 @@ line_arrow_down.setAttribute('class', 'line_arrows');
 var container = document.createElement( 'div' );
 container.setAttribute('class', 'container');
 var triangle = document.createElement( 'div' )
-triangle.setAttribute('class', 'triangle');
+triangle.setAttribute('class', 'triangle controls');
 triangle.setAttribute('id', 'triangle_down');
 var triangle_up = document.createElement( 'div' )
-triangle_up.setAttribute('class', 'triangle');
+triangle_up.setAttribute('class', 'triangle controls');
 triangle_up.setAttribute('id', 'triangle_up');
 
 // container.appendChild( triangle);
