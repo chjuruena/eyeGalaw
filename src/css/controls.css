@@ -97,70 +97,55 @@ right: 0;
   padding-right: 10px;
  
 }
-#scrll_top{
-    top: 0;
-  right: 0;
 
 
+.scrll_TB{
    display: block; /*center*/
   margin: 0 auto; /*center*/
 position:fixed;
 
 
-  /*font-size: 48px;*/
+  font-size: 24px;
+  line-height: 90%;
 font-style: normal;
 /*font-weight: bold;*/
 text-decoration: none;
 text-transform: none;
+text-align: center;
 color: #000000;
-background-color: #ffffff;
-
-
-
+/*background-color: #ffffff;*/
  }
+ #scrll_top{
+    top: 0;
+  right: 0;
+}
 #scrll_bottom{
     right: 0;
   bottom: 0;
-  padding-right: 10px;
-
-   display: block; /*center*/
-  margin: 0 auto; /*center*/
-position:fixed;
-
-
-  /*font-size: 12px;*/
-/*font-style: normal;*/
-/*font-weight: bold;*/
-text-decoration: none;
-text-transform: none;
-color: #000000;
-background-color: #ffffff;
-
-
- 
+  padding-right: 10px; 
 }
 .hidehold_div{
-  width: 100px;
-  height: 100px;
-  margin: auto;
+  width: 50px;
+  height: 50px;
+  /*margin: auto;*/
 /*background-color: re d;*/
 position:fixed;
-z-index: 1000 !important;
+/*z-index: 1000 !important;*/
 
 }
 .hidehold_txt{
   display: block; /*center*/
-  margin: 0 auto; /*center*/
+  /*margin: 0 auto; /*center*/
 position:fixed;
 
 
-  font-size: 48px;
+  font-size: 36px;
 font-style: normal;
 /*font-weight: bold;*/
 text-decoration: none;
 text-transform: none;
 color: #000000;
-background-color: #ffffff;
+/*background-color: #ffffff;*/
   
 }
 .arrows{
@@ -222,6 +207,7 @@ right: 0;
   /*width: 100px;*/
   width: 100%;
   height: 50px;
+  margin-left: 110px;
   /*background-color:red;*/
   position:fixed;
 }
@@ -278,8 +264,8 @@ right: 0;
     position: fixed;
     margin: auto;
     /*top: 0;*/
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
     border-right: 4px solid #e74c3c;
     border-bottom: 4px solid #e74c3c;
     

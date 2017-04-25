@@ -207,13 +207,18 @@ function startWebgazerfeed(){
              // scroll_speed
             var scroll_speed=data["scroll_speed"];
             var pagePosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            var position2 =  $(window).scrollTop();
+            if ( position2 != pagePosition) alert("hello");
+            
+
+
             function scrollz(scrolled){
                 $("html, body").animate({
                     scrollTop:  scrolled
                });
             }
 
-            // function startTimer(func) {
+            // function //setTimeout(func) {
             //     var i = 0;
             //     var timer = setInterval(function() {
             //         console.log(++i);
@@ -223,7 +228,7 @@ function startWebgazerfeed(){
             //         console.log('post-interval'); //this will still run after clearing
             //     }, 4000);
             // }
-            function startTimer(func) {
+            function setTimeout(func) {
                // var func = new Function(fxn);
                 var i = 0;
                  var timer;
@@ -245,12 +250,12 @@ function startWebgazerfeed(){
 
 
             if ((hold.x < xprediction &&  xprediction<(hold.x+100))&& (hold.y  < yprediction && yprediction<(hold.y+100))){
-                // startTimer();
-                // startTimer();
-                // startTimer();
-                // startTimer();
-                // startTimer();
-                // startTimer();
+                // //setTimeout();
+                // //setTimeout();
+                // //setTimeout();
+                // //setTimeout();
+                // //setTimeout();
+                // //setTimeout();
                 // alert('hold');
                 // window.history.back();
                              
@@ -283,13 +288,15 @@ function startWebgazerfeed(){
                          
                      };
                      setObjectdata(obj); 
+                     alert("tempToggle" +tempToggle+ " " + scroll_speed);
                   
                 }
+
                setTimeout(tempToggleFunc(), 4000);
 
             }
             if ((prev_page.x < xprediction &&  xprediction<(prev_page.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
-                startTimer();                
+                //setTimeout();                
                 // window.history.back();
             }
 
@@ -299,78 +306,141 @@ function startWebgazerfeed(){
             
             if ((scrll_top.x < xprediction &&  xprediction<(scrll_top.x+50))&& (scrll_top.y  < yprediction && yprediction<(scrll_top.y+50))){
                 // alert("scrollTop")
-                startTimer();                
+                //setTimeout();                
                 // window.history.back();
                 // $('html, body').scrollTop(0);
-                if (scroll_speed!=0){
-                    $('html, body').animate({ scrollTop: 0 }, 'fast');
+                function scrllT(){
+                  if (scroll_speed!=0){
+                      $('html, body').animate({ scrollTop: 0 }, 'fast');
+
+                  }
 
                 }
-                // alert("pagePosition scrll_top"+ pagePosition);
-                pagePosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-                startTimer();                
-                startTimer();                
-                
-
+                setTimeout(scrllT(), 4000);
+                // pagePosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+               
 
 
             }
             if ((scrll_bottom.x < xprediction &&  xprediction<(scrll_bottom.x+50))&& (scrll_bottom.y  < yprediction && yprediction<(scrll_bottom.y+50))){
                 // alert("scrll_bottom");
-                startTimer();                
+                //setTimeout();                
               // window.history.back();
+              console.log("scrll_bottom")
+              console.log("scrll_bottom")
+              console.log("scrll_bottom")
+              console.log("scrll_bottom")
+              console.log("scrll_bottom")
+              console.log("scrll_bottom")
+              console.log("scrll_bottom")
+              console.log("scrll_bottom")
+              console.log("scrll_bottom")
+              console.log("scrll_bottom")
+              console.log("scrll_bottom")
+              console.log("scrll_bottom")
+              function scrllB(){
                 if (scroll_speed!=0){
-                    // window.scrollTo(0,0);
-                        $("html, body").animate({ scrollTop: $(document).height() }, 'fast');
+                        // $("html, body").animate({ scrollTop: $(document).height() }, 'fast');
+                        window.scrollTo(0, document.body.scrollHeight);
 
                 }
+                
+              }
+              setTimeout(scrllB(), 4000);
                 // alert("pagePosition scrll_bot" +pagePosition);
-                pagePosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-                startTimer();                
-                startTimer();                
+                // pagePosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+                // //setTimeout();                
+                // //setTimeout();                
 
 
 
             }
             if ((arrow_up.x < xprediction &&  xprediction<(screen.width-50))&& (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))){
-
+              console.log("arrow_up")
+              console.log("arrow_up")
+              console.log("arrow_up")
+              console.log("arrow_up")
+              console.log("arrow_up")
+              console.log("arrow_up")
+              console.log("arrow_up")
+              console.log("arrow_up")
+              console.log("arrow_up")
+              console.log("arrow_up")
+              console.log("arrow_up")
+              console.log("arrow_up")
+              console.log("arrow_up")
+              console.log("arrow_up")
+              console.log("arrow_up")
+              console.log("arrow_up")
+              console.log("arrow_up")
+              console.log("arrow_up")
              // if ( (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))){                     
                // alert("arr up")
-               if(scroll_speed==0)  toastr["error"]("", "Scrolling is disabled");
+               function arrDown(){
 
-                
-                scrolled=pagePosition-scroll_speed;
-                console.log("up");           
-                startTimer();
-                scrollz(scrolled);                
+                 if(scroll_speed==0)  toastr["error"]("", "Scrolling is disabled");
+
+                  
+                  scrolled=pagePosition-scroll_speed;
+                  console.log("up");           
+                  //setTimeout();
+                  scrollz(scrolled);  
+                }     
+                setTimeout(arrDown(), 4000);
+
              } 
 
             if ((arrow_down.x < xprediction &&  xprediction<(screen.width-50))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
             
               // if  ((arrow_down.y < yprediction) && ((arrow_down.y+100)  > yprediction )){                  
-               // alert("down")
+               console.log("down")
+               console.log("down")
+               console.log("down")
+               console.log("down")
+               console.log("down")
+               console.log("down")
+               console.log("down")
+               console.log("down")
+               console.log("down")
+               console.log("down")
+               console.log("down")
+               console.log("down")
+               console.log("down")
+               console.log("down")
+               console.log("down")
+               console.log("down")
+               console.log("down")
+               console.log("down")
+               console.log("down")
+               console.log("down")
+               console.log("down")
+               console.log("down")
+               function arrDown(){
+                 if(scroll_speed==0)  toastr["error"]("", "Scrolling is disabled");
+                  scrolled=pagePosition+scroll_speed;
+                  console.log("down"); 
+                  scrollz(scrolled);
                 
-               if(scroll_speed==0)  toastr["error"]("", "Scrolling is disabled");
-                scrolled=pagePosition+scroll_speed;
-                console.log("down"); 
-                startTimer();
-                scrollz(scrolled);
+               }
+                setTimeout(arrDown(), 4000);
+                // setTimeout(arrDown(), 4000);
+                
 
              } 
 
 
              if ((hide.x < xprediction &&  xprediction<(hide.x+100))&& (hide.y  < yprediction && yprediction<(hide.y+100))){
                 // alert('hide');
-               //  startTimer(); 
-               startTimer();
-               startTimer();
-               startTimer();
-               startTimer();
+               //  //setTimeout(); 
+               //setTimeout();
+               //setTimeout();
+               //setTimeout();
+               //setTimeout();
                  if ((hide.x < xprediction &&  xprediction<(hide.x+100))&& (hide.y  < yprediction && yprediction<(hide.y+100))){
-                startTimer();
-               startTimer();
-               startTimer();
-               startTimer();
+                //setTimeout();
+               //setTimeout();
+               //setTimeout();
+               //setTimeout();
                 
                 // function togglHide(){
                     $("#hide_div").toggle(
@@ -385,10 +455,7 @@ function startWebgazerfeed(){
                         });                  
                      }
                      ,function () {
-                       startTimer();
-               startTimer();
-               startTimer();
-               startTimer();
+                       
                         $(".hidehold_div").css('opacity', '1');
                         var arr=[ "#prev_page","#hide_div" ,"#hold_div", "#scrll_top", "#scrll_bottom"];
                         arr.forEach(function(element) {
@@ -414,7 +481,7 @@ function startWebgazerfeed(){
             
 
             // if ((hold.x < xprediction &&  xprediction<(hold.x+100))&& (hold.y  < yprediction && yprediction<(hold.y+100))){
-            //     // startTimer();
+            //     // //setTimeout();
             //     alert('hold');
             //     // window.history.back();
             // }

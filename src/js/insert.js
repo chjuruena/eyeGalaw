@@ -44,14 +44,14 @@ hold_div.setAttribute('class', 'hidehold_div controls');
 
 var scrll_top = document.createElement( 'a' );
 var scrll_bottom = document.createElement( 'a' );
-scrll_top.innerHTML="scroll to top";
-scrll_bottom.innerHTML="scroll to bottom";
+scrll_top.innerHTML="scroll to <br> top";
+scrll_bottom.innerHTML="scroll to <br> bottom";
 
 scrll_top.setAttribute('id', 'scrll_top');
 scrll_bottom.setAttribute('id', 'scrll_bottom');
 
-scrll_top.setAttribute('class', 'controls');
-scrll_bottom.setAttribute('class', 'controls');
+scrll_top.setAttribute('class', 'scrll_TB controls');
+scrll_bottom.setAttribute('class', 'scrll_TB controls');
 
 
 
@@ -106,8 +106,8 @@ document.body.appendChild(scrll_bottom );
 
 var screenwidth = screen.width;
 var screenheight = screen.width;
-document.getElementById('gaze_down').style.width = screenwidth+"px";
-document.getElementById('gaze_up').style.width = screenwidth+"px";
+document.getElementById('gaze_down').style.width = (screenwidth-220)+"px";
+document.getElementById('gaze_up').style.width = (screenwidth-220)+"px";
 // alert(document.getElementById('gaze_down').style.width);
 
 
