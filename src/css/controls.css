@@ -100,6 +100,8 @@ right: 0;
 
 
 .scrll_TB{
+  width: 110px;
+  height: 50px;
    display: block; /*center*/
   margin: 0 auto; /*center*/
 position:fixed;
@@ -113,6 +115,7 @@ text-decoration: none;
 text-transform: none;
 text-align: center;
 color: #000000;
+
 /*background-color: #ffffff;*/
  }
  #scrll_top{

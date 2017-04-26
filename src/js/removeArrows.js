@@ -1,14 +1,14 @@
-var gaze_pads = document.querySelectorAll(".gaze_pads");
-var line_arrows = document.querySelectorAll(".line_arrows");
-var hidehold_div = document.querySelectorAll("hidehold_div");
+var controls = document.querySelectorAll(".controls");
+var line_arrows = document.querySelectorAll(".triangle");
+var hidehold_div = document.querySelectorAll(".hidehold_div");
 
-for (var i = 0; i < line_arrows.length; i++) {  
+for (var i = 0; i < controls.length; i++) {  
 	// myElements[i].style.opacity = '+value/100+'
-	if(gaze_pads[i]) document.body.removeChild(gaze_pads[i]);
-	if(hidehold_div[i]) document.body.removeChild(hidehold_div[i]);
+	if(controls[i]) document.body.removeChild(controls[i]);
+	// if(hidehold_div[i]) document.body.removeChild(hidehold_div[i]);
 
 	
-	document.body.removeChild(line_arrows[i]);
+	// document.body.removeChild(line_arrows[i]);
 };
 		
 

@@ -36,8 +36,8 @@ hide_div.setAttribute('id', 'hide_div');
 hold_div.setAttribute('id', 'hold_div');
 hide.setAttribute('id', 'hide');
 hold.setAttribute('id','hold');
-hide.setAttribute('class', 'hidehold_txt');
-hold.setAttribute('class', 'hidehold_txt');
+hide.setAttribute('class', 'hidehold_txt ');
+hold.setAttribute('class', 'hidehold_txt ');
 hide_div.setAttribute('class', 'hidehold_div controls');
 hold_div.setAttribute('class', 'hidehold_div controls');
 
@@ -60,11 +60,11 @@ var gaze_down = document.createElement( 'div' )
 var gaze_up = document.createElement( 'div' )
 gaze_down.setAttribute('id', 'gaze_down');
 gaze_up.setAttribute('id', 'gaze_up');
-gaze_down.setAttribute('class', 'gaze_pads ');
-gaze_up.setAttribute('class', 'gaze_pads');
+gaze_down.setAttribute('class', 'gaze_pads controls ');
+gaze_up.setAttribute('class', 'gaze_pads controls');
 
 prev_page.setAttribute('id', 'prev_page');
-prev_page.setAttribute('class', 'line_arrows');
+prev_page.setAttribute('class', 'line_arrows controls');
 // arrow_up.setAttribute('id', 'arrow_up');
 
 // arrow_down.setAttribute('class', 'arrows');
@@ -84,8 +84,15 @@ triangle_up.setAttribute('class', 'triangle controls');
 triangle_up.setAttribute('id', 'triangle_up');
 
 // container.appendChild( triangle);
+// getObjectdata( function(data){
+//     var value=data["opacity"];
 
+//     var list = ["triangle_up","triangle","hide_div","hold_div", "scrll_top", "scrll_bottom" ];
+//     for (var i = 0; i < myElements.length; i++) { 
+//         list[i].setAttribute("style", "opacity:"+value/100+";" );
 
+//     }
+// });
 
 document.body.appendChild( triangle_up);
 document.body.appendChild( triangle);
@@ -109,6 +116,18 @@ var screenheight = screen.width;
 document.getElementById('gaze_down').style.width = (screenwidth-220)+"px";
 document.getElementById('gaze_up').style.width = (screenwidth-220)+"px";
 // alert(document.getElementById('gaze_down').style.width);
+// getObjectdata( function(data){
+//     var value=data["opacity"];
+//     // function changeOpacity(){
+//     // var value = $( '#flat-slider1' ).slider( 'values', 0 );
+//     var myElements = document.querySelectorAll(".controls");
+//     for (var i = 0; i < myElements.length; i++) { 
+//          myElements[i].style.opacity = value/100;
+//     }
+    
+
+
+// });
 
 
 

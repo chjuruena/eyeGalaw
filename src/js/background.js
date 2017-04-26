@@ -63,17 +63,17 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 }); 
 function checkHold(){
 	getObjectdata( function(data){
-	var msg;
-	var type="info";
-	if(data["hold_toggle"]==true) {
-	// alert("activetabId" + data["activetabId"]);
-		msg = "Scrolling is disabled!"
-	}else{
-		msg = "Scrolling is enabled!"
+		var msg;
+		var type="info";
+		if(data["hold_toggle"]==true) {
+		// alert("activetabId" + data["activetabId"]);
+			msg = "Scrolling is disabled!"
+		}else{
+			msg = "Scrolling is enabled!"
 
-	}
-	showtoastr(type, msg);
-});
+		}
+		showtoastr(type, msg);
+	});
 }
 
 

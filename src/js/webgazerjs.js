@@ -155,6 +155,7 @@ function startWebgazerfeed(){
     .setTracker('clmtrackr')
     .setGazeListener(function(eyedata, elapsedTime) {
 
+
         //show
         //  executescript
         // showLoadingscreen(true);
@@ -165,7 +166,7 @@ function startWebgazerfeed(){
             // loading screen
             return;
         }
-        $('.loader').fadeOut('slow',function(){$(this).remove();});
+        
         // toastr["success"]("", "eyeGalaw succesfully launched");
         //hdie
 
@@ -179,7 +180,22 @@ function startWebgazerfeed(){
         var yprediction = eyedata.y; //these y coordinates are relative to the viewport
         console.log(elapsedTime); //elapsed time is based on time since begin was called
        
-        getObjectdata( function(data){         
+        getObjectdata( function(data){
+
+          if(data["load_page"]){
+            $('.loader').fadeOut('slow',function(){
+              $(this).remove();
+              var obj= {
+                 "load_page" : false
+                 
+              };
+              setObjectdata(obj); 
+
+            });
+            
+          }
+
+
 
             
             if (data["start_button"] == "START") webgazer.showPredictionPoints(false).clearGazeListener();
@@ -208,7 +224,7 @@ function startWebgazerfeed(){
             var scroll_speed=data["scroll_speed"];
             var pagePosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
             var position2 =  $(window).scrollTop();
-            if ( position2 != pagePosition) alert("hello");
+            if ( position2 != pagePosition) alert("hello");           
             
 
 
@@ -228,24 +244,25 @@ function startWebgazerfeed(){
             //         console.log('post-interval'); //this will still run after clearing
             //     }, 4000);
             // }
-            function setTimeout(func) {
-               // var func = new Function(fxn);
-                var i = 0;
-                 var timer;
-                function fxn (func) {
-                    i++;
-                    console.log(++i);
-                    if (i === 4) { //seconds from RRL
+
+            // function setTimeout(func) {
+            //    // var func = new Function(fxn);
+            //     var i = 0;
+            //      var timer;
+            //     function fxn (func) {
+            //         i++;
+            //         console.log(++i);
+            //         if (i === 4) { //seconds from RRL
                         
-                         var temp = new Function(func);
-                         temp();
-                        clearInterval(timer);
-                    }
-                    // console.log('post-interval'); //this will still run after clearing
-                }
-                // var fxn1 = fxn;
-               timer = setInterval(fxn, 1000);
-            }
+            //              var temp = new Function(func);
+            //              temp();
+            //             clearInterval(timer);
+            //         }
+            //         // console.log('post-interval'); //this will still run after clearing
+            //     }
+            //     // var fxn1 = fxn;
+            //    timer = setInterval(fxn, 1000);
+            // }
            
 
 
@@ -268,10 +285,10 @@ function startWebgazerfeed(){
                        // tempToggle = !tempToggle;                    
                         scroll_speed= data["pageheight"]*(data["scroll_speed_slider"]/100);
                         // console.log()
-                        msg= "Scrolling disabled"  ;
+                        msg= "Scrolling disabled";
                     }else {
                         // tempToggle = true;
-                        msg= "Scrolling enabled"
+                        msg= "Scrolling enabled";
 
                        scroll_speed=0;
                     }
@@ -288,8 +305,7 @@ function startWebgazerfeed(){
                          
                      };
                      setObjectdata(obj); 
-                     alert("tempToggle" +tempToggle+ " " + scroll_speed);
-                  
+                     
                 }
 
                setTimeout(tempToggleFunc(), 4000);
@@ -309,6 +325,23 @@ function startWebgazerfeed(){
                 //setTimeout();                
                 // window.history.back();
                 // $('html, body').scrollTop(0);
+                console.log("scrll_top")
+                console.log("scrll_top")
+                console.log("scrll_top")
+                console.log("scrll_top")
+                console.log("scrll_top")
+                console.log("scrll_top")
+                console.log("scrll_top")
+                console.log("scrll_top")
+                console.log("scrll_top")
+                console.log("scrll_top")
+                console.log("scrll_top")
+                console.log("scrll_top")
+                console.log("scrll_top")
+                console.log("scrll_top")
+                console.log("scrll_top")
+                console.log("scrll_top")
+                console.log("scrll_top")
                 function scrllT(){
                   if (scroll_speed!=0){
                       $('html, body').animate({ scrollTop: 0 }, 'fast');
@@ -355,7 +388,7 @@ function startWebgazerfeed(){
 
 
             }
-            if ((arrow_up.x < xprediction &&  xprediction<(screen.width-50))&& (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))){
+            if ((arrow_up.x < xprediction &&  xprediction<(screen.width-110))&& (arrow_up.y  < yprediction && yprediction<(arrow_up.y+100))){
               console.log("arrow_up")
               console.log("arrow_up")
               console.log("arrow_up")
@@ -390,7 +423,7 @@ function startWebgazerfeed(){
 
              } 
 
-            if ((arrow_down.x < xprediction &&  xprediction<(screen.width-50))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
+            if ((arrow_down.x < xprediction &&  xprediction<(screen.width-110))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
             
               // if  ((arrow_down.y < yprediction) && ((arrow_down.y+100)  > yprediction )){                  
                console.log("down")
@@ -430,45 +463,57 @@ function startWebgazerfeed(){
 
 
              if ((hide.x < xprediction &&  xprediction<(hide.x+100))&& (hide.y  < yprediction && yprediction<(hide.y+100))){
-                // alert('hide');
-               //  //setTimeout(); 
-               //setTimeout();
-               //setTimeout();
-               //setTimeout();
-               //setTimeout();
-                 if ((hide.x < xprediction &&  xprediction<(hide.x+100))&& (hide.y  < yprediction && yprediction<(hide.y+100))){
-                //setTimeout();
-               //setTimeout();
-               //setTimeout();
-               //setTimeout();
-                
-                // function togglHide(){
-                    $("#hide_div").toggle(
-                     function () {
-                        var arr=[ "#prev_page","#hide_div","#hold_div", "#scrll_top", "#scrll_bottom"];
+               
+                  function tempToggleFunc(){
+                    var tempToggle = data["hide_toggle"];
+                     var msg;
+                     function changeOpcty(val){
+                        var arr=[ "#prev_page","#hide_div","#hold_div", "#scrll_top", "#scrll_bottom", "#triangle_down", "#triangle_up"];
                         arr.forEach(function(element) {
                             console.log(document.getElementById(element));
-                            $(element).css('opacity', '0');
-                            // $(element).toggle();
+                            $(element).css('opacity', val);
+                        });  
 
-                            
-                        });                  
                      }
-                     ,function () {
+                    if(tempToggle) {
+                      changeOpcty(0);
+                    }else {
+                      changeOpcty(data["opacity"]/100);                        
+                    }
+                    tempToggle = !tempToggle; 
+
+                    var obj= {
+                         "hide_toggle" : tempToggle                         
+                     };
+                     setObjectdata(obj); 
+                  
+                }
+                setTimeout(tempToggleFunc(), 4000);
+
+
+              }
+
+
+
+                   //  $("#hide_div").toggle(
+                   //   function () {
+                                        
+                   //   }
+                   //   ,function () {
                        
-                        $(".hidehold_div").css('opacity', '1');
-                        var arr=[ "#prev_page","#hide_div" ,"#hold_div", "#scrll_top", "#scrll_bottom"];
-                        arr.forEach(function(element) {
-                            console.log(document.getElementById(element));
+                   //      $(".hidehold_div").css('opacity', '1');
+                   //      var arr=[ "#prev_page","#hide_div" ,"#hold_div", "#scrll_top", "#scrll_bottom"];
+                   //      arr.forEach(function(element) {
+                   //          console.log(document.getElementById(element));
                             
-                            $(element).css('opacity', data["opacity"]/100);
+                   //          $(element).css('opacity', data["opacity"]/100);
                             
-                        });
+                   //      });
 
                  
-                   });
-                }
-          }
+                   // });
+                
+          
 
 
 

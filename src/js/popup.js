@@ -74,6 +74,7 @@ function loadSliders(){
 			$('#flat-slider2').slider('value',scroll_speed_slider);
 			$('#flat-slider1').slider('value',opacity_slider);
 		});
+		// changeOpacity();
 		// add opcaity
 	});
 }
@@ -100,7 +101,7 @@ function startEvent() {
 	getObjectdata( function(data){
 		disablebtn(data["start_button"]);
 
-		loadStartBtnFxns(data["start_button"], "click");
+		loadStartBtnFxns(data["start_button"], "click", data["insert_script"]);
 		var obj= {
 			"action" : "click" 
 
@@ -143,11 +144,6 @@ window.onload=function(){
 			msg="Welcome to eyeGalaw!";
 			showtoastr(type, msg);
 			popupBox();
-
-
-
-
-		
 			// tutorial
 			console.log("wala pang start_button");
 			document.getElementById('start_button').text ='START';
@@ -161,7 +157,7 @@ window.onload=function(){
 		// setPopupsize(data["longpop-up"]);
 
 			console.log("MERON NAAAAAAAA start_button"); 
-				loadStartBtnFxns(data["start_button"], "reload");
+				loadStartBtnFxns(data["start_button"], "reload", data["insert_script"]);
 				var obj= {
 					"action" : "reload" 
 				};
@@ -170,18 +166,11 @@ window.onload=function(){
 				loadButtonVal();
 				console.log(data);
 		}
-		
-		if(toastr_val[0] == null && toastr_val[1] == null ){
-			
+
+		if(toastr_val[0] == null && toastr_val[1] == null ){			
 			popupBox();
+		}		
 
-		}
-
-
-		
-
-		console.log(data);
-		console.log(data["stopped"]);
 	});	
 
 	// loadButtonVal();
@@ -272,7 +261,7 @@ function showtoastr(type, msg){
 		
 }
 
-function loadStartBtnFxns(start_val, action){
+function loadStartBtnFxns(start_val, action, insertscript){
 	// getObjectdata( function(data){		
 
 	// var start_val=data["start_button"];
@@ -304,11 +293,49 @@ function loadStartBtnFxns(start_val, action){
 		$('.flat-slider').slider({
 			disabled: false
 		});	
-				
-		chrome.tabs.executeScript(null, {
-				// allFrames: true, 
-			file: 'src/js/insert.js'						
-		});
+
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		console.log(insertscript)
+		if (!insertscript){
+			alert("execute"+ insertscript);
+			chrome.tabs.executeScript(null, {
+					// allFrames: true, 
+				file: 'src/js/insert.js'						
+			}, function(){
+				changeOpacity();
+			});
+			var obj= {
+			     "insert_script" : true			     
+			};
+			setObjectdata(obj); 
+				 
+		}
+
 
 		startWebgazer();
 
@@ -329,19 +356,27 @@ function loadStartBtnFxns(start_val, action){
 
 	}
 	else if((start_val =='STOP' && action=="click") || (start_val =='START' && action=="reload")  ){
+
 		if(start_val =='STOP' && action=="click") {
 			type = "info";
 			msg= "eyeGalaw disabled!";
 			$('.onoffswitch-checkbox').prop('disabled', false);
-			// alert("start_val =='STOP' && action==click");
+			alert("start_val =='STOP' && action==click");
 		}
 		else if (start_val =='START' && action=="reload")  
-			// alert("(start_val =='START' && action==reload");
+			alert("(start_val =='START' && action==reload");
+		
+		var obj= {
+		 "insert_script" : false
+		 
+		};
+		setObjectdata(obj); 
 		
 
 		chrome.tabs.executeScript(null,  {
 			file: 'src/js/removeArrows.js'
 		});
+
 		$('.flat-slider').slider({
 			disabled: true
 		});
@@ -381,23 +416,37 @@ function startWebgazer(){
 	  var type="warning";
     	var msg = "Click anywhere in the screen to initialize eyeGalaw."
     	showtoastr(type, msg);
-    	chrome.tabs.executeScript(null, {
-            // file: 'src/js/insertLoading.js'                        
-            code:
+		getObjectdata( function(data){
+			var loadpage = data["load_page"];
+			// alert(loadpage);
+			if (!loadpage){
+		    	chrome.tabs.executeScript(null, {
+		            code:
 
-            "var preloader = document.createElement( \'div\' );" +
-            "preloader.setAttribute(\'class\', \'loader\');" +
-            "document.body.appendChild(preloader);"
-           
+		            "var preloader = document.createElement( \'div\' );" +
+		            "preloader.setAttribute(\'class\', \'loader\');" +
+		            "document.body.appendChild(preloader);"
+		           
 
-            
-        }, function(){
-            // chrome.tabs.executeScript({file: 'src/js/webgazerjs.js'}, function(){
-            chrome.tabs.executeScript({file: 'src/js/webgazerjs.js'}, function(){
+		            
+		        });
+				var obj= {
+				     "load_page" : true
+				     
+				 };
+				 setObjectdata(obj); 
+				 
+			}
+
+	        
+	            // chrome.tabs.executeScript({file: 'src/js/webgazerjs.js'}, function(){
+	        chrome.tabs.executeScript({file: 'src/js/webgazerjs.js'}, function(){
 
 
-            });
-   		});
+	        });
+			
+		});
+
 	}).catch(err => {
 	  console.error(`Error occurred: ${err}`);
 	});
