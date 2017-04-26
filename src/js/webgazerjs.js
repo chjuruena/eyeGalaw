@@ -208,9 +208,6 @@ function startWebgazerfeed(){
           var yprediction = eyedata.y; //these y coordinates are relative to the viewport
           // console.log(elapsedTime); //elapsed time is based on time since begin was called
          
-
-          
-
           if(data["load_page"]){
             $('.loader').fadeOut('slow',function(){
               $(this).remove();
@@ -316,16 +313,16 @@ function startWebgazerfeed(){
                        // tempToggle = !tempToggle;                    
                         scroll_speed= data["pageheight"]*(data["scroll_speed_slider"]/100);
                         // console.log()
-                        msg= "Scrolling disabled";
+                        // msg= "Scrolling disabled";
                     }else{
                         // tempToggle = true;
-                        msg= "Scrolling enabled";
+                        // msg= "Scrolling enabled";
 
                        scroll_speed=0;
                     }
                     tempToggle = !tempToggle; 
 
-                    toastr["warning"]("", msg);
+                    // toastr["warning"]("", msg);
                     
 
                     // var arr = [];
@@ -336,9 +333,20 @@ function startWebgazerfeed(){
                          
                      };
                      setObjectdata(obj); 
-                     
-                }
+                      getObjectdata( function(data){
+                      var type, msg;
+                        if(data["hold_toggle"]==true && scroll_speed==0) {
+                          msg= "Scrolling disabled";
+                          type="error";
+                        }
+                        else if(data["hold_toggle"]==false && scroll_speed!=0) {
+                          msg= "Scrolling enabled";
+                          type="warning"
+                        }
+                        toastr[type]("", msg);
 
+                    });                     
+                }
                setTimeout(tempToggleFunc(), 4000);
 
             }
