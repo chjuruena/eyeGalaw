@@ -32,6 +32,7 @@ function init(){
      // startvid = null;
 
     getObjectdata( function(data){
+          
           if((data["start_button"] =='STOP' && data["action"]=="click") || (data["start_button"] =='STOP' && 
             data["page-action"]=="reload" && data["action"]=="reload")) {
                 // alert("start");
@@ -151,36 +152,66 @@ function showVideo(enabled){
 // }
 
 function startWebgazerfeed(){
+    
+    var page_action;
+    var start_button;
     webgazer.setRegression('ridge') /* currently must set regression and tracker */
     .setTracker('clmtrackr')
     .setGazeListener(function(eyedata, elapsedTime) {
 
 
+
+          if(page_action=="removeArrows" && start_button == "START" ) {
+            // alert("removeArrows")
+            webgazer.showPredictionPoints(false);
+            webgazer.clearGazeListener();
+            webgazer.end();
+            // return;
+
+          }
+
+        if (eyedata == null) {
+            console.log("nagnull");
+            // loading screen
+            // webgazer.showPredictionPoints(false).clearGazeListener();
+
+            return;
+        }
         //show
         //  executescript
         // showLoadingscreen(true);
         // var target = $('#target');
         // target.loadingOverlay();  
-        if (eyedata == null) {
-            console.log("nagnull");
-            // loading screen
-            return;
-        }
-        
-        // toastr["success"]("", "eyeGalaw succesfully launched");
-        //hdie
-
-       
-
-        // showtoastr(type,msg);
-        // if (eyedata != null) alert("yey")
-
-
-        var xprediction = eyedata.x; //these x coordinates are relative to the viewport 
-        var yprediction = eyedata.y; //these y coordinates are relative to the viewport
-        console.log(elapsedTime); //elapsed time is based on time since begin was called
-       
         getObjectdata( function(data){
+          // alert(data["page-action"]+ data["start_button"] + data["action"]=="click" )
+
+          if(data["page-action"]=="removeArrows" && data["start_button"] == "START" ) {
+            start_button =  data["start_button"];
+            page_action =  data["page-action"];
+            console.log("page-action: removeArrows")
+
+            // webgazer.showPredictionPoints(false);
+            // webgazer.clearGazeListener();
+            // webgazer.end();
+            // return;
+          } 
+
+          
+          // toastr["success"]("", "eyeGalaw succesfully launched");
+          //hdie
+
+         
+
+          // showtoastr(type,msg);
+          // if (eyedata != null) alert("yey")
+
+
+          var xprediction = eyedata.x; //these x coordinates are relative to the viewport 
+          var yprediction = eyedata.y; //these y coordinates are relative to the viewport
+          // console.log(elapsedTime); //elapsed time is based on time since begin was called
+         
+
+          
 
           if(data["load_page"]){
             $('.loader').fadeOut('slow',function(){
@@ -192,13 +223,15 @@ function startWebgazerfeed(){
               setObjectdata(obj); 
 
             });
+            // $('#popup1').fadeOut('slow',function(){
+            //   $(this).remove();
+            // });
             
           }
 
 
 
             
-            if (data["start_button"] == "START") webgazer.showPredictionPoints(false).clearGazeListener();
 
             
             var arrow_down=data["gaze_down"];

@@ -31,8 +31,7 @@ $(function() {
           "hideMethod": "fadeOut"
         }
         
-        alert(data0.typeof)
-
+        
 
         if( data1 == "Video feed is enabled"){
             toastr[data0]("It will take a moment, at least 10 seconds to prepare! ", toastr_val[1])

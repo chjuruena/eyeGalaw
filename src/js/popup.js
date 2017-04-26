@@ -101,7 +101,7 @@ function startEvent() {
 	getObjectdata( function(data){
 		disablebtn(data["start_button"]);
 
-		loadStartBtnFxns(data["start_button"], "click", data["insert_script"]);
+		loadStartBtnFxns(data, "click");
 		var obj= {
 			"action" : "click" 
 
@@ -125,8 +125,12 @@ window.onload=function(){
 	var msg;
 
 	loadSliders();
+	
 
 	getObjectdata( function(data){
+        alert(data["page-action"]+" "+ data["start_button"] +" "+ data["action"] )
+		// alert(data["page-action"])
+
 		setPopupsize(data["longpop-up"]);
 		disablebtn(data["start_button"]);
 
@@ -143,7 +147,7 @@ window.onload=function(){
 			type = "success";
 			msg="Welcome to eyeGalaw!";
 			showtoastr(type, msg);
-			popupBox();
+			// popupBox();
 			// tutorial
 			console.log("wala pang start_button");
 			document.getElementById('start_button').text ='START';
@@ -157,18 +161,18 @@ window.onload=function(){
 		// setPopupsize(data["longpop-up"]);
 
 			console.log("MERON NAAAAAAAA start_button"); 
-				loadStartBtnFxns(data["start_button"], "reload", data["insert_script"]);
+				loadStartBtnFxns(data, "reload");
 				var obj= {
 					"action" : "reload" 
 				};
 				setObjectdata(obj);
-
+				
 				loadButtonVal();
 				console.log(data);
 		}
 
 		if(toastr_val[0] == null && toastr_val[1] == null ){			
-			popupBox();
+			// popupBox();
 		}		
 
 	});	
@@ -261,7 +265,10 @@ function showtoastr(type, msg){
 		
 }
 
-function loadStartBtnFxns(start_val, action, insertscript){
+function loadStartBtnFxns(data, action){
+	
+	var start_val = data["start_button"];
+	var insertscript = data["insert_script"];
 	// getObjectdata( function(data){		
 
 	// var start_val=data["start_button"];
@@ -273,15 +280,24 @@ function loadStartBtnFxns(start_val, action, insertscript){
 	var msg;
 	var type;
 
+	function insertControls(){
+
+		alert("execute"+ insertscript);
+		chrome.tabs.executeScript(null, {
+				// allFrames: true, 
+			file: 'src/js/insert.js'						
+		}, function(){
+			changeOpacity();
+		});
+	}
 	if((start_val =='START' && action=="click") || (start_val =='STOP' && action=="reload") ){
-		
 		if(start_val =='START' && action=="click") {
-			// alert("start_val =='START' && action==click");
+			alert("start_val =='START' && action==click");
 			type = "info";
 			msg= "Starting eyeGalaw";			
 		}
 		else if(start_val =='STOP' && action=="reload") {
-			// alert("start_val =='STOP' && action==reload");
+			alert("start_val =='STOP' && action==reload");
 			type = "info";
 			msg= "eyeGalaw enabled! Loading settings.";
 		}
@@ -304,35 +320,12 @@ function loadStartBtnFxns(start_val, action, insertscript){
 		console.log(insertscript)
 		console.log(insertscript)
 		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		if (!insertscript){
-			alert("execute"+ insertscript);
-			chrome.tabs.executeScript(null, {
-					// allFrames: true, 
-				file: 'src/js/insert.js'						
-			}, function(){
-				changeOpacity();
-			});
-			var obj= {
-			     "insert_script" : true			     
-			};
-			setObjectdata(obj); 
+		if ((data["page-action"] == "reload") || (start_val =='START' && action=="click")){
+			insertControls();
+			// var obj= {
+			//      "insert_script" : true			     
+			// };
+			// setObjectdata(obj); 
 				 
 		}
 
@@ -358,24 +351,32 @@ function loadStartBtnFxns(start_val, action, insertscript){
 	else if((start_val =='STOP' && action=="click") || (start_val =='START' && action=="reload")  ){
 
 		if(start_val =='STOP' && action=="click") {
+			alert("start_val =='STOP' && action==click" + data["page-action"]);
 			type = "info";
 			msg= "eyeGalaw disabled!";
 			$('.onoffswitch-checkbox').prop('disabled', false);
-			alert("start_val =='STOP' && action==click");
+			chrome.tabs.executeScript(null,  {
+				file: 'src/js/removeArrows.js'
+			
+			});
+			var obj= {
+				 "page-action" : "removeArrows"
+				 
+				};
+				setObjectdata(obj); 
+			console.log(data)
 		}
 		else if (start_val =='START' && action=="reload")  
-			alert("(start_val =='START' && action==reload");
+			alert("(start_val =='START' && action==reload" + data["page-action"]);
 		
-		var obj= {
-		 "insert_script" : false
+		// var obj= {
+		//  "insert_script" : false
 		 
-		};
-		setObjectdata(obj); 
+		// };
+		// setObjectdata(obj); 
 		
 
-		chrome.tabs.executeScript(null,  {
-			file: 'src/js/removeArrows.js'
-		});
+		
 
 		$('.flat-slider').slider({
 			disabled: true
@@ -386,6 +387,8 @@ function loadStartBtnFxns(start_val, action, insertscript){
 		loadButtonVal();
 
 		showtoastr(type, msg);
+          alert(data["page-action"]+" "+ data["start_button"] +" "+ data["action"] )
+
 	}
 
 
