@@ -128,7 +128,7 @@ window.onload=function(){
 	
 
 	getObjectdata( function(data){
-        alert(data["page-action"]+" "+ data["start_button"] +" "+ data["action"] )
+        // alert(data["page-action"]+" "+ data["start_button"] +" "+ data["action"] )
 		// alert(data["page-action"])
 
 		setPopupsize(data["longpop-up"]);
@@ -147,7 +147,7 @@ window.onload=function(){
 			type = "success";
 			msg="Welcome to eyeGalaw!";
 			showtoastr(type, msg);
-			// popupBox();
+			popupBox();
 			// tutorial
 			console.log("wala pang start_button");
 			document.getElementById('start_button').text ='START';
@@ -172,7 +172,7 @@ window.onload=function(){
 		}
 
 		if(toastr_val[0] == null && toastr_val[1] == null ){			
-			// popupBox();
+			popupBox();
 		}		
 
 	});	
@@ -282,7 +282,7 @@ function loadStartBtnFxns(data, action){
 
 	function insertControls(){
 
-		alert("execute"+ insertscript);
+		alert("insertControls"+ insertscript);
 		chrome.tabs.executeScript(null, {
 				// allFrames: true, 
 			file: 'src/js/insert.js'						
@@ -292,12 +292,12 @@ function loadStartBtnFxns(data, action){
 	}
 	if((start_val =='START' && action=="click") || (start_val =='STOP' && action=="reload") ){
 		if(start_val =='START' && action=="click") {
-			alert("start_val =='START' && action==click");
+			//alert("start_val =='START' && action==click");
 			type = "info";
 			msg= "Starting eyeGalaw";			
 		}
 		else if(start_val =='STOP' && action=="reload") {
-			alert("start_val =='STOP' && action==reload");
+			//alert("start_val =='STOP' && action==reload");
 			type = "info";
 			msg= "eyeGalaw enabled! Loading settings.";
 		}
@@ -351,7 +351,7 @@ function loadStartBtnFxns(data, action){
 	else if((start_val =='STOP' && action=="click") || (start_val =='START' && action=="reload")  ){
 
 		if(start_val =='STOP' && action=="click") {
-			alert("start_val =='STOP' && action==click" + data["page-action"]);
+			//alert("start_val =='STOP' && action==click" + data["page-action"]);
 			type = "info";
 			msg= "eyeGalaw disabled!";
 			$('.onoffswitch-checkbox').prop('disabled', false);
@@ -367,7 +367,7 @@ function loadStartBtnFxns(data, action){
 			console.log(data)
 		}
 		else if (start_val =='START' && action=="reload")  
-			alert("(start_val =='START' && action==reload" + data["page-action"]);
+			//alert("(start_val =='START' && action==reload" + data["page-action"]);
 		
 		// var obj= {
 		//  "insert_script" : false
@@ -387,7 +387,7 @@ function loadStartBtnFxns(data, action){
 		loadButtonVal();
 
 		showtoastr(type, msg);
-          alert(data["page-action"]+" "+ data["start_button"] +" "+ data["action"] )
+          //alert(data["page-action"]+" "+ data["start_button"] +" "+ data["action"] )
 
 	}
 

@@ -171,12 +171,10 @@ function startWebgazerfeed(){
           }
 
         if (eyedata == null) {
-            console.log("nagnull");
-            // loading screen
-            // webgazer.showPredictionPoints(false).clearGazeListener();
-
+            console.log("nagnull");           
             return;
         }
+
         //show
         //  executescript
         // showLoadingscreen(true);
@@ -223,9 +221,12 @@ function startWebgazerfeed(){
               setObjectdata(obj); 
 
             });
-            // $('#popup1').fadeOut('slow',function(){
-            //   $(this).remove();
-            // });
+            if($('#popup1')){
+              $('#popup1').fadeOut('slow',function(){
+                $(this).remove();
+              });
+              
+            }
             
           }
 
@@ -241,10 +242,7 @@ function startWebgazerfeed(){
             var hold=data["hold_div"];
             var scrll_bottom = data["scrll_bottom"];
             var scrll_top = data["scrll_top"];
-            var gdown=data["gaze_down"];
-            var gup=data["gaze_up"];
-
-
+          
 
              // /////////////////////////////////
                 console.log("X-gaze:" + xprediction+ " Y-gaze:" +yprediction);
@@ -319,7 +317,7 @@ function startWebgazerfeed(){
                         scroll_speed= data["pageheight"]*(data["scroll_speed_slider"]/100);
                         // console.log()
                         msg= "Scrolling disabled";
-                    }else {
+                    }else{
                         // tempToggle = true;
                         msg= "Scrolling enabled";
 
