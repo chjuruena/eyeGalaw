@@ -22,7 +22,7 @@ var arrow_up = document.createElement( 'div' );
 var line_arrow_up = document.createElement( 'div' );
 var arrow_down = document.createElement( 'div' );
 var line_arrow_down = document.createElement( 'div' );
-var prev_page = document.createElement( 'div' );
+// var prev_page = document.createElement( 'div' );
 
 var hide_div = document.createElement( 'div' );
 var hold_div = document.createElement( 'div' );
@@ -63,8 +63,8 @@ gaze_up.setAttribute('id', 'gaze_up');
 gaze_down.setAttribute('class', 'gaze_pads controls ');
 gaze_up.setAttribute('class', 'gaze_pads controls');
 
-prev_page.setAttribute('id', 'prev_page');
-prev_page.setAttribute('class', 'line_arrows controls');
+// prev_page.setAttribute('id', 'prev_page');
+// prev_page.setAttribute('class', 'line_arrows controls');
 // arrow_up.setAttribute('id', 'arrow_up');
 
 // arrow_down.setAttribute('class', 'arrows');
@@ -74,14 +74,19 @@ prev_page.setAttribute('class', 'line_arrows controls');
 
 
 // delete this
-var container = document.createElement( 'div' );
-container.setAttribute('class', 'container');
+
 var triangle = document.createElement( 'div' )
 triangle.setAttribute('class', 'triangle controls');
 triangle.setAttribute('id', 'triangle_down');
 var triangle_up = document.createElement( 'div' )
 triangle_up.setAttribute('class', 'triangle controls');
 triangle_up.setAttribute('id', 'triangle_up');
+var triangleleft = document.createElement( 'div' )
+triangleleft.setAttribute('class', 'triangle controls');
+triangleleft.setAttribute('id', 'prev_page');
+var trianglerght = document.createElement( 'div' )
+trianglerght.setAttribute('class', 'triangle controls');
+trianglerght.setAttribute('id', 'frwd_page');
 
 // container.appendChild( triangle);
 // getObjectdata( function(data){
@@ -96,6 +101,8 @@ triangle_up.setAttribute('id', 'triangle_up');
 
 document.body.appendChild( triangle_up);
 document.body.appendChild( triangle);
+document.body.appendChild( triangleleft);
+document.body.appendChild( trianglerght);
 document.body.appendChild( gaze_down);
 document.body.appendChild( gaze_up);
 
@@ -105,7 +112,7 @@ document.body.appendChild( gaze_up);
 // document.body.appendChild( line_arrow_down);
 document.body.appendChild(hide_div );
 document.body.appendChild(hold_div);
-document.body.appendChild(prev_page );
+// document.body.appendChild(prev_page );
 
 document.body.appendChild(scrll_top );
 document.body.appendChild(scrll_bottom );
@@ -160,7 +167,7 @@ function getPosition(){
     var obj={};
      // var arr=["gaze_up", "gaze_down", "arrow_down","arrow_up","arrow_left","arrow_right", "prev_page"];
     // var arr =["arrow_down","arrow_up","arrow_left","arrow_right", "prev_page"];
-     var arr=["gaze_up", "gaze_down", "prev_page","hide_div" ,"hold_div", "scrll_top", "scrll_bottom"];
+     var arr=["gaze_up", "gaze_down", "prev_page", "frwd_page","hide_div" ,"hold_div", "scrll_top", "scrll_bottom"];
     arr.forEach(function(element) {
         console.log(document.getElementById(element));
         // var position = document.getElementById(element).offsetParent.offsetTop;

@@ -76,7 +76,7 @@ function showVideo(enabled){
 // function setupvid(){
     var width = 320;
     var height = 240;
-    var topDist = '0px';
+    var topDist = '100px';
     var leftDist = '0px';
     
     var setup = function() {
@@ -207,7 +207,7 @@ function startWebgazerfeed(){
           var xprediction = eyedata.x; //these x coordinates are relative to the viewport 
           var yprediction = eyedata.y; //these y coordinates are relative to the viewport
           // console.log(elapsedTime); //elapsed time is based on time since begin was called
-         
+          // alert(data["load_page"])
           if(data["load_page"]){
             $('.loader').fadeOut('slow',function(){
               $(this).remove();
@@ -235,6 +235,7 @@ function startWebgazerfeed(){
             var arrow_down=data["gaze_down"];
             var arrow_up=data["gaze_up"];
             var prev_page=data["prev_page"];
+            var frwd_page=data["frwd_page"];
             var hide=data["hide_div"];
             var hold=data["hold_div"];
             var scrll_bottom = data["scrll_bottom"];
@@ -349,10 +350,19 @@ function startWebgazerfeed(){
                 }
                setTimeout(tempToggleFunc(), 4000);
 
+            // if ((arrow_down.x < xprediction &&  xprediction<(screen.width-110))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
             }
-            if ((prev_page.x < xprediction &&  xprediction<(prev_page.x+100))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
-                //setTimeout();                
-                // window.history.back();
+            frwd_page
+            if ((frwd_page.x < xprediction &&  xprediction<(frwd_page.x+50))&& (frwd_page.y  < yprediction && yprediction<(frwd_page.y+100))){
+                // alert("me here");
+                setTimeout(window.history.forward(), 4000);                
+                
+            }
+
+            if ((prev_page.x < xprediction &&  xprediction<(prev_page.x+50))&& (prev_page.y  < yprediction && yprediction<(prev_page.y+100))){
+                // alert("me here");
+                setTimeout(window.history.back(), 4000);                
+                
             }
 
 
