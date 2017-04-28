@@ -26,7 +26,7 @@
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
 
    "web_accessible_resources": [
-         "src/thirdParty/toastr.min.css", "src/css/controls.css", "src/css/modal.css", "/src/img/load.gif"
+         "src/thirdParty/toastr.min.css", "src/css/controls.css", "src/css/modal.css", "/src/img/load.gif", "/src/img/movie.mp4"
     ],
 
     
