@@ -127,6 +127,8 @@ window.onload=function(){
 	var msg;
 
 	loadSliders();
+			popupBox();
+
 	
 
 	getObjectdata( function(data){
@@ -334,7 +336,7 @@ function loadStartBtnFxns(data, action){
 		}
 
 
-		startWebgazer();
+		// startWebgazer();
 			$('.onoffswitch-checkbox').prop('disabled', false);
 
 
@@ -403,9 +405,10 @@ function loadStartBtnFxns(data, action){
 
 function popupBox(){
 
-	injectResources(['src/css/modal.css', 'src/thirdParty/jquery-3.1.1.min.js']).then(() => {
+	injectResources(['src/css/welcome.css', 'src/thirdParty/jquery-3.1.1.min.js']).then(() => {
+	// injectResources(['src/css/modal.css', 'src/css/eyes.css','src/css/csscarousel.css', 'src/thirdParty/jquery-3.1.1.min.js']).then(() => {
 	  chrome.tabs.executeScript({
-	    file: 'src/js/insertPopCard.js'
+	    file: 'src/js/insertPopCard2.js'
 	  },function(){
 
 
@@ -462,27 +465,6 @@ function startWebgazer(){
 	});
 
 
-
-    // chrome.tabs.executeScript({file: 'src/thirdParty/webgazer.js'}, function(){
-    // 	var type="warning";
-    // 	var msg = "Click anywhere in the screen to initialize eyeGalaw."
-    // 	showtoastr(type, msg);
-    // 	chrome.tabs.executeScript(null, {
-    //         // file: 'src/js/insertLoading.js'                        
-    //         code:
-
-    //         "var preloader = document.createElement( \'div\' );" +
-    //         "preloader.setAttribute(\'class\', \'loader\');" +
-    //         "document.body.appendChild(preloader);"
-           
-
-            
-    //     }, function(){
-    //         chrome.tabs.executeScript({file: 'src/js/webgazerjs.js'}, function(){
-
-    //         });
-   	// 	});  
-    // });  
 }
 
 function newchangeSpeed(){

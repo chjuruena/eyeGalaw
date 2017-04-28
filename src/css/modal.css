@@ -1,5 +1,5 @@
 body{
-    font-family: Arial, sans-serif;
+    font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
       /*position: relative;*/
 
 
@@ -15,13 +15,13 @@ body{
 */
   top: 0;
   bottom: 0;
-  left: 0;
-  right: 0;
+  /*left: 0;
+  right: 0;*/
   background: rgba(0, 0, 0, 0.7);
   transition: opacity 500ms;
   visibility: visible;
   /*opacity: .5;*/
-  z-index: 1;
+  /*z-index: 1;*/
 
 }
 /*.overlay:target {
@@ -53,10 +53,6 @@ body{
   color: #42f492;
     text-align: center;
   opacity: 2;
-
-
-
-
 }
 .popup h2 {
   margin-top: 0;
