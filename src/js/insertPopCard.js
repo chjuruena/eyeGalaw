@@ -13,14 +13,13 @@ close.innerHTML= "&#215";
 var content=  document.createElement( 'div' );
 content.setAttribute('class', 'content'); 
 
-var arr = ["list", "items", "here"];
+// var arr = ["list", "items", "here"];
 
 var strs = [ "Remove any face obstructions.",
 "Wearing of eyeglasses is acceptable." ,
 "Turn the lights on.", 
 "Reangle webcam.",
-"If adjusted settings does not apply or show or an error occurs, always remember to restart the webpage"
- ];
+"If adjusted settings does not apply or show or an error occurs, always remember to restart the webpage"];
 
 var list = document.createElement("ul");
 for (var i in strs) {

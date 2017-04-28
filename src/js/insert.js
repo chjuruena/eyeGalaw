@@ -64,17 +64,7 @@ gaze_up.setAttribute('id', 'gaze_up');
 gaze_down.setAttribute('class', 'gaze_pads controls ');
 gaze_up.setAttribute('class', 'gaze_pads controls');
 
-// prev_page.setAttribute('id', 'prev_page');
-// prev_page.setAttribute('class', 'line_arrows controls');
-// arrow_up.setAttribute('id', 'arrow_up');
 
-// arrow_down.setAttribute('class', 'arrows');
-// arrow_down.setAttribute('class', 'arrows');
-// arrow_left.setAttribute('class', 'arrows');
-// arrow_right.setAttribute('class', 'arrows');
-
-
-// delete this
 
 var triangle = document.createElement( 'div' )
 triangle.setAttribute('class', 'triangle controls');
@@ -89,16 +79,6 @@ var trianglerght = document.createElement( 'div' )
 trianglerght.setAttribute('class', 'triangle controls');
 trianglerght.setAttribute('id', 'frwd_page');
 
-// container.appendChild( triangle);
-// getObjectdata( function(data){
-//     var value=data["opacity"];
-
-//     var list = ["triangle_up","triangle","hide_div","hold_div", "scrll_top", "scrll_bottom" ];
-//     for (var i = 0; i < myElements.length; i++) { 
-//         list[i].setAttribute("style", "opacity:"+value/100+";" );
-
-//     }
-// });
 
 document.body.appendChild( triangle_up);
 document.body.appendChild( triangle);
@@ -123,45 +103,9 @@ var screenwidth = screen.width;
 var screenheight = screen.width;
 document.getElementById('gaze_down').style.width = (screenwidth-220)+"px";
 document.getElementById('gaze_up').style.width = (screenwidth-220)+"px";
-// alert(document.getElementById('gaze_down').style.width);
-// getObjectdata( function(data){
-//     var value=data["opacity"];
-//     // function changeOpacity(){
-//     // var value = $( '#flat-slider1' ).slider( 'values', 0 );
-//     var myElements = document.querySelectorAll(".controls");
-//     for (var i = 0; i < myElements.length; i++) { 
-//          myElements[i].style.opacity = value/100;
-//     }
-    
-
-
-// });
 
 
 
-
-// // alert(screenwidth);
-
-// $('.gaze_pads').css('width', screenwidth);
-// getObjectdata( function(items){
-//     scroll_speed = items.scroll_speed;
-//     console.log(items.scroll_speed)
-
-
-// });
-
-
-// chrome.storage.local.get(null, function(items) {
-//     var allKeys = Object.keys(items);
-//     console.log(items);
-//     console.log(allKeys);
-// });
-
-// chrome.storage.local.get(null, function (items) {
-//     scroll_speed = items.scroll_speed;
-//     console.log(items.scroll_speed)
-
-// });
 getPosition();
 
 function getPosition(){
@@ -196,75 +140,4 @@ function getPosition(){
         console.log('position', obj);
     });
 }
-
-
-// $(function() {
-//      $(document.body ).on("click" , function(event){
-//         var x = event.clientX;
-//         var y = event.clientY;
-//          console.log("clickX:" + x+ " clickY:" +y);
-
-//          var currclick = {
-//                 'x': x, 
-//                 'y': y
-//             };
-//          chrome.storage.local.set(currclick, function () {
-//             console.log('currclick', currclick);
-//         });
-
-//     });
-
-//     $("#prev_page").on("click" ,function(event){
-//         window.history.back();
-
-//     });
-    
-//     $("#arrow_down").on("click" ,function(event){
-//         scrolled=scrolled+scroll_speed;
-
-// 		$("html, body").animate({
-// 		        scrollTop:  scrolled
-// 		   });
-
-//         // var x = event.clientX;
-//         // var y = event.clientY;
-//         //  console.log("clickX:" + x+ " clickY:" +y);
-
-//         //  var currclick = {
-//         //         'x': x, 
-//         //         'y': y
-//         //     };
-//         //  chrome.storage.local.set(currclick, function () {
-//         //     console.log('currclick', currclick);
-//         // });
-
-// 				// console.log( "pageX: " + event.pageX + ", pageY: " + event.pageY );
-// 	 //  	var p = $( "#arrow_down" );
-// 		// var position = p.position();
-// 		// var offset = p.offset();
-// 		// console.log( "left: " + offset.left + ", top: " + position.top );
-
-				
-
-
-// 	});
-//     $("#arrow_left").on("click" ,function(event){     
-
-//         var x = event.clientX;
-//         var y = event.clientY;
-//         console.log("clickX:" + x+ " clickY:" +y);    
-//     });
-
-    
-//     $("#arrow_up").on("click" ,function(){
-//         alert(scroll_speed);
-// 				scrolled=scrolled-scroll_speed;
-				
-// 		$("html, body").animate({
-// 		        scrollTop:  scrolled
-// 		   });
-// 	});   
-    
-// });
-
 
