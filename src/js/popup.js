@@ -294,12 +294,12 @@ function loadStartBtnFxns(data, action){
 	}
 	if((start_val =='START' && action=="click") || (start_val =='STOP' && action=="reload") ){
 		if(start_val =='START' && action=="click") {
-			alert("start_val =='START' && action==click");
+			// alert("start_val =='START' && action==click");
 			type = "info";
 			msg= "Starting eyeGalaw";			
 		}
 		else if(start_val =='STOP' && action=="reload") {
-			alert("start_val =='STOP' && action==reload");
+			// alert("start_val =='STOP' && action==reload");
 			type = "info";
 			msg= "eyeGalaw enabled! Loading settings.";
 		}
@@ -357,7 +357,7 @@ function loadStartBtnFxns(data, action){
 	else if((start_val =='STOP' && action=="click") || (start_val =='START' && action=="reload")  ){
 
 		if(start_val =='STOP' && action=="click") {
-			alert(data["start_button"] +"start_val =='STOP' && action==click" + data["page-action"]);
+			// alert(data["start_button"] +"start_val =='STOP' && action==click" + data["page-action"]);
 			type = "info";
 			msg= "eyeGalaw disabled!";
 			$('.onoffswitch-checkbox').prop('disabled', true);
@@ -373,7 +373,7 @@ function loadStartBtnFxns(data, action){
 			console.log(data)
 		}
 		else if (start_val =='START' && action=="reload")  
-			alert("(start_val =='START' && action==reload" + data["page-action"]);
+			// alert("(start_val =='START' && action==reload" + data["page-action"]);
 		
 		// var obj= {
 		//  "insert_script" : false

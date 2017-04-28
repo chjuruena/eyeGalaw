@@ -31,7 +31,8 @@ chrome.tabs.onActivated.addListener(function(activeInfo) {
 	getObjectdata( function(data){
 		if (activeInfo.tabId != data["activetabId"] ){
 			var obj= {
-				"page-action" : "reload" 
+				"page-action" : "reload",
+				"load_page" : false 
 			};
 			setObjectdata(obj);
 		}

@@ -43,6 +43,7 @@ hold_div.setAttribute('class', 'hidehold_div controls');
 
 
 var scrll_top = document.createElement( 'a' );
+scrll_top.href="#";
 var scrll_bottom = document.createElement( 'a' );
 scrll_top.innerHTML="scroll to <br> top";
 scrll_bottom.innerHTML="scroll to <br> bottom";
@@ -114,8 +115,8 @@ document.body.appendChild(hide_div );
 document.body.appendChild(hold_div);
 // document.body.appendChild(prev_page );
 
-document.body.appendChild(scrll_top );
-document.body.appendChild(scrll_bottom );
+// document.body.appendChild(scrll_top );
+// document.body.appendChild(scrll_bottom );
 
 
 var screenwidth = screen.width;
@@ -167,7 +168,8 @@ function getPosition(){
     var obj={};
      // var arr=["gaze_up", "gaze_down", "arrow_down","arrow_up","arrow_left","arrow_right", "prev_page"];
     // var arr =["arrow_down","arrow_up","arrow_left","arrow_right", "prev_page"];
-     var arr=["gaze_up", "gaze_down", "prev_page", "frwd_page","hide_div" ,"hold_div", "scrll_top", "scrll_bottom"];
+     // var arr=["gaze_up", "gaze_down", "prev_page", "frwd_page","hide_div" ,"hold_div", "scrll_top", "scrll_bottom"];
+     var arr=["gaze_up", "gaze_down", "prev_page", "frwd_page","hide_div" ,"hold_div"];
     arr.forEach(function(element) {
         console.log(document.getElementById(element));
         // var position = document.getElementById(element).offsetParent.offsetTop;

@@ -86,8 +86,12 @@ right: 0;
  
 }
 #hide_div{
-   top: 0;
+  /* top: 0;
   left: 0;
+*/
+    right: 0;
+  bottom: 0;
+  margin-right: 50px; 
 /*right: 0;*/
  }
 #hold_div{
