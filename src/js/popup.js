@@ -336,7 +336,7 @@ function loadStartBtnFxns(data, action){
 		}
 
 
-		// startWebgazer();
+		startWebgazer();
 			$('.onoffswitch-checkbox').prop('disabled', false);
 
 
@@ -583,9 +583,13 @@ $(function() {
 
 	// options dropdown	
     $("#options").on("click", function(){
-	// $( "#effect" ).toggle( "blind", null, 500 );
-		$( "#effect" ).toggle( "blind", null, 500 );
+		var lbl;
+    	if($("#options").text()== "Options▲") lbl = "Options▼";
+    	else lbl = " Options▲"		
+	   $("#options").text(lbl);
+	 
 	
+	$( "#effect" ).toggle( "blind", null, 500 );
 		getObjectdata( function(data){
 			// alert(data["longpop-up"]);
 			if(data["longpop-up"]) {
