@@ -99,7 +99,7 @@ z-index: 3px;
 .carousel-item {
     position: absolute;
     opacity: 0;
-   width: 100%;
+   /*width: 100%;*/
 
     /*height: 530px;*/
 /*     background: blue; */
