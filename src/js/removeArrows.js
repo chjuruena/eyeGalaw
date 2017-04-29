@@ -13,8 +13,3 @@ for (var i = 0; i < controls.length; i++) {  
 };
 		
 
-
-
-
-
-// code: ' var myElements = document.querySelectorAll(\".arrows\");Array.prototype.forEach.call( myElements, function( node ) {node.parentNode.removeChild( node );});'

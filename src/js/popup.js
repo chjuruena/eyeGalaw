@@ -1,25 +1,12 @@
 // small letter for start then Pascal for functions ex. startEvent
 // css class and ids are snake-case
 
-// var app = chrome.runtime.getBackgroundPage();
 var running;
 var first=1;
-var defaultPixelMovement = 50;
+var defaultPixelMovement = 150;
 var pageheight = screen.height;
 
 
-// toaster
-
-
-// var sheight=$(document).height(); 
-
-
-getObjectdata( function(data){
-	console.log(data);
-});
-
-
-// saving data to chrome local storage
 function setObjectdata(obj){
 	chrome.storage.local.set(obj, function () {
         console.log('Saved', obj);
@@ -42,15 +29,10 @@ function loadDeafultValues(){
 	$('.flat-slider').slider({
 		disabled: true
 	});	
-		$('.onoffswitch-checkbox').prop('disabled', true);		
-
-
-	//setdefaultSpeed
+		$('.onoffswitch-checkbox').prop('disabled', true);	
 	
 	var sliderVal= Math.round((defaultPixelMovement/pageheight) * 100);
-	var startingScrollSpeed = pageheight * (sliderVal/100);   				
-	
-
+	var startingScrollSpeed = pageheight * (sliderVal/100); 
 
 	var obj= {
 		"pageheight" : pageheight,
@@ -58,7 +40,6 @@ function loadDeafultValues(){
 		'wgvideofeed' : false,
 		'scroll_speed' : startingScrollSpeed,
 		'opacity' : 50
-		// 'longpop-up' : true
 	};
 	setObjectdata(obj);
 }
@@ -76,8 +57,7 @@ function loadSliders(){
 			$('#flat-slider2').slider('value',scroll_speed_slider);
 			$('#flat-slider1').slider('value',opacity_slider);
 		});
-		// changeOpacity();
-		// add opcaity
+		
 	});
 }
 function loadButtonVal(){
@@ -127,14 +107,10 @@ window.onload=function(){
 	var msg;
 
 	loadSliders();
-			popupBox();
-
-	
+			// popupBox();	
 
 	getObjectdata( function(data){
-        // alert(data["page-action"]+" "+ data["start_button"] +" "+ data["action"] )
-		// alert(data["page-action"])
-
+     
 		setPopupsize(data["longpop-up"]);
 		disablebtn(data["start_button"]);
 
@@ -143,10 +119,6 @@ window.onload=function(){
 		else $('#myonoffswitch').prop('checked', false);
 		console.log(data);
 		var toastr_val = data["toastr_val"];
-
-
-
-
 		if (!data["start_button"]){			
 			type = "success";
 			msg="Welcome to eyeGalaw!";
@@ -156,21 +128,17 @@ window.onload=function(){
 			console.log("wala pang start_button");
 			document.getElementById('start_button').text ='START';
 			setBtnto("START");
-			// setSliderValAtStart();
 			loadDeafultValues();
 
 
 		}
 		else {
-		// setPopupsize(data["longpop-up"]);
-
 			console.log("MERON NAAAAAAAA start_button"); 
 				loadStartBtnFxns(data, "reload");
 				var obj= {
 					"action" : "reload" 
 				};
-				setObjectdata(obj);
-				
+				setObjectdata(obj);				
 				loadButtonVal();
 				console.log(data);
 		}
@@ -181,9 +149,6 @@ window.onload=function(){
 
 	});	
 
-	// loadButtonVal();
-
-
 	document.getElementById('start_button').addEventListener('click', startEvent);	
 }
 
@@ -193,13 +158,8 @@ function setPopupsize(data){
 		
 	}else{
         $(".dropdown").css('display', 'block');
-
 		
 	}
-
-
-    //   if($('#menu').height() != 200)
-    //         $("#menu").css('height', '200px');
     
 }
 function disablebtn(start_val){
@@ -209,7 +169,6 @@ function disablebtn(start_val){
 		$(".onoffswitch-checkbox").css('opacity', '0.40');
 		$(".onoffswitch-checkbox").css('opacity', '0.40');
 		$(".onoffswitch-label").css('cursor', 'not-allowed');
-
 				
 	}else{
 		$(".onoffswitch-inner").css('opacity', '100');
@@ -273,22 +232,13 @@ function loadStartBtnFxns(data, action){
 	
 	var start_val = data["start_button"];
 	var insertscript = data["insert_script"];
-	// getObjectdata( function(data){		
-
-	// var start_val=data["start_button"];
-	console.log(start_val);
-
-	//opposite azng reload at click
-	// relaod =value after clicking
-	// click=value before clicking
+	
 	var msg;
 	var type;
 
 	function insertControls(){
 
-		// alert("insertControls"+ insertscript);
 		chrome.tabs.executeScript(null, {
-				// allFrames: true, 
 			file: 'src/js/insert.js'						
 		}, function(){
 			changeOpacity();
@@ -313,40 +263,11 @@ function loadStartBtnFxns(data, action){
 		$('.flat-slider').slider({
 			disabled: false
 		});	
-		// $('.onoffswitch-checkbox').prop('disabled', false);		
-
-
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
-		console.log(insertscript)
 		if ((data["page-action"] == "reload") || (start_val =='START' && action=="click")){
-			insertControls();
-			// var obj= {
-			//      "insert_script" : true			     
-			// };
-			// setObjectdata(obj); 
-				 
+			insertControls();			
 		}
-
-
 		startWebgazer();
-			$('.onoffswitch-checkbox').prop('disabled', false);
-
-
-		// getObjectdata( function(data){
-		// 	var toastr_val=data["toastr_val"];
-		// 	showtoastr(toastr_val[0], toastr_val[1]);
-
-		// 	// if(  data["hold_toggle"]) alert( data["hold_toggle"])
-			
-		// });
+			$('.onoffswitch-checkbox').prop('disabled', false);		
 
 		if (action=="click"){
 			setBtnto("STOP");
@@ -374,18 +295,7 @@ function loadStartBtnFxns(data, action){
 				setObjectdata(obj); 
 			console.log(data)
 		}
-		else if (start_val =='START' && action=="reload")  
-			// alert("(start_val =='START' && action==reload" + data["page-action"]);
-		
-		// var obj= {
-		//  "insert_script" : false
-		 
-		// };
-		// setObjectdata(obj); 
-		
-
-		
-
+		// else if (start_val =='START' && action=="reload")  
 		$('.flat-slider').slider({
 			disabled: true
 		});
@@ -396,7 +306,6 @@ function loadStartBtnFxns(data, action){
 		loadButtonVal();
 
 		showtoastr(type, msg);
-          //alert(data["page-action"]+" "+ data["start_button"] +" "+ data["action"] )
 
 	}
 
@@ -418,10 +327,7 @@ function popupBox(){
 	});
 
 		
-	// timer
-    
-    // setTimeout(checkIfReady,100);
-
+	
 }
 
 function startWebgazer(){
@@ -431,7 +337,6 @@ function startWebgazer(){
     	showtoastr(type, msg);
 		getObjectdata( function(data){
 			var loadpage = data["load_page"];
-			// alert(loadpage);
 			if (!loadpage){
 		    	chrome.tabs.executeScript(null, {
 		            code:
@@ -439,32 +344,19 @@ function startWebgazer(){
 		            "var preloader = document.createElement( \'div\' );" +
 		            "preloader.setAttribute(\'class\', \'loader\');" +
 		            "document.body.appendChild(preloader);"
-		           
-
-		            
 		        });
 				var obj= {
 				     "load_page" : true
-				     
 				 };
 				 setObjectdata(obj); 
-				 
 			}
-
-	        
-	            // chrome.tabs.executeScript({file: 'src/js/webgazerjs.js'}, function(){
 	        chrome.tabs.executeScript({file: 'src/js/webgazerjs.js'}, function(){
-
-
-	        });
-			
+	        });			
 		});
 
 	}).catch(err => {
 	  console.error(`Error occurred: ${err}`);
 	});
-
-
 }
 
 function newchangeSpeed(){
@@ -472,9 +364,6 @@ function newchangeSpeed(){
 	var scroll_speed;
 	var scroll_speed_slider_val;
 	scroll_speed = pageheight * (value/100);
-
-
-
 	var obj= {
 		"scroll_speed_slider" : value,
 		"scroll_speed" : scroll_speed
@@ -492,14 +381,11 @@ function changeSpeed(){
 		 	scroll_speed_slider_val = data["scroll_speed_slider"];
 		 	
 		getObjectdata( function(data2){
-
 		 	scroll_speed = data2["scroll_speed"];
 			console.log("scroll_speed" +scroll_speed);
 
-
 			var tempvalue = value;
 			if ( value > 50) tempvalue = value*5;
-
 
 			if ( value > scroll_speed_slider_val ) new_scroll_speed = scroll_speed + tempvalue;
 			else new_scroll_speed = scroll_speed  - tempvalue;
@@ -533,7 +419,6 @@ function changeOpacity(){
 	chrome.tabs.executeScript(null, {
 		code: ' var myElements = document.querySelectorAll(\'.controls\');for (var i = 0; i < myElements.length; i++) {  myElements[i].style.opacity = '+value/100+';} '
 	});
-	// $('#flat-slider1').slider('value', value).change();
 	var obj= {
 		'opacity' : value
 	};
@@ -541,19 +426,7 @@ function changeOpacity(){
 
 }
 
-// message passing
-// chrome.tabs.getSelected(null, function(tab) {
-//   // Send a request to the content script.
-//   chrome.tabs.sendMessage(tab.id, {action: 'getDOM'}, function(response) {
-//     console.log(response.dom);
-//   });
-// });
-
-
-
-
 function myFunction() {
-	    // document.getElementById('myDropdown').classList.toggle('show');
 	var myDropdown = document.getElementById('myDropdown');
 	myDropdown.classList.toggle('show');
 }
@@ -568,7 +441,6 @@ $(function() {
             }
 	});
 	$('#flat-slider2').slider({
-		// alert( $('#flat-slider2').prop('disabled'));
 		slide: function( event, ui ) {
 
                 $( '#slider-value-scroll' ).html( ui.value );
@@ -602,18 +474,9 @@ $(function() {
 				};
 			}
 			setObjectdata(obj);
-		});
- 
-      
+		});   
+    });   
 
-
-
-
-    });
-
-    
-    // $(".onoffswitch-checkbox").is(':checked') = true;
-	// document.getElementById('myonoffswitch').checked=true;
     
     $(".onoffswitch-checkbox").on("click", function(){
     	var type, msg;
@@ -624,9 +487,7 @@ $(function() {
 				'wgvideofeed' : true
 			};
 			setObjectdata(wgvideofeed);
-			msg = "Video feed is enabled;"
-
-
+			msg = "Video feed is enabled;";
 	    } 
 	    else {
 	    	var wgvideofeed= {
@@ -634,14 +495,9 @@ $(function() {
 			};
 			setObjectdata(wgvideofeed);
 			msg = "Video feed is disabled;"
-
 		}	
-
 		type = "info;"
 		showtoastr(type, msg);
-
-
-						 
 	});   
 
 	
