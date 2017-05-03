@@ -266,12 +266,22 @@ function startWebgazerfeed(){
                     var tempToggle = data["hold_toggle"];
                      var msg;
                     if(tempToggle) {
-                       // tempToggle = !tempToggle;                    
+                       // tempToggle = !tempToggle;  
+                       $('#hold').css({
+                          'color':   '#000000'
+                        });
+
                         scroll_speed= data["pageheight"]*(data["scroll_speed_slider"]/100);
+                        document.getElementById('hold').text="HOLD";
+
                         
                     }else{
-                        
+                         $('#hold').css({
+                          'color':   '#e74c3c'
+                        });
                        scroll_speed=0;
+                       document.getElementById('hold').text="UNHOLD";
+                       
                     }
                     tempToggle = !tempToggle; 
 
@@ -382,7 +392,7 @@ function startWebgazerfeed(){
                     var tempToggle = data["hide_toggle"];
                      var msg;
                      function changeOpcty(val){
-                        var arr=[ "#prev_page", "#frwd_page", "#hide_div","#hold_div", "#scrll_top", "#scrll_bottom", "#triangle_down", "#triangle_up"];
+                        var arr=[ "#prev_page", "#frwd_page", "#hold_div", "#scrll_top", "#scrll_bottom", "#triangle_down", "#triangle_up"];
                         arr.forEach(function(element) {
                             console.log(document.getElementById(element));
                             if (element) $(element).css('opacity', val);
@@ -390,9 +400,23 @@ function startWebgazerfeed(){
 
                      }
                     if(tempToggle) {
+                        $('#hide').css({
+                          'margin-left': '100px',
+                          'color':   '#e74c3c'
+                        });
                       changeOpcty(0);
+                        document.getElementById('hide').text="SHOW";
+                       
+
+
                     }else {
-                      changeOpcty(data["opacity"]/100);                        
+                      $('#hide').css({
+                          'margin-right': '50px',
+                          'color':   '#000000'
+                        });
+                      changeOpcty(data["opacity"]/100);   
+                      document.getElementById('hide').text="HIDE";
+
                     }
                     tempToggle = !tempToggle; 
 

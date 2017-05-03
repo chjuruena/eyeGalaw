@@ -315,7 +315,6 @@ function loadStartBtnFxns(data, action){
 function popupBox(){
 
 	injectResources(['src/css/welcome.css', 'src/thirdParty/jquery-3.1.1.min.js']).then(() => {
-	// injectResources(['src/css/modal.css', 'src/css/eyes.css','src/css/csscarousel.css', 'src/thirdParty/jquery-3.1.1.min.js']).then(() => {
 	  chrome.tabs.executeScript({
 	    file: 'src/js/insertPopCard2.js'
 	  },function(){
@@ -333,7 +332,7 @@ function popupBox(){
 function startWebgazer(){
 	injectResources([ 'src/thirdParty/webgazer.js','src/thirdParty/toastr.min.css', 'src/thirdParty/jquery-3.1.1.min.js', 'src/thirdParty/toastr.min.js']).then(() => {
 	  var type="warning";
-    	var msg = "Click anywhere in the screen to initialize eyeGalaw."
+    	var msg = "Click anywhere in the screen while looking at the mouse pointer to initialize/calibrate eyeGalaw."
     	showtoastr(type, msg);
 		getObjectdata( function(data){
 			var loadpage = data["load_page"];
