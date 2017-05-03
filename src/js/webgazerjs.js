@@ -401,7 +401,7 @@ function startWebgazerfeed(){
                      }
                     if(tempToggle) {
                         $('#hide').css({
-                          'margin-left': '100px',
+                          'right': 2,
                           'color':   '#e74c3c'
                         });
                       changeOpcty(0);
@@ -411,7 +411,7 @@ function startWebgazerfeed(){
 
                     }else {
                       $('#hide').css({
-                          'margin-right': '50px',
+                          'right': 0,
                           'color':   '#000000'
                         });
                       changeOpcty(data["opacity"]/100);   

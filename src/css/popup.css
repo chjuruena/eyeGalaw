@@ -36,11 +36,12 @@ height:170px;
 
 }
 img#eyeGalaw-icon{
-	width: 80px;
-  height: 80px;
+	width:230px;
+  height: 90px;
+  margin-left: -2px;
   /*margin-top: 50px;*/
   margin-bottom: 10px;
-  padding-top: 50px;
+  padding-top: 45px;
   /*margin: 5px auto;*/
   display: block;
 }
@@ -147,7 +148,7 @@ img#eyeGalaw-icon{
     -moz-transition: top 1s;
     -o-transition: top 1s;
     transition: top 1s ;
-  width: 150px;
+  width: 160px;
   height: 180px;
 }
 
@@ -167,9 +168,18 @@ img#eyeGalaw-icon{
   top: 3px;
 }
 
-#low-opacity{
 
+a#help {
+    color:#fff;
+    background-color:#feb22a;
+    width:12px;
+    height:12px;
+    display:inline-block;
+    border-radius:100%;
+    font-size:10px;
+    text-align:center;
+    text-decoration:none;
+    -webkit-box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
+    box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
 }
-
-
-
