@@ -44,6 +44,8 @@ img#eyeGalaw-icon{
   padding-top: 45px;
   /*margin: 5px auto;*/
   display: block;
+  cursor:pointer;
+
 }
 
 .center{
@@ -187,6 +189,7 @@ a.help {
 .tooltip {
   display:none;
   position:absolute;
+  left:50;
   border:1px solid #333;
   background-color:#161616;
   border-radius:5px;
@@ -195,4 +198,15 @@ a.help {
   font-size:10px;
   z-index: 10;
 
+}
+
+/**/
+#eyeGalaw_about{
+  top: 20px;
+  color: #616366;
+  font-size: 80%;  
+  letter-spacing:10px;
+  text-align: center;
+  /*margin: 0 auto;*/
+  cursor:pointer;
 }

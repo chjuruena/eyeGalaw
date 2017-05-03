@@ -1,0 +1,87 @@
+body{
+    font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+      /*position: relative;*/
+
+
+  /*background-size: cover;*/
+}
+
+
+#backdrop {
+  position: fixed;
+  /*background-size: cover;*/
+/*  width: 100%;
+  height: 100%;
+*/
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: visible;
+  /*opacity: .5;*/
+  /*z-index: 1;*/
+
+}
+/*.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}*/
+
+#modal {
+  /*position: absolute;*/
+    /*margin: 0 auto;*/
+    position: fixed;
+  top: 20%;
+  left: 40%;
+
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 300px;
+  /*position: relative;*/
+  transition: all 5s ease-in-out;
+  opacity: 1;
+  z-index: 2;
+
+}
+
+.welcome {
+  top:20%;
+  font-size: 100px;
+  color: #42f492;
+    text-align: center;
+  opacity: 2;
+}
+.modal h2 {
+  margin-top: 0;
+  color: #333;
+  /*font-family: Tahoma, Arial, sans-serif;*/
+}
+.modal .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+  float: right;
+  cursor: pointer;
+}
+.modal .close:hover {
+  color: #06D85F;
+}
+.modal .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  
+  .modal{
+    width: 70%;
+  }
+}

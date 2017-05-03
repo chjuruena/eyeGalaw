@@ -108,6 +108,8 @@ window.onload=function(){
 
 	loadSliders();
 			// popupBox();	
+			var first='src/js/insertPopCard2.js';
+			var dep = ['src/css/welcome.css', 'src/thirdParty/jquery-3.1.1.min.js'];
 
 	getObjectdata( function(data){
      
@@ -123,7 +125,8 @@ window.onload=function(){
 			type = "success";
 			msg="Welcome to eyeGalaw!";
 			showtoastr(type, msg);
-			popupBox();
+
+			popupBox(first,dep );
 			// tutorial
 			console.log("wala pang start_button");
 			document.getElementById('start_button').text ='START';
@@ -144,7 +147,7 @@ window.onload=function(){
 		}
 
 		if(toastr_val[0] == null && toastr_val[1] == null ){			
-			popupBox();
+			popupBox(first, dep);
 		}		
 
 	});	
@@ -312,11 +315,11 @@ function loadStartBtnFxns(data, action){
 
 }
 
-function popupBox(){
+function popupBox(filename, dep){
 
-	injectResources(['src/css/welcome.css', 'src/thirdParty/jquery-3.1.1.min.js']).then(() => {
+	injectResources(dep).then(() => {
 	  chrome.tabs.executeScript({
-	    file: 'src/js/insertPopCard2.js'
+	    file: filename
 	  },function(){
 
 
@@ -529,7 +532,11 @@ $(function() {
                 .css({ top: mousey, left: mousex })
         });
 
-    $("#speedhelp").on("click", function(){
+    $("#eyeGalaw-icon").on("click", function(){
+		var filename ='src/js/insertPopCard.js';
+		var dep = 	['src/css/modal.css', 'src/thirdParty/jquery-3.1.1.min.js'];
+
+    		popupBox(filename, dep);
 
     });
 
