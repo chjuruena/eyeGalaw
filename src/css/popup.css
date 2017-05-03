@@ -169,7 +169,7 @@ img#eyeGalaw-icon{
 }
 
 
-a#help {
+a.help {
     color:#fff;
     background-color:#feb22a;
     width:12px;
@@ -182,4 +182,17 @@ a#help {
     -webkit-box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
     -moz-box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
     box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
+}
+
+.tooltip {
+  display:none;
+  position:absolute;
+  border:1px solid #333;
+  background-color:#161616;
+  border-radius:5px;
+  padding:10px;
+  color:#fff;
+  font-size:10px;
+  z-index: 10;
+
 }

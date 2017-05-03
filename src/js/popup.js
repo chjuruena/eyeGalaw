@@ -529,6 +529,10 @@ $(function() {
                 .css({ top: mousey, left: mousex })
         });
 
+    $("#speedhelp").on("click", function(){
+
+    });
+
 	
 	
 });
