@@ -228,6 +228,8 @@ function showtoastr(type, msg){
 	}).catch(err => {
 	  console.error(`Error occurred: ${err}`);
 	});
+
+
 		
 }
 
@@ -333,7 +335,7 @@ function popupBox(filename, dep){
 }
 
 function startWebgazer(){
-	injectResources([ 'src/thirdParty/webgazer.js','src/thirdParty/toastr.min.css', 'src/thirdParty/jquery-3.1.1.min.js', 'src/thirdParty/toastr.min.js']).then(() => {
+	injectResources([ 'src/thirdParty/webgazer.js','src/thirdParty/toastr.min.css', 'src/thirdParty/jquery-3.1.1.min.js', 'src/thirdParty/toastr.min.js', 'src/css/dots.css']).then(() => {
 	  var type="warning";
     	var msg = "Click anywhere in the screen while looking at the mouse pointer to initialize/calibrate eyeGalaw."
     	showtoastr(type, msg);
@@ -341,17 +343,17 @@ function startWebgazer(){
 			var loadpage = data["load_page"];
 			if (!loadpage){
 		    	chrome.tabs.executeScript(null, {
-		            code:
+		            file: 'src/js/loader.js'
 
-		            "var preloader = document.createElement( \'div\' );" +
-		            "preloader.setAttribute(\'class\', \'loader\');" +
-		            "document.body.appendChild(preloader);"
 		        });
+
+
 				var obj= {
 				     "load_page" : true
 				 };
 				 setObjectdata(obj); 
 			}
+			
 	        chrome.tabs.executeScript({file: 'src/js/webgazerjs.js'}, function(){
 	        });			
 		});

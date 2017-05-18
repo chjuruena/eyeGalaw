@@ -1,0 +1,18 @@
+
+.mark {
+	-webkit-transition: -webkit-transform .1s linear;
+	-moz-transition: -moz-transform .1s ease-in-out;
+	-o-transition: -o-transform .1s ease-in-out;
+	transition: tranform .1s ease-in-out;
+	background-color: red;
+
+}
+.focused-mark {
+	-webkit-transform: scale(1.3);
+	-moz-transform: scale(1.3);
+	-o-transform: scale(1.3);
+	transform: scale(1.3);
+	background-color: red;
+
+}
+

@@ -22,4 +22,19 @@ $("#item3").css("width", screenwidth);
 $(".close").on("click", function(){
     $('#popup1').fadeOut('slow',function(){$(this).remove();});
     $('#popup').fadeOut('slow',function(){$(this).remove();});
+    var obj= {
+             "starting-page" : true 
+         };
+         setObjectdata(obj); 
 });
+
+
+function getObjectdata(callback) {
+    chrome.storage.local.get(null, callback);
+}
+function setObjectdata(obj){
+    chrome.storage.local.set(obj, function () {
+    });
+}
+
+		             

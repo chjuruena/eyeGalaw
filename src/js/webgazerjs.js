@@ -36,7 +36,7 @@ function init(){
           if((data["start_button"] =='STOP' && data["action"]=="click") || (data["start_button"] =='STOP' && 
             data["page-action"]=="reload" && data["action"]=="reload")) {
                 // alert("start");
-                startWebgazerfeed(); 
+              startWebgazerfeed(); 
                 var obj= {
                      "page-action" : null 
                  };
@@ -76,7 +76,7 @@ function showVideo(enabled){
 // function setupvid(){
     var width = 320;
     var height = 240;
-    var topDist = '100px';
+    var topDist = '0px';
     var leftDist = '0px';
     
     var setup = function() {
@@ -116,7 +116,10 @@ function showVideo(enabled){
     };
     function checkIfReady() {
         if (webgazer.isReady()) {
+            
             setup();
+            toastr["success"]("", "Eye video feed enabled");
+
         } else {
             setTimeout(checkIfReady, 100);
         }
@@ -155,6 +158,9 @@ function startWebgazerfeed(){
     
     var page_action;
     var start_button;
+      var scroll_speed;
+
+
     webgazer.setRegression('ridge') /* currently must set regression and tracker */
     .setTracker('clmtrackr')
     .setGazeListener(function(eyedata, elapsedTime) {
@@ -209,20 +215,41 @@ function startWebgazerfeed(){
 
           // console.log(elapsedTime); //elapsed time is based on time since begin was called
           // alert(data["load_page"])
-          if(data["load_page"]){
-            $('.loader').fadeOut('slow',function(){
-              $(this).remove();
-              var obj= {
-                 "load_page" : false
-                 
-              };
-              setObjectdata(obj); 
+          if(data["load_page"] ){
+              if (data["starting-page"] == true){
+                  // alert(data["click-count"]);
+                if( data["click-count"]>35) {
+                    // alert('yeas')
+                  $('.loader').fadeOut('slow',function(){
+                    $(this).remove();
+                    var obj= {
+                       "load_page" : false,
+                       "starting-page" : null
+                       
+                    };
+                    setObjectdata(obj); 
 
-            });
+                  });
+                }
+                scroll_speed =0;
+              }else{
+                $('.loader').fadeOut('slow',function(){
+                    $(this).remove();
+                    var obj= {
+                       "load_page" : false,
+                       
+                    };
+                    setObjectdata(obj); 
+
+                  });
+              }
+
+            
             if($('#popup1')){
               $('#popup1').fadeOut('slow',function(){
                 $(this).remove();
               });
+                
               
             }
             
@@ -230,7 +257,6 @@ function startWebgazerfeed(){
 
 
 
-            
 
             
             var arrow_down=data["gaze_down"];
@@ -242,7 +268,7 @@ function startWebgazerfeed(){
             // var scrll_bottom = data["scrll_bottom"];
             
              // scroll_speed
-            var scroll_speed=data["scroll_speed"];
+            scroll_speed=data["scroll_speed"];
             var pagePosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
             var position2 =  $(window).scrollTop();
             if ( position2 != pagePosition) alert("hello");           
