@@ -1,9 +1,17 @@
 function getObjectdata(callback) {
     chrome.storage.local.get(null, callback);
-} //gettng chrome storage objects
+}
 
-//THIS DOCUMENTS ADDS THE NAVIGATIONS BUTTONS 
-// scroll up, down, back adn forard page, hide and hold button dynamically
+// Listen for messages
+chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
+    // If the received message has the expected format...
+    if (msg.text === 'report_back') {
+        // Call the specified callback, passing
+        // the web-page's DOM content as argument
+        sendResponse(document.all[0].outerHTML);
+    }
+});
+
 
 document.documentElement.style.height = '100%';
 document.documentElement.style.width = '100%';
@@ -14,8 +22,8 @@ var arrow_up = document.createElement( 'div' );
 var line_arrow_up = document.createElement( 'div' );
 var arrow_down = document.createElement( 'div' );
 var line_arrow_down = document.createElement( 'div' );
+// var prev_page = document.createElement( 'div' );
 
-// hold and hide
 var hide_div = document.createElement( 'div' );
 var hold_div = document.createElement( 'div' );
 var hide = document.createElement( 'a' );
@@ -80,7 +88,10 @@ document.body.appendChild( gaze_down);
 document.body.appendChild( gaze_up);
 
 
+document.body.appendChild(hide_div );
 document.body.appendChild(hold_div);
+
+
 
 var screenwidth = screen.width;
 var screenheight = screen.width;
@@ -91,16 +102,18 @@ document.getElementById('gaze_up').style.width = (screenwidth-220)+"px";
 
 getPosition();
 
-// getting position of the elements on the screen
 function getPosition(){
     var obj={};
      var arr=["gaze_up", "gaze_down", "prev_page", "frwd_page","hide_div" ,"hold_div"];
     arr.forEach(function(element) {
         console.log(document.getElementById(element));
-         if(document.getElementById(element)) {
+          if(document.getElementById(element)) {
             var x = document.getElementById(element).offsetLeft;
             var y = document.getElementById(element).offsetTop;
             console.log("x "+ x + ", y"+y);
+
+
+
             var objelement = {
                 'x': x,
                 'y': y
