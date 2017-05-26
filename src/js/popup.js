@@ -25,13 +25,16 @@ function setdefaultSpeed(){
 
 }
 
+// loading default values for the extension
 function loadDeafultValues(){
 	$('.flat-slider').slider({
 		disabled: true
 	});	
 		$('.onoffswitch-checkbox').prop('disabled', true);	
 	
+	// slider values is defaultPixelMovement/pageheight *100
 	var sliderVal= Math.round((defaultPixelMovement/pageheight) * 100);
+	// computing for the scroll speed
 	var startingScrollSpeed = pageheight * (sliderVal/100); 
 
 	var obj= {
@@ -44,7 +47,7 @@ function loadDeafultValues(){
 	setObjectdata(obj);
 }
 
-//load slider values for opacity adn scroll value
+//load slider values for opacity and scroll value
 function loadSliders(){
 	getObjectdata( function(data){
 		var scroll_speed_slider = data['scroll_speed_slider'];
@@ -60,6 +63,8 @@ function loadSliders(){
 		
 	});
 }
+
+// loads buttons value
 function loadButtonVal(){
 	
 	getObjectdata( function(data){
@@ -70,7 +75,7 @@ function loadButtonVal(){
 	});	
 }
 
-
+// sets "start"'s button's value
 function setBtnto(action){
 	var obj= {
 		'start_button' : action
@@ -78,8 +83,9 @@ function setBtnto(action){
 	setObjectdata(obj);
 	document.getElementById('start_button').text = action;
 }
-function startEvent() {   
 
+// gets and sets button event
+function startEvent() {   
 	getObjectdata( function(data){
 		disablebtn(data["start_button"]);
 
@@ -93,30 +99,21 @@ function startEvent() {
 	});	
 }
 
-function setSliderValAtStart(){
-	
-
-}
-
-function saveClicks(){
-	
-}
+// where most of the functions are called
 window.onload=function(){
-	// if($("#mainr").height;)
 	var type;
 	var msg;
 
 	loadSliders();
-			// popupBox();	
-			var first='src/js/insertPopCard2.js';
-			var dep = ['src/css/welcome.css', 'src/thirdParty/jquery-3.1.1.min.js'];
+	// files for the start-up screen welcome page
+	var first='src/js/insertPopCard2.js';
+	var dep = ['src/css/welcome.css', 'src/thirdParty/jquery-3.1.1.min.js'];
 
 	getObjectdata( function(data){
      
 		setPopupsize(data["longpop-up"]);
 		disablebtn(data["start_button"]);
 
-		// alert(data["wgvideofeed"]);
 		if (data["wgvideofeed"]) $('#myonoffswitch').prop('checked', true);
 		else $('#myonoffswitch').prop('checked', false);
 		console.log(data);
@@ -125,10 +122,9 @@ window.onload=function(){
 			type = "success";
 			msg="Welcome to eyeGalaw!";
 			showtoastr(type, msg);
-
+			// call for the start-up screen welcome page
 			popupBox(first,dep );
-			// tutorial
-			console.log("wala pang start_button");
+
 			document.getElementById('start_button').text ='START';
 			setBtnto("START");
 			loadDeafultValues();
@@ -136,7 +132,6 @@ window.onload=function(){
 
 		}
 		else {
-			console.log("MERON NAAAAAAAA start_button"); 
 				loadStartBtnFxns(data, "reload");
 				var obj= {
 					"action" : "reload" 
@@ -155,6 +150,7 @@ window.onload=function(){
 	document.getElementById('start_button').addEventListener('click', startEvent);	
 }
 
+// setting pop up size depending on the user's prerog using CSS
 function setPopupsize(data){
 	if(data) {
         $('.dropdown').css('display', 'none');
@@ -165,6 +161,8 @@ function setPopupsize(data){
 	}
     
 }
+
+// webgazerfeed button CSS adjust
 function disablebtn(start_val){
 	if(start_val=="START"){
 		$(".onoffswitch-inner").css('opacity', '0.40');
@@ -213,6 +211,9 @@ function injectResources(files) {
         });
     })));
 }
+
+// shows toastr
+// injects toastr options to initialize the toastr settings
 function showtoastr(type, msg){  
 	var arr=[];
 	arr.push(type, msg);
@@ -228,11 +229,10 @@ function showtoastr(type, msg){
 	}).catch(err => {
 	  console.error(`Error occurred: ${err}`);
 	});
-
-
-		
+	
 }
 
+// loading start button values
 function loadStartBtnFxns(data, action){
 	
 	var start_val = data["start_button"];
@@ -249,6 +249,7 @@ function loadStartBtnFxns(data, action){
 			changeOpacity();
 		});
 	}
+
 	if((start_val =='START' && action=="click") || (start_val =='STOP' && action=="reload") ){
 		if(start_val =='START' && action=="click") {
 			// alert("start_val =='START' && action==click");
@@ -317,6 +318,9 @@ function loadStartBtnFxns(data, action){
 
 }
 
+
+//fxn for inserting  the start-up screen welcome page
+
 function popupBox(filename, dep){
 
 	injectResources(dep).then(() => {
@@ -330,10 +334,10 @@ function popupBox(filename, dep){
 	  console.error(`Error occurred: ${err}`);
 	});
 
-		
-	
+
 }
 
+// injecting web gazer whenever the user clicks start
 function startWebgazer(){
 	injectResources([ 'src/thirdParty/webgazer.js','src/thirdParty/toastr.min.css', 'src/thirdParty/jquery-3.1.1.min.js', 'src/thirdParty/toastr.min.js', 'src/css/dots.css']).then(() => {
 	  var type="warning";
@@ -346,7 +350,6 @@ function startWebgazer(){
 		            file: 'src/js/loader.js'
 
 		        });
-
 
 				var obj= {
 				     "load_page" : true
@@ -363,6 +366,7 @@ function startWebgazer(){
 	});
 }
 
+// change scrolling speed
 function newchangeSpeed(){
 	var value = $( "#flat-slider2" ).slider( "values", 0 );
 	var scroll_speed;
@@ -376,6 +380,7 @@ function newchangeSpeed(){
 
 }
 
+// change scrolling speed
 
 function changeSpeed(){
 	var value = $( "#flat-slider2" ).slider( "values", 0 );
@@ -418,6 +423,8 @@ function changeSpeed(){
 	setObjectdata(obj);
 	
 }
+
+// inscrease/dec opacity using CSS
 function changeOpacity(){
 	var value = $( '#flat-slider1' ).slider( 'values', 0 );
 	chrome.tabs.executeScript(null, {
@@ -430,12 +437,7 @@ function changeOpacity(){
 
 }
 
-function myFunction() {
-	var myDropdown = document.getElementById('myDropdown');
-	myDropdown.classList.toggle('show');
-}
-
-// initialization of UI
+// initialization of UI by jquery
 $(function() {
 	var last = 0;
 	$('#flat-slider1').slider({

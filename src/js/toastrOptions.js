@@ -1,3 +1,10 @@
+/**
+ * this document initializes the toastr options in the pop-up.js file
+ it is injected from the pop-up.js because if the toastr is called inside the
+ pop-up.js file, the toaster will appear on the pop-up of the extension and we dont want that
+ */
+
+
 function getObjectdata(callback) {
     chrome.storage.local.get(null, callback);
 }

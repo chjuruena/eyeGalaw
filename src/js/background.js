@@ -10,7 +10,6 @@ function getObjectdata(callback) {
 }
 
 
-
 chrome.tabs.onActivated.addListener(function(activeInfo) {
 	getObjectdata( function(data){
 		if (activeInfo.tabId != data["activetabId"] ){
@@ -21,42 +20,25 @@ chrome.tabs.onActivated.addListener(function(activeInfo) {
 			setObjectdata(obj);
 		}
 	});
-	// checkHold();
 }); 
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-   // alert(changeInfo.status);
 
 	if(tab.active) {
 		var obj= {
-			"activetabId" : tab.id 
+			"activetabId" : tab.id  //gets Id of active tab
 		};
 		setObjectdata(obj);
-		// checkHold();
 	}
    if (changeInfo.status == "loading" || changeInfo.status == "complete"){
 	   	var obj= {
-			"page-action" : "reload" 
+			"page-action" : "reload" //sets data for page-action
 		};
 		setObjectdata(obj);
    }
    
 	
 }); 
-function checkHold(){
-	getObjectdata( function(data){
-		var msg;
-		var type="info";
-		if(data["hold_toggle"]==true) {
-		// alert("activetabId" + data["activetabId"]);
-			msg = "Scrolling is disabled!"
-		}else{
-			msg = "Scrolling is enabled!"
-
-		}
-		showtoastr(type, msg);
-	});
-}
 
 
 

@@ -8,10 +8,10 @@ function setObjectdata(obj){
     });
 }
 
+// initialize webgazer.js
 init();
+// detemine if video feed is enabled
 getObjectdata( function(data){
-
-
     if (data["wgvideofeed"]) showVideo(true);
     else {
         // alert("neh");
@@ -28,9 +28,9 @@ var startvid;
     window.localStorage.setItem(localstorageLabel, null);
 }
 
-function init(){
-     // startvid = null;
 
+// function if webgazer resumes or stops
+function init(){
     getObjectdata( function(data){
           
           if((data["start_button"] =='STOP' && data["action"]=="click") || (data["start_button"] =='STOP' && 
@@ -55,25 +55,21 @@ function init(){
     
 }
 
+// show video feed using CSS
 function showVideo(enabled){
     if (enabled) startvid=setTimeout(checkIfReady,100);
     else {
         console.log("hide");
         clearTimeout(startvid);
         var video = document.getElementById('webgazerVideoFeed');
-        video.style.display = 'none';
-        // document.body.removeChild(video);
-        
+        video.style.display = 'none';        
         var overlay=document.getElementById('overlay');
-        // document.body.removeChild(overlay);
         video.style.display = 'overlay';
-
-
 
     }
 }
 
-// function setupvid(){
+// CSS and Js prop of  video feed outside of the fucntion so that it can be called globally
     var width = 320;
     var height = 240;
     var topDist = '0px';
@@ -124,36 +120,9 @@ function showVideo(enabled){
             setTimeout(checkIfReady, 100);
         }
     }
-    // setTimeout(checkIfReady,100); 
-// }
-// function showLoadingscreen(show){
-//      chrome.tabs.executeScript({file: '/thirdParty/jquery-3.1.1.min.js'}, function(){
-           
-//             chrome.tabs.executeScript(null, {
-//             // file: 'src/js/insertLoading.js'                        
-//             code:
-//             "var preloader = document.createElement( \'div\' );" +
-//             "preloader.setAttribute(\'id\', \'preloader\');" +
-//             "document.body.appendChild(preloader);"
+    
 
-//         // },function(){            
-//         });           
-
-        
-//              // $('.toggle-loading').click(function () {
-//              //    if (target.hasClass('loading')) {
-//              //      target.loadingOverlay('remove');
-//              //    } else {
-//              //      target.loadingOverlay();
-//              //    };
-//              //  });
-
-//     });
-
-
-
-// }
-
+// controller function of the eyeGalaw
 function startWebgazerfeed(){
     
     var page_action;
@@ -168,11 +137,9 @@ function startWebgazerfeed(){
 
 
           if(page_action=="removeArrows" && start_button == "START" ) {
-            // alert("removeArrows")
             webgazer.showPredictionPoints(false);
             webgazer.clearGazeListener();
             webgazer.end();
-            // return;
 
           }
 
@@ -197,25 +164,13 @@ function startWebgazerfeed(){
             page_action =  data["page-action"];
             console.log("page-action: removeArrows")
 
-            // webgazer.showPredictionPoints(false);
-            // webgazer.clearGazeListener();
-            // webgazer.end();
-            // return;
           } 
 
           
-          // toastr["success"]("", "eyeGalaw succesfully launched");
-          //hdie
-
-         
-
-          // showtoastr(type,msg);
-          // if (eyedata != null) alert("yey")
-
-
-          // console.log(elapsedTime); //elapsed time is based on time since begin was called
-          // alert(data["load_page"])
+        
+        
           if(data["load_page"] ){
+            // for calibration page
               if (data["starting-page"] == true){
                   // alert(data["click-count"]);
                 if( data["click-count"]>35) {
@@ -233,6 +188,7 @@ function startWebgazerfeed(){
                 }
                 scroll_speed =0;
               }else{
+                // for normal laoding screen
                 $('.loader').fadeOut('slow',function(){
                     $(this).remove();
                     var obj= {
