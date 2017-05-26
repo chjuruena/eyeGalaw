@@ -230,7 +230,7 @@ function startWebgazerfeed(){
             if ( position2 != pagePosition) alert("hello");           
             
 
-
+            // scrolling whenever the gazepoints points at the scroll up and down
             function scrollz(scrolled){
                 $("html, body").animate({
                     scrollTop:  scrolled
@@ -240,7 +240,7 @@ function startWebgazerfeed(){
 
             
 
-
+            // fxn for whenever gaze point points at hold button
             if ((hold.x < xprediction &&  xprediction<(hold.x+100))&& (hold.y  < yprediction && yprediction<(hold.y+100))){
                // alert("1st hold");
 
@@ -304,13 +304,16 @@ function startWebgazerfeed(){
             // if ((arrow_down.x < xprediction &&  xprediction<(screen.width-110))&& (arrow_down.y  < yprediction && yprediction<(arrow_down.y+100))){
             }
             // frwd_page
+            // forwards page much like how the foward apage int he browser works
             if ((frwd_page.x < xprediction &&  xprediction<(frwd_page.x+50))&& (frwd_page.y  < yprediction && yprediction<(frwd_page.y+100))){
                 // alert("me here");
                 if ( scroll_speed>0) setTimeout(window.history.forward(), 4000);                
                 else  toastr["error"]("", "Scrolling disabled"); 
                 
             }
-
+            
+            // prev_page
+            // prev_page page much like how the prev page in the browser works
             if ((prev_page.x < xprediction &&  xprediction<(prev_page.x+50))&& (prev_page.y  < yprediction && yprediction<(prev_page.y+100))){
                 // alert("me here");
                 if ( scroll_speed>0) setTimeout(window.history.back(), 4000); 
@@ -367,7 +370,8 @@ function startWebgazerfeed(){
              }
 
 
-
+             // if gaze point points to hide
+             // manipulat css- opacity of elements
              if ((hide.x < xprediction &&  xprediction<(hide.x+100))&& (hide.y  < yprediction && yprediction<(hide.y+100))){
                
                   function tempToggleFunc(){
@@ -429,7 +433,7 @@ function startWebgazerfeed(){
     webgazer.end(); //Uncomment if you want to save the data even if you reload the page.
     // window.localStorage.clear(); //Comment out if you want to save data across different sessions 
   }
-
+// toastr options 
 toastr.options = {
     "closeButton": true,
     "debug": false,
